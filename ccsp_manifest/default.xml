@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote  name="ccsp"
+           fetch="https://github.com/ccsp-yocto"
+           review="https://gerrit.webapps.rr.com" />
+
+  <default remote="ccsp" revision="master" sync-j="2" />
+
+  <project path="CcspCommonLibrary" remote="ccsp" name="CcspCommonLibrary" revision="master" />
+  <project path="CcspCMAgent" remote="ccsp" name="CcspCMAgent" revision="master" />
+  <project path="CcspCr" remote="ccsp" name="CcspCr" revision="master" />
+  <project path="CcspLMLite" remote="ccsp" name="CcspLMLite" revision="master" />
+  <project path="CcspMisc" remote="ccsp" name="CcspMisc" revision="master" />
+  <project path="CcspMtaAgent" remote="ccsp" name="CcspMtaAgent" revision="master" />
+  <project path="CcspPandM" remote="ccsp" name="CcspPandM" revision="master" />
+  <project path="CcspPsm" remote="ccsp" name="CcspPsm" revision="master" />
+  <project path="CcspSnmpPa" remote="ccsp" name="CcspSnmpPa" revision="master" />
+  <project path="CcspTr069Pa" remote="ccsp" name="CcspTr069Pa" revision="master" />
+  <project path="CcspWifiAgent" remote="ccsp" name="CcspWifiAgent" revision="master" />
+  <project path="hal" remote="ccsp" name="hal" revision="master" />
+  <project path="meta-rdk-ccsp" remote="ccsp" name="meta-rdk-ccsp" revision="master" />
+  <project path="RebootManager" remote="ccsp" name="RebootManager" revision="master" />
+  <project path="TestAndDiagnostic" remote="ccsp" name="TestAndDiagnostic" revision="master" />
+  <project path="Utopia" remote="ccsp" name="Utopia" revision="master" />
+
+</manifest>
