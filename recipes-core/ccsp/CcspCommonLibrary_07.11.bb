@@ -4,6 +4,8 @@ HOMEPAGE = "http://github.com/ccsp-yocto/CcspCommonLibrary"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 
+DEPENDS = "dbus"
+
 SRC_URI = "\
 git://github.com/ccsp-yocto/CcspCommonLibrary.git;protocol=git;branch=master \
     "
@@ -16,3 +18,9 @@ S = "${WORKDIR}/git"
 
 inherit autotools
 
+export LDFLAGS = "-L${STAGING_DIR_HOST}/lib \
+                  -L${STAGING_DIR_HOST}/usr/lib \
+                 "
+export INCLUDES = "-isystem${STAGING_DIR_HOST}/usr/include/dbus-1.0 \
+                   -isystem${STAGING_DIR_HOST}/usr/lib/dbus-1.0/include \
+                  "
