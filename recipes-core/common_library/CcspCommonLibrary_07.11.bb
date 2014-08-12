@@ -1,18 +1,18 @@
 SUMMARY = "CCSP libccsp_common component"
 HOMEPAGE = "http://github.com/ccsp-yocto/CcspCommonLibrary"
 
-LICENSE = "APACHEv2"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=0c56db0143f4f80c369ee3af7425af6e"
-
-S = "${WORKDIR}/${BPN}-${PV}"
-
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 
 SRC_URI = "\
-http://github.com/ccsp-yocto/CcspCommonLibrary.git \
+git://github.com/ccsp-yocto/CcspCommonLibrary.git;protocol=git;branch=master \
     "
+SRCREV="75b957d28065c727c17c62f3c8e33ed2d68d0966"
 
-SRC_URI[md5sum] = "65b4e0df4934a6cd08c506cabcbe584f"
-SRC_URI[sha256sum] = "22c37dc90c871e8e052b2cab0ad219d010fa938608cd66b21c8f3c759046fa36"
+SRC_URI[md5sum] = "d338d61e396d5038025339bf5bdb169d"
+SRC_URI[sha256sum] = "e6f5a166c0e0f775dc09261f992abb561b781f4a992ef2c0081edcf6b265df24"
+
+S = "${WORKDIR}/git"
 
 inherit autotools
 
