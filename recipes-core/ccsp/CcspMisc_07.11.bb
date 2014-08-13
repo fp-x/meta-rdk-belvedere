@@ -1,4 +1,4 @@
-SUMMARY = "CCSP libccsp_common component"
+SUMMARY = "CCSP miscellaneous tools."
 HOMEPAGE = "http://github.com/ccsp-yocto/CcspMisc"
 
 LICENSE = "Apache-2.0"
