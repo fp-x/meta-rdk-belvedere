@@ -50,7 +50,16 @@ Index: dbus-1.4.14/dbus/Makefile.in
  	dbus-marshal-header.c			\
  	dbus-marshal-header.h			\
  	dbus-marshal-byteswap.c			\
-@@ -1052,6 +1055,7 @@
+@@ -865,8 +868,6 @@
+ 	dbus-auth-script.h			\
+ 	dbus-auth-util.c			\
+ 	dbus-credentials-util.c			\
+-	dbus-mainloop.c				\
+-	dbus-mainloop.h				\
+ 	dbus-marshal-byteswap-util.c		\
+ 	dbus-marshal-recursive-util.c		\
+ 	dbus-marshal-validate-util.c		\
+@@ -1052,6 +1053,7 @@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-internals.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-keyring.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-list.Plo@am__quote@
@@ -58,7 +67,7 @@ Index: dbus-1.4.14/dbus/Makefile.in
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-marshal-basic.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-marshal-byteswap.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-marshal-header.Plo@am__quote@
-@@ -1112,7 +1116,6 @@
+@@ -1112,7 +1114,6 @@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-internals.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-keyring.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-list.Plo@am__quote@
@@ -66,7 +75,7 @@ Index: dbus-1.4.14/dbus/Makefile.in
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-marshal-basic.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-marshal-byteswap-util.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-marshal-byteswap.Plo@am__quote@
-@@ -1243,6 +1246,13 @@
+@@ -1243,6 +1244,13 @@
  @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
  @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_1_la-dbus-keyring.lo `test -f 'dbus-keyring.c' || echo '$(srcdir)/'`dbus-keyring.c
  
