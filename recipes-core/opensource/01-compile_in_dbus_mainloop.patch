@@ -1,0 +1,82 @@
+Index: dbus-1.4.14/dbus/Makefile.in
+===================================================================
+--- dbus-1.4.14.orig/dbus/Makefile.in	2011-07-29 09:05:29.000000000 -0400
++++ dbus-1.4.14/dbus/Makefile.in	2014-08-13 15:52:23.010243096 -0600
+@@ -159,7 +159,7 @@
+ 	dbus-transport-socket.c dbus-transport-socket.h dbus-watch.c \
+ 	dbus-watch.h dbus-dataslot.c dbus-dataslot.h dbus-file.c \
+ 	dbus-file.h dbus-hash.c dbus-hash.h dbus-internals.c \
+-	dbus-internals.h dbus-list.c dbus-list.h dbus-marshal-basic.c \
++	dbus-internals.h dbus-list.c dbus-list.h dbus-mainloop.c dbus-marshal-basic.c \
+ 	dbus-marshal-basic.h dbus-memory.c dbus-mempool.c \
+ 	dbus-mempool.h dbus-pipe.c dbus-pipe.h dbus-string.c \
+ 	dbus-string.h dbus-string-private.h dbus-server-launchd.h \
+@@ -180,6 +180,7 @@
+ 	libdbus_1_la-dbus-bus.lo libdbus_1_la-dbus-connection.lo \
+ 	libdbus_1_la-dbus-credentials.lo libdbus_1_la-dbus-errors.lo \
+ 	libdbus_1_la-dbus-keyring.lo \
++	libdbus_1_la-dbus-mainloop.lo \
+ 	libdbus_1_la-dbus-marshal-header.lo \
+ 	libdbus_1_la-dbus-marshal-byteswap.lo \
+ 	libdbus_1_la-dbus-marshal-recursive.lo \
+@@ -747,6 +748,7 @@
+ 	dbus-bus.h				\
+ 	dbus-connection.h			\
+ 	dbus-errors.h				\
++	dbus-mainloop.h				\
+ 	dbus-macros.h				\
+ 	dbus-memory.h				\
+ 	dbus-message.h				\
+@@ -758,11 +760,11 @@
+ 	dbus-signature.h			\
+ 	dbus-syntax.h				\
+ 	dbus-threads.h				\
+-	dbus-types.h
+-
+-nodist_dbusarchinclude_HEADERS = \
++	dbus-types.h				\
+ 	dbus-arch-deps.h
+ 
++nodist_dbusarchinclude_HEADERS =
++
+ 
+ ### source code that goes in the installed client library
+ ### and is specific to library functionality
+@@ -778,6 +780,7 @@
+ 	dbus-errors.c				\
+ 	dbus-keyring.c				\
+ 	dbus-keyring.h				\
++	dbus-mainloop.c				\
+ 	dbus-marshal-header.c			\
+ 	dbus-marshal-header.h			\
+ 	dbus-marshal-byteswap.c			\
+@@ -1052,6 +1055,7 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-internals.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-keyring.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-list.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-mainloop.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-marshal-basic.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-marshal-byteswap.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-marshal-header.Plo@am__quote@
+@@ -1112,7 +1116,6 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-internals.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-keyring.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-list.Plo@am__quote@
+-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-mainloop.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-marshal-basic.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-marshal-byteswap-util.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-marshal-byteswap.Plo@am__quote@
+@@ -1243,6 +1246,13 @@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_1_la-dbus-keyring.lo `test -f 'dbus-keyring.c' || echo '$(srcdir)/'`dbus-keyring.c
+ 
++libdbus_1_la-dbus-mainloop.lo: dbus-mainloop.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_1_la-dbus-mainloop.lo -MD -MP -MF $(DEPDIR)/libdbus_1_la-dbus-mainloop.Tpo -c -o libdbus_1_la-dbus-mainloop.lo `test -f 'dbus-mainloop.c' || echo '$(srcdir)/'`dbus-mainloop.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_1_la-dbus-mainloop.Tpo $(DEPDIR)/libdbus_1_la-dbus-mainloop.Plo
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dbus-mainloop.c' object='libdbus_1_la-dbus-mainloop.lo' libtool=yes @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_1_la-dbus-mainloop.lo `test -f 'dbus-mainloop.c' || echo '$(srcdir)/'`dbus-mainloop.c
++
+ libdbus_1_la-dbus-marshal-header.lo: dbus-marshal-header.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_1_la-dbus-marshal-header.lo -MD -MP -MF $(DEPDIR)/libdbus_1_la-dbus-marshal-header.Tpo -c -o libdbus_1_la-dbus-marshal-header.lo `test -f 'dbus-marshal-header.c' || echo '$(srcdir)/'`dbus-marshal-header.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_1_la-dbus-marshal-header.Tpo $(DEPDIR)/libdbus_1_la-dbus-marshal-header.Plo
