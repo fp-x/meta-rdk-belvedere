@@ -1,4 +1,4 @@
-SUMMARY = "CCSP dmcli and psmcli tools"
+SUMMARY = "CCSP MTA Agent"
 HOMEPAGE = "http://github.com/ccsp-yocto/CcspMtaAgent"
 
 LICENSE = "Apache-2.0"
