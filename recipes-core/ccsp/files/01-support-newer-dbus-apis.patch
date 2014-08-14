@@ -1,0 +1,56 @@
+--- CcspCommonLibrary/source/util_api/ccsp_msg_bus/ccsp_message_bus.c.orig	2014-08-13 19:03:34.573378523 -0600
++++ CcspCommonLibrary/source/util_api/ccsp_msg_bus/ccsp_message_bus.c	2014-08-13 19:08:37.133383637 -0600
+@@ -208,10 +208,13 @@
+     return _dbus_loop_add_watch 
+                (
+                    cd->loop,
++                   watch
++#if 0
+                    watch,
+                    connection_watch_callback,
+                    cd, 
+                    NULL
++#endif
+                 );
+ }
+ 
+@@ -227,9 +230,12 @@
+     _dbus_loop_remove_watch 
+         (
+              cd->loop,
++             watch 
++#if 0
+              watch, 
+              connection_watch_callback, 
+              cd
++#endif
+          );
+ }
+ 
+@@ -256,10 +262,13 @@
+     return _dbus_loop_add_timeout 
+                (
+                    cd->loop,
++                   timeout 
++#if 0
+                    timeout, 
+                    connection_timeout_callback, 
+                    cd, 
+                    NULL
++#endif
+                 );
+ }
+ 
+@@ -275,9 +284,12 @@
+     _dbus_loop_remove_timeout 
+         (
+             cd->loop,
++            timeout 
++#if 0
+             timeout, 
+             connection_timeout_callback, 
+             cd
++#endif
+          );
+ }
+ 
