@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/ccsp-yocto/CcspCMAgent"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 
-DEPENDS = "CcspCommonLibrary"
+DEPENDS = "CcspCommonLibrary hal"
 
 SRC_URI = "\
 git://github.com/ccsp-yocto/CcspCMAgent.git;protocol=git;branch=daisy;rev=daisy \
