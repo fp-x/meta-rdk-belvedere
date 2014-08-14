@@ -25,4 +25,7 @@ export INCLUDES = " -I${STAGING_DIR_HOST}/usr/include/dbus-1.0 \
  -I${STAGING_DIR_HOST}/usr/lib/dbus-1.0/include \
 "
 
+export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
+ -ldbus-1 \
+"
 
