@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/ccsp-yocto/CcspSnmpPa"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 
-DEPENDS = "CcspCommonLibrary"
+DEPENDS = "CcspCommonLibrary net-snmp"
 
 SRC_URI = "\
 git://github.com/ccsp-yocto/CcspSnmpPa.git;protocol=git;branch=daisy;rev=daisy \
@@ -17,14 +17,16 @@ S = "${WORKDIR}/git"
 
 inherit autotools
 
-PACKAGECONFIG ??= "CcspCommonLibrary"
+PACKAGECONFIG ??= "CcspCommonLibrary net-snmp"
 
 export INCLUDES = " -I${STAGING_DIR_HOST}/usr/include/dbus-1.0 \
  -I${STAGING_DIR_HOST}/usr/lib/dbus-1.0/include \
+ -I${STAGING_DIR_HOST}/usr/lib/net-snmp \
  -I${STAGING_DIR_HOST}/usr/include/ccsp \
 "
 
 export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
  -ldbus-1 \
+ -lnetsnmp \
 "
 
