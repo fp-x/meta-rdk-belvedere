@@ -9,7 +9,6 @@ DEPENDS = "CcspCommonLibrary"
 SRC_URI = "\
 git://github.com/ccsp-yocto/CcspPandM.git;protocol=git;branch=daisy;rev=daisy \
     "
-SRCREV="ce3e73e94d15b0fa5b9a39aded277ac39d1e0eb2"
 
 SRC_URI[md5sum] = "d338d61e396d5038025339bf5bdb169d"
 SRC_URI[sha256sum] = "e6f5a166c0e0f775dc09261f992abb561b781f4a992ef2c0081edcf6b265df24"
