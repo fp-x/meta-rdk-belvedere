@@ -9,6 +9,7 @@ DEPENDS = "dbus"
 SRC_URI = "\
 git://github.com/ccsp-yocto/CcspCommonLibrary.git;protocol=git;branch=daisy;rev=daisy \
 file://01-support-newer-dbus-apis.patch \
+file://02-support-dbus-ccsp-apis.patch \
     "
 
 SRC_URI[md5sum] = "d338d61e396d5038025339bf5bdb169d"
