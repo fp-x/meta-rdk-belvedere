@@ -5,6 +5,10 @@ All CCSP recipes are in these subdirectories.
 
 As recipes are written for components, the SRCREV should be made automatic based on each components branch "daisy"; i.e. each component's master branch will be buildable on the pc where as it's daisy branch will be buildable in yocto.
 
+Depending on your Yocto installation of poky, you maye have to:<br>
+cd poky
+git pull
+git clone -b daisy git://git.openembedded.org/meta-openembedded
 
 To test this component against a standard core-image-minimal yocto build:
 
