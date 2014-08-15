@@ -9,7 +9,6 @@ DEPENDS = "CcspCommonLibrary hal"
 SRC_URI = "\
 git://github.com/ccsp-yocto/CcspWifiAgent.git;protocol=git;branch=daisy;rev=daisy \
     "
-SRCREV="e4da1923154bb49d691b136710746b44398b3c91"
 
 SRC_URI[md5sum] = "d338d61e396d5038025339bf5bdb169d"
 SRC_URI[sha256sum] = "e6f5a166c0e0f775dc09261f992abb561b781f4a992ef2c0081edcf6b265df24"
