@@ -1,0 +1,864 @@
+From ff237fea6fc390fafc4198ea14847cd36302f3bc Mon Sep 17 00:00:00 2001
+From: Steve Maynard <steve.maynard@twcable.com>
+Date: Thu, 14 Aug 2014 17:14:56 -0600
+Subject: [PATCH 1/6] add dbus-ccsp-apis interface to _dbus_loop methods
+
+---
+ dbus/Makefile.am      |    1 +
+ dbus/Makefile.in      |   25 +++++++++++--
+ dbus/dbus-ccsp-apis.c |   90 ++++++++++++++++++++++++++++++++++++++++++++++
+ dbus/dbus-ccsp-apis.h |   94 +++++++++++++++++++++++++++++++++++++++++++++++++
+ dbus/dbus.h           |    1 +
+ 5 files changed, 208 insertions(+), 3 deletions(-)
+ create mode 100644 dbus/dbus-ccsp-apis.c
+ create mode 100644 dbus/dbus-ccsp-apis.h
+
+diff --git a/dbus/Makefile.am b/dbus/Makefile.am
+index bb5ccca..27bd08f 100644
+--- a/dbus/Makefile.am
++++ b/dbus/Makefile.am
+@@ -147,6 +147,7 @@ DBUS_LIB_SOURCES=				\
+ 	dbus-auth.c				\
+ 	dbus-auth.h				\
+ 	dbus-bus.c				\
++	dbus-ccsp-apis.c			\
+ 	dbus-connection.c			\
+ 	dbus-connection-internal.h		\
+ 	dbus-credentials.c			\
+diff --git a/dbus/Makefile.in b/dbus/Makefile.in
+index d30696d..5b439db 100644
+--- a/dbus/Makefile.in
++++ b/dbus/Makefile.in
+@@ -136,7 +136,7 @@ am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(dbusincludedir)" \
+ LTLIBRARIES = $(lib_LTLIBRARIES) $(noinst_LTLIBRARIES)
+ am__DEPENDENCIES_1 =
+ am__libdbus_1_la_SOURCES_DIST = dbus-address.c dbus-auth.c dbus-auth.h \
+-	dbus-bus.c dbus-connection.c dbus-connection-internal.h \
++	dbus-bus.c dbus-ccsp-apis.c dbus-connection.c dbus-connection-internal.h \
+ 	dbus-credentials.c dbus-credentials.h dbus-errors.c \
+ 	dbus-keyring.c dbus-keyring.h dbus-marshal-header.c \
+ 	dbus-marshal-header.h dbus-marshal-byteswap.c \
+@@ -175,7 +175,8 @@ am__libdbus_1_la_SOURCES_DIST = dbus-address.c dbus-auth.c dbus-auth.h \
+ @DBUS_WIN_FALSE@	libdbus_1_la-dbus-server-unix.lo
+ @DBUS_WIN_TRUE@am__objects_1 = libdbus_1_la-dbus-server-win.lo
+ am__objects_2 = libdbus_1_la-dbus-address.lo libdbus_1_la-dbus-auth.lo \
+-	libdbus_1_la-dbus-bus.lo libdbus_1_la-dbus-connection.lo \
++	libdbus_1_la-dbus-bus.lo libdbus_1_la-dbus-ccsp-apis.lo \
++	libdbus_1_la-dbus-connection.lo \
+ 	libdbus_1_la-dbus-credentials.lo libdbus_1_la-dbus-errors.lo \
+ 	libdbus_1_la-dbus-keyring.lo \
+ 	libdbus_1_la-dbus-marshal-header.lo \
+@@ -228,7 +229,7 @@ libdbus_1_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+ libdbus_internal_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+ 	$(am__DEPENDENCIES_1)
+ am__libdbus_internal_la_SOURCES_DIST = dbus-address.c dbus-auth.c \
+-	dbus-auth.h dbus-bus.c dbus-connection.c \
++	dbus-auth.h dbus-bus.c dbus-ccsp-apis.c dbus-connection.c \
+ 	dbus-connection-internal.h dbus-credentials.c \
+ 	dbus-credentials.h dbus-errors.c dbus-keyring.c dbus-keyring.h \
+ 	dbus-marshal-header.c dbus-marshal-header.h \
+@@ -280,6 +281,7 @@ am__libdbus_internal_la_SOURCES_DIST = dbus-address.c dbus-auth.c \
+ am__objects_8 = libdbus_internal_la-dbus-address.lo \
+ 	libdbus_internal_la-dbus-auth.lo \
+ 	libdbus_internal_la-dbus-bus.lo \
++	libdbus_internal_la-dbus-ccsp-apis.lo \
+ 	libdbus_internal_la-dbus-connection.lo \
+ 	libdbus_internal_la-dbus-credentials.lo \
+ 	libdbus_internal_la-dbus-errors.lo \
+@@ -749,6 +751,7 @@ DBUS_LIB_SOURCES = \
+ 	dbus-auth.c				\
+ 	dbus-auth.h				\
+ 	dbus-bus.c				\
++	dbus-ccsp-apis.c			\
+ 	dbus-connection.c			\
+ 	dbus-connection-internal.h		\
+ 	dbus-credentials.c			\
+@@ -1011,6 +1014,7 @@ distclean-compile:
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-address.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-auth.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-bus.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-ccsp-apis.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-connection.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-credentials.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-dataslot.Plo@am__quote@
+@@ -1069,6 +1073,7 @@ distclean-compile:
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-auth-util.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-auth.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-bus.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-ccsp-apis.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-connection.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-credentials-util.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_internal_la-dbus-credentials.Plo@am__quote@
+@@ -1184,6 +1189,13 @@ libdbus_1_la-dbus-bus.lo: dbus-bus.c
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_1_la-dbus-bus.lo `test -f 'dbus-bus.c' || echo '$(srcdir)/'`dbus-bus.c
+ 
++libdbus_1_la-dbus-ccsp-apis.lo: dbus-ccsp-apis.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_1_la-dbus-ccsp-apis.lo -MD -MP -MF $(DEPDIR)/libdbus_1_la-dbus-ccsp-apis.Tpo -c -o libdbus_1_la-dbus-ccsp-apis.lo `test -f 'dbus-ccsp-apis.c' || echo '$(srcdir)/'`dbus-ccsp-apis.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_1_la-dbus-ccsp-apis.Tpo $(DEPDIR)/libdbus_1_la-dbus-ccsp-apis.Plo
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dbus-ccsp-apis.c' object='libdbus_1_la-dbus-ccsp-apis.lo' libtool=yes @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_1_la-dbus-ccsp-apis.lo `test -f 'dbus-ccsp-apis.c' || echo '$(srcdir)/'`dbus-ccsp-apis.c
++
+ libdbus_1_la-dbus-connection.lo: dbus-connection.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_1_la-dbus-connection.lo -MD -MP -MF $(DEPDIR)/libdbus_1_la-dbus-connection.Tpo -c -o libdbus_1_la-dbus-connection.lo `test -f 'dbus-connection.c' || echo '$(srcdir)/'`dbus-connection.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_1_la-dbus-connection.Tpo $(DEPDIR)/libdbus_1_la-dbus-connection.Plo
+@@ -1576,6 +1588,13 @@ libdbus_internal_la-dbus-bus.lo: dbus-bus.c
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_internal_la-dbus-bus.lo `test -f 'dbus-bus.c' || echo '$(srcdir)/'`dbus-bus.c
+ 
++libdbus_internal_la-dbus-ccsp-apis.lo: dbus-ccsp-apis.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_internal_la-dbus-ccsp-apis.lo -MD -MP -MF $(DEPDIR)/libdbus_internal_la-dbus-ccsp-apis.Tpo -c -o libdbus_internal_la-dbus-ccsp-apis.lo `test -f 'dbus-ccsp-apis.c' || echo '$(srcdir)/'`dbus-ccsp-apis.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_internal_la-dbus-ccsp-apis.Tpo $(DEPDIR)/libdbus_internal_la-dbus-ccsp-apis.Plo
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dbus-ccsp-apis.c' object='libdbus_internal_la-dbus-ccsp-apis.lo' libtool=yes @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_internal_la-dbus-ccsp-apis.lo `test -f 'dbus-ccsp-apis.c' || echo '$(srcdir)/'`dbus-ccsp-apis.c
++
+ libdbus_internal_la-dbus-connection.lo: dbus-connection.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_internal_la-dbus-connection.lo -MD -MP -MF $(DEPDIR)/libdbus_internal_la-dbus-connection.Tpo -c -o libdbus_internal_la-dbus-connection.lo `test -f 'dbus-connection.c' || echo '$(srcdir)/'`dbus-connection.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_internal_la-dbus-connection.Tpo $(DEPDIR)/libdbus_internal_la-dbus-connection.Plo
+diff --git a/dbus/dbus-ccsp-apis.c b/dbus/dbus-ccsp-apis.c
+new file mode 100644
+index 0000000..c2aa6f4
+--- /dev/null
++++ b/dbus/dbus-ccsp-apis.c
+@@ -0,0 +1,90 @@
++/* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*- */
++/* dbus-ccsp-apis.c
++ *
++ * Copyright (C) 2003  Red Hat, Inc.
++ *
++ * Licensed under the Academic Free License version 2.1
++ * 
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ * 
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ *
++ */
++
++#include <dbus/dbus-ccsp-apis.h>
++
++
++DBusLoop* dbus_loop_new(void)
++{
++    return _dbus_loop_new();
++}
++
++DBusLoop* dbus_loop_ref(DBusLoop *loop)
++{
++    return _dbus_loop_ref(loop);
++}
++
++void dbus_loop_unref(DBusLoop *loop) { _dbus_loop_unref(loop); }
++
++dbus_bool_t dbus_loop_add_watch(DBusLoop *loop, DBusWatch *watch)
++{
++    return _dbus_loop_add_watch(loop, watch);
++}
++
++void dbus_loop_remove_watch(DBusLoop *loop, DBusWatch *watch)
++{
++    _dbus_loop_remove_watch(loop, watch);
++}
++
++dbus_bool_t dbus_loop_add_timeout(DBusLoop *loop, DBusTimeout *timeout)
++{
++    return _dbus_loop_add_timeout(loop, timeout);
++}
++
++void dbus_loop_remove_timeout(DBusLoop *loop, DBusTimeout *timeout)
++{
++     _dbus_loop_remove_timeout(loop, timeout);
++}
++
++dbus_bool_t dbus_loop_queue_dispatch(DBusLoop *loop, DBusConnection *connection)
++{
++    return _dbus_loop_queue_dispatch(loop, connection);
++}
++
++void dbus_loop_run(DBusLoop *loop)
++{
++     _dbus_loop_run(loop);
++}
++
++void dbus_loop_quit(DBusLoop *loop)
++{
++     _dbus_loop_quit(loop);
++}
++
++dbus_bool_t dbus_loop_iterate(DBusLoop *loop, dbus_bool_t block)
++{
++    return _dbus_loop_iterate(loop, block);
++}
++
++dbus_bool_t dbus_loop_dispatch(DBusLoop *loop)
++{
++    return _dbus_loop_dispatch(loop);
++}
++
++
++/** @} */
++
++DBUS_END_DECLS
++
++#endif /* DBUS_CCSP_APIS_H */
++
+diff --git a/dbus/dbus-ccsp-apis.h b/dbus/dbus-ccsp-apis.h
+new file mode 100644
+index 0000000..4ce95cb
+--- /dev/null
++++ b/dbus/dbus-ccsp-apis.h
+@@ -0,0 +1,94 @@
++/* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*- */
++/* dbus-ccsp-apis.h
++ *
++ * Copyright (C) 2003  Red Hat, Inc.
++ *
++ * Licensed under the Academic Free License version 2.1
++ * 
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ * 
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
++ */
++#if !defined (DBUS_INSIDE_DBUS_H) && !defined (DBUS_COMPILATION)
++#error "Only <dbus/dbus.h> can be included directly, this file may disappear or change contents."
++#endif
++
++#ifndef DBUS_CCSP_APIS_H
++#define DBUS_CCSP_APIS_H
++
++#include <dbus/dbus-macros.h>
++#include <dbus/dbus-types.h>
++#include <dbus/dbus-arch-deps.h>
++#include <dbus/dbus-memory.h>
++#include <dbus/dbus-errors.h>
++#include <dbus/dbus-mainloop.h>
++#include <stdarg.h>
++
++typedef struct DBusLoop DBusLoop;
++
++DBUS_BEGIN_DECLS
++
++/**
++ * @addtogroup DBusCcspApis
++ * @{
++ */
++
++DBUS_EXPORT
++DBusLoop*   dbus_loop_new            (void);
++
++DBUS_EXPORT
++DBusLoop*   dbus_loop_ref            (DBusLoop            *loop);
++
++DBUS_EXPORT
++void        dbus_loop_unref          (DBusLoop            *loop);
++
++DBUS_EXPORT
++dbus_bool_t dbus_loop_add_watch      (DBusLoop            *loop,
++                                      DBusWatch           *watch);
++
++DBUS_EXPORT
++void        dbus_loop_remove_watch   (DBusLoop            *loop,
++                                      DBusWatch           *watch);
++
++DBUS_EXPORT
++dbus_bool_t dbus_loop_add_timeout    (DBusLoop            *loop,
++                                      DBusTimeout         *timeout);
++
++DBUS_EXPORT
++void        dbus_loop_remove_timeout (DBusLoop            *loop,
++                                      DBusTimeout         *timeout);
++
++DBUS_EXPORT
++dbus_bool_t dbus_loop_queue_dispatch (DBusLoop            *loop,
++                                      DBusConnection      *connection);
++
++DBUS_EXPORT
++void        dbus_loop_run            (DBusLoop            *loop);
++
++DBUS_EXPORT
++void        dbus_loop_quit           (DBusLoop            *loop);
++
++DBUS_EXPORT
++dbus_bool_t dbus_loop_iterate        (DBusLoop            *loop,
++                                      dbus_bool_t          block);
++
++DBUS_EXPORT
++dbus_bool_t dbus_loop_dispatch       (DBusLoop            *loop);
++
++
++/** @} */
++
++DBUS_END_DECLS
++
++#endif /* DBUS_CCSP_APIS_H */
++
+diff --git a/dbus/dbus.h b/dbus/dbus.h
+index 932ceab..568da04 100644
+--- a/dbus/dbus.h
++++ b/dbus/dbus.h
+@@ -30,6 +30,7 @@
+ #include <dbus/dbus-address.h>
+ #include <dbus/dbus-bus.h>
+ #include <dbus/dbus-connection.h>
++#include <dbus/dbus-ccsp-apis.h>
+ #include <dbus/dbus-errors.h>
+ #include <dbus/dbus-macros.h>
+ #include <dbus/dbus-message.h>
+-- 
+1.7.9.5
+
+
+From 271b3b6932f75915a0a57ba6ebbe36cea139639b Mon Sep 17 00:00:00 2001
+From: Steve Maynard <steve.maynard@twcable.com>
+Date: Thu, 14 Aug 2014 17:19:29 -0600
+Subject: [PATCH 2/6] fix dbus-ccsp-apis.c cut-n-paste error
+
+---
+ dbus/dbus-ccsp-apis.c |    7 -------
+ 1 file changed, 7 deletions(-)
+
+diff --git a/dbus/dbus-ccsp-apis.c b/dbus/dbus-ccsp-apis.c
+index c2aa6f4..a6785be 100644
+--- a/dbus/dbus-ccsp-apis.c
++++ b/dbus/dbus-ccsp-apis.c
+@@ -81,10 +81,3 @@ dbus_bool_t dbus_loop_dispatch(DBusLoop *loop)
+     return _dbus_loop_dispatch(loop);
+ }
+ 
+-
+-/** @} */
+-
+-DBUS_END_DECLS
+-
+-#endif /* DBUS_CCSP_APIS_H */
+-
+-- 
+1.7.9.5
+
+
+From 974d95cae51342db5f125f6e86ef5d015f847fea Mon Sep 17 00:00:00 2001
+From: Steve Maynard <steve.maynard@twcable.com>
+Date: Thu, 14 Aug 2014 18:36:14 -0600
+Subject: [PATCH 3/6] fix unresolved externals by linking with internal lib
+
+---
+ dbus/Makefile.am |    2 +-
+ dbus/Makefile.in |    5 +++--
+ 2 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/dbus/Makefile.am b/dbus/Makefile.am
+index 27bd08f..93d1533 100644
+--- a/dbus/Makefile.am
++++ b/dbus/Makefile.am
+@@ -278,7 +278,7 @@ libdbus_1_la_CPPFLAGS = \
+ 	$(AM_CPPFLAGS) \
+ 	-Ddbus_1_EXPORTS \
+ 	$(NULL)
+-libdbus_1_la_LIBADD= $(LIBDBUS_LIBS)
++libdbus_1_la_LIBADD= $(LIBDBUS_LIBS) libdbus-internal.la
+ libdbus_1_la_LDFLAGS = \
+ 	$(AM_LDFLAGS) \
+ 	$(export_symbols) \
+diff --git a/dbus/Makefile.in b/dbus/Makefile.in
+index 5b439db..01c3cfe 100644
+--- a/dbus/Makefile.in
++++ b/dbus/Makefile.in
+@@ -80,7 +80,8 @@ PRE_UNINSTALL = :
+ POST_UNINSTALL = :
+ build_triplet = @build@
+ host_triplet = @host@
+-@DBUS_WIN_FALSE@libdbus_1_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
++@DBUS_WIN_FALSE@libdbus_1_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
++@DBUS_WIN_FALSE@	libdbus-internal.la
+ @HAVE_LINUX_EPOLL_TRUE@am__append_1 = dbus-socket-set-epoll.c
+ noinst_PROGRAMS = $(am__EXEEXT_1)
+ 
+@@ -881,7 +882,7 @@ libdbus_1_la_CPPFLAGS = \
+ 	-Ddbus_1_EXPORTS \
+ 	$(NULL)
+ 
+-libdbus_1_la_LIBADD = $(LIBDBUS_LIBS)
++libdbus_1_la_LIBADD = $(LIBDBUS_LIBS) libdbus-internal.la
+ libdbus_1_la_LDFLAGS = \
+ 	$(AM_LDFLAGS) \
+ 	$(export_symbols) \
+-- 
+1.7.9.5
+
+
+From ad220142abef5627110fb7de6380542c3c192dbf Mon Sep 17 00:00:00 2001
+From: Steve Maynard <steve.maynard@twcable.com>
+Date: Thu, 14 Aug 2014 18:58:29 -0600
+Subject: [PATCH 4/6] fix duplicate symbols by moving mainloop code from
+ internal lib to shared
+
+---
+ dbus/Makefile.am |    6 ++--
+ dbus/Makefile.in |   86 +++++++++++++++++++++++++++++-------------------------
+ 2 files changed, 50 insertions(+), 42 deletions(-)
+
+diff --git a/dbus/Makefile.am b/dbus/Makefile.am
+index 93d1533..5baa04e 100644
+--- a/dbus/Makefile.am
++++ b/dbus/Makefile.am
+@@ -213,6 +213,8 @@ DBUS_SHARED_SOURCES=				\
+ 	dbus-internals.h			\
+ 	dbus-list.c				\
+ 	dbus-list.h				\
++	dbus-mainloop.c				\
++	dbus-mainloop.h				\
+ 	dbus-marshal-basic.c			\
+ 	dbus-marshal-basic.h			\
+ 	dbus-memory.c				\
+@@ -238,8 +240,6 @@ DBUS_UTIL_SOURCES=				\
+ 	dbus-auth-script.h			\
+ 	dbus-auth-util.c			\
+ 	dbus-credentials-util.c			\
+-	dbus-mainloop.c				\
+-	dbus-mainloop.h				\
+ 	dbus-marshal-byteswap-util.c		\
+ 	dbus-marshal-recursive-util.c		\
+ 	dbus-marshal-validate-util.c		\
+@@ -278,7 +278,7 @@ libdbus_1_la_CPPFLAGS = \
+ 	$(AM_CPPFLAGS) \
+ 	-Ddbus_1_EXPORTS \
+ 	$(NULL)
+-libdbus_1_la_LIBADD= $(LIBDBUS_LIBS) libdbus-internal.la
++libdbus_1_la_LIBADD= $(LIBDBUS_LIBS)
+ libdbus_1_la_LDFLAGS = \
+ 	$(AM_LDFLAGS) \
+ 	$(export_symbols) \
+diff --git a/dbus/Makefile.in b/dbus/Makefile.in
+index 01c3cfe..2444355 100644
+--- a/dbus/Makefile.in
++++ b/dbus/Makefile.in
+@@ -158,17 +158,17 @@ am__libdbus_1_la_SOURCES_DIST = dbus-address.c dbus-auth.c dbus-auth.h \
+ 	dbus-transport-socket.c dbus-transport-socket.h dbus-watch.c \
+ 	dbus-watch.h dbus-dataslot.c dbus-dataslot.h dbus-file.c \
+ 	dbus-file.h dbus-hash.c dbus-hash.h dbus-internals.c \
+-	dbus-internals.h dbus-list.c dbus-list.h dbus-marshal-basic.c \
+-	dbus-marshal-basic.h dbus-memory.c dbus-mempool.c \
+-	dbus-mempool.h dbus-pipe.c dbus-pipe.h dbus-string.c \
+-	dbus-string.h dbus-string-private.h dbus-server-launchd.h \
+-	dbus-server-launchd.c dbus-file-unix.c dbus-pipe-unix.c \
+-	dbus-sysdeps-unix.c dbus-sysdeps-unix.h dbus-sysdeps-pthread.c \
+-	dbus-transport-unix.c dbus-transport-unix.h dbus-userdb.c \
+-	dbus-userdb.h sd-daemon.c sd-daemon.h \
+-	dbus-sysdeps-wince-glue.h dbus-sysdeps-wince-glue.c \
+-	dbus-file-win.c dbus-pipe-win.c dbus-sockets-win.h \
+-	dbus-sysdeps-win.c dbus-sysdeps-win.h \
++	dbus-internals.h dbus-list.c dbus-list.h dbus-mainloop.c \
++	dbus-mainloop.h dbus-marshal-basic.c dbus-marshal-basic.h \
++	dbus-memory.c dbus-mempool.c dbus-mempool.h dbus-pipe.c \
++	dbus-pipe.h dbus-string.c dbus-string.h dbus-string-private.h \
++	dbus-server-launchd.h dbus-server-launchd.c dbus-file-unix.c \
++	dbus-pipe-unix.c dbus-sysdeps-unix.c dbus-sysdeps-unix.h \
++	dbus-sysdeps-pthread.c dbus-transport-unix.c \
++	dbus-transport-unix.h dbus-userdb.c dbus-userdb.h sd-daemon.c \
++	sd-daemon.h dbus-sysdeps-wince-glue.h \
++	dbus-sysdeps-wince-glue.c dbus-file-win.c dbus-pipe-win.c \
++	dbus-sockets-win.h dbus-sysdeps-win.c dbus-sysdeps-win.h \
+ 	dbus-sysdeps-thread-win.c dbus-transport-win.c \
+ 	dbus-transport-win.h dbus-sysdeps.c dbus-sysdeps.h \
+ 	dbus-valgrind-internal.h
+@@ -214,6 +214,7 @@ am__objects_2 = libdbus_1_la-dbus-address.lo libdbus_1_la-dbus-auth.lo \
+ am__objects_6 = libdbus_1_la-dbus-dataslot.lo \
+ 	libdbus_1_la-dbus-file.lo libdbus_1_la-dbus-hash.lo \
+ 	libdbus_1_la-dbus-internals.lo libdbus_1_la-dbus-list.lo \
++	libdbus_1_la-dbus-mainloop.lo \
+ 	libdbus_1_la-dbus-marshal-basic.lo libdbus_1_la-dbus-memory.lo \
+ 	libdbus_1_la-dbus-mempool.lo libdbus_1_la-dbus-pipe.lo \
+ 	libdbus_1_la-dbus-string.lo $(am__objects_5) \
+@@ -252,27 +253,26 @@ am__libdbus_internal_la_SOURCES_DIST = dbus-address.c dbus-auth.c \
+ 	dbus-transport-socket.c dbus-transport-socket.h dbus-watch.c \
+ 	dbus-watch.h dbus-dataslot.c dbus-dataslot.h dbus-file.c \
+ 	dbus-file.h dbus-hash.c dbus-hash.h dbus-internals.c \
+-	dbus-internals.h dbus-list.c dbus-list.h dbus-marshal-basic.c \
+-	dbus-marshal-basic.h dbus-memory.c dbus-mempool.c \
+-	dbus-mempool.h dbus-pipe.c dbus-pipe.h dbus-string.c \
+-	dbus-string.h dbus-string-private.h dbus-server-launchd.h \
+-	dbus-server-launchd.c dbus-file-unix.c dbus-pipe-unix.c \
+-	dbus-sysdeps-unix.c dbus-sysdeps-unix.h dbus-sysdeps-pthread.c \
+-	dbus-transport-unix.c dbus-transport-unix.h dbus-userdb.c \
+-	dbus-userdb.h sd-daemon.c sd-daemon.h \
+-	dbus-sysdeps-wince-glue.h dbus-sysdeps-wince-glue.c \
+-	dbus-file-win.c dbus-pipe-win.c dbus-sockets-win.h \
+-	dbus-sysdeps-win.c dbus-sysdeps-win.h \
++	dbus-internals.h dbus-list.c dbus-list.h dbus-mainloop.c \
++	dbus-mainloop.h dbus-marshal-basic.c dbus-marshal-basic.h \
++	dbus-memory.c dbus-mempool.c dbus-mempool.h dbus-pipe.c \
++	dbus-pipe.h dbus-string.c dbus-string.h dbus-string-private.h \
++	dbus-server-launchd.h dbus-server-launchd.c dbus-file-unix.c \
++	dbus-pipe-unix.c dbus-sysdeps-unix.c dbus-sysdeps-unix.h \
++	dbus-sysdeps-pthread.c dbus-transport-unix.c \
++	dbus-transport-unix.h dbus-userdb.c dbus-userdb.h sd-daemon.c \
++	sd-daemon.h dbus-sysdeps-wince-glue.h \
++	dbus-sysdeps-wince-glue.c dbus-file-win.c dbus-pipe-win.c \
++	dbus-sockets-win.h dbus-sysdeps-win.c dbus-sysdeps-win.h \
+ 	dbus-sysdeps-thread-win.c dbus-transport-win.c \
+ 	dbus-transport-win.h dbus-sysdeps.c dbus-sysdeps.h \
+ 	dbus-valgrind-internal.h dbus-auth-script.c dbus-auth-script.h \
+-	dbus-auth-util.c dbus-credentials-util.c dbus-mainloop.c \
+-	dbus-mainloop.h dbus-marshal-byteswap-util.c \
+-	dbus-marshal-recursive-util.c dbus-marshal-validate-util.c \
+-	dbus-message-factory.c dbus-message-factory.h \
+-	dbus-message-util.c dbus-shell.c dbus-shell.h \
+-	dbus-sysdeps-util-unix.c dbus-userdb-util.c dbus-spawn.c \
+-	dbus-socket-set-epoll.c dbus-sysdeps-util-win.c \
++	dbus-auth-util.c dbus-credentials-util.c \
++	dbus-marshal-byteswap-util.c dbus-marshal-recursive-util.c \
++	dbus-marshal-validate-util.c dbus-message-factory.c \
++	dbus-message-factory.h dbus-message-util.c dbus-shell.c \
++	dbus-shell.h dbus-sysdeps-util-unix.c dbus-userdb-util.c \
++	dbus-spawn.c dbus-socket-set-epoll.c dbus-sysdeps-util-win.c \
+ 	dbus-spawn-win.c dbus-socket-set.h dbus-socket-set.c \
+ 	dbus-socket-set-poll.c dbus-spawn.h dbus-string-util.c \
+ 	dbus-sysdeps-util.c dbus-test.c dbus-test.h
+@@ -329,6 +329,7 @@ am__objects_12 = libdbus_internal_la-dbus-dataslot.lo \
+ 	libdbus_internal_la-dbus-hash.lo \
+ 	libdbus_internal_la-dbus-internals.lo \
+ 	libdbus_internal_la-dbus-list.lo \
++	libdbus_internal_la-dbus-mainloop.lo \
+ 	libdbus_internal_la-dbus-marshal-basic.lo \
+ 	libdbus_internal_la-dbus-memory.lo \
+ 	libdbus_internal_la-dbus-mempool.lo \
+@@ -348,7 +349,6 @@ am__objects_12 = libdbus_internal_la-dbus-dataslot.lo \
+ am__objects_15 = libdbus_internal_la-dbus-auth-script.lo \
+ 	libdbus_internal_la-dbus-auth-util.lo \
+ 	libdbus_internal_la-dbus-credentials-util.lo \
+-	libdbus_internal_la-dbus-mainloop.lo \
+ 	libdbus_internal_la-dbus-marshal-byteswap-util.lo \
+ 	libdbus_internal_la-dbus-marshal-recursive-util.lo \
+ 	libdbus_internal_la-dbus-marshal-validate-util.lo \
+@@ -819,6 +819,8 @@ DBUS_SHARED_SOURCES = \
+ 	dbus-internals.h			\
+ 	dbus-list.c				\
+ 	dbus-list.h				\
++	dbus-mainloop.c				\
++	dbus-mainloop.h				\
+ 	dbus-marshal-basic.c			\
+ 	dbus-marshal-basic.h			\
+ 	dbus-memory.c				\
+@@ -845,8 +847,6 @@ DBUS_UTIL_SOURCES = \
+ 	dbus-auth-script.h			\
+ 	dbus-auth-util.c			\
+ 	dbus-credentials-util.c			\
+-	dbus-mainloop.c				\
+-	dbus-mainloop.h				\
+ 	dbus-marshal-byteswap-util.c		\
+ 	dbus-marshal-recursive-util.c		\
+ 	dbus-marshal-validate-util.c		\
+@@ -1027,6 +1027,7 @@ distclean-compile:
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-internals.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-keyring.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-list.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-mainloop.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-marshal-basic.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-marshal-byteswap.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-marshal-header.Plo@am__quote@
+@@ -1428,6 +1429,13 @@ libdbus_1_la-dbus-list.lo: dbus-list.c
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_1_la-dbus-list.lo `test -f 'dbus-list.c' || echo '$(srcdir)/'`dbus-list.c
+ 
++libdbus_1_la-dbus-mainloop.lo: dbus-mainloop.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_1_la-dbus-mainloop.lo -MD -MP -MF $(DEPDIR)/libdbus_1_la-dbus-mainloop.Tpo -c -o libdbus_1_la-dbus-mainloop.lo `test -f 'dbus-mainloop.c' || echo '$(srcdir)/'`dbus-mainloop.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_1_la-dbus-mainloop.Tpo $(DEPDIR)/libdbus_1_la-dbus-mainloop.Plo
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dbus-mainloop.c' object='libdbus_1_la-dbus-mainloop.lo' libtool=yes @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_1_la-dbus-mainloop.lo `test -f 'dbus-mainloop.c' || echo '$(srcdir)/'`dbus-mainloop.c
++
+ libdbus_1_la-dbus-marshal-basic.lo: dbus-marshal-basic.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_1_la-dbus-marshal-basic.lo -MD -MP -MF $(DEPDIR)/libdbus_1_la-dbus-marshal-basic.Tpo -c -o libdbus_1_la-dbus-marshal-basic.lo `test -f 'dbus-marshal-basic.c' || echo '$(srcdir)/'`dbus-marshal-basic.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_1_la-dbus-marshal-basic.Tpo $(DEPDIR)/libdbus_1_la-dbus-marshal-basic.Plo
+@@ -1827,6 +1835,13 @@ libdbus_internal_la-dbus-list.lo: dbus-list.c
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_internal_la-dbus-list.lo `test -f 'dbus-list.c' || echo '$(srcdir)/'`dbus-list.c
+ 
++libdbus_internal_la-dbus-mainloop.lo: dbus-mainloop.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_internal_la-dbus-mainloop.lo -MD -MP -MF $(DEPDIR)/libdbus_internal_la-dbus-mainloop.Tpo -c -o libdbus_internal_la-dbus-mainloop.lo `test -f 'dbus-mainloop.c' || echo '$(srcdir)/'`dbus-mainloop.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_internal_la-dbus-mainloop.Tpo $(DEPDIR)/libdbus_internal_la-dbus-mainloop.Plo
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dbus-mainloop.c' object='libdbus_internal_la-dbus-mainloop.lo' libtool=yes @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_internal_la-dbus-mainloop.lo `test -f 'dbus-mainloop.c' || echo '$(srcdir)/'`dbus-mainloop.c
++
+ libdbus_internal_la-dbus-marshal-basic.lo: dbus-marshal-basic.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_internal_la-dbus-marshal-basic.lo -MD -MP -MF $(DEPDIR)/libdbus_internal_la-dbus-marshal-basic.Tpo -c -o libdbus_internal_la-dbus-marshal-basic.lo `test -f 'dbus-marshal-basic.c' || echo '$(srcdir)/'`dbus-marshal-basic.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_internal_la-dbus-marshal-basic.Tpo $(DEPDIR)/libdbus_internal_la-dbus-marshal-basic.Plo
+@@ -1988,13 +2003,6 @@ libdbus_internal_la-dbus-credentials-util.lo: dbus-credentials-util.c
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_internal_la-dbus-credentials-util.lo `test -f 'dbus-credentials-util.c' || echo '$(srcdir)/'`dbus-credentials-util.c
+ 
+-libdbus_internal_la-dbus-mainloop.lo: dbus-mainloop.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_internal_la-dbus-mainloop.lo -MD -MP -MF $(DEPDIR)/libdbus_internal_la-dbus-mainloop.Tpo -c -o libdbus_internal_la-dbus-mainloop.lo `test -f 'dbus-mainloop.c' || echo '$(srcdir)/'`dbus-mainloop.c
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_internal_la-dbus-mainloop.Tpo $(DEPDIR)/libdbus_internal_la-dbus-mainloop.Plo
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dbus-mainloop.c' object='libdbus_internal_la-dbus-mainloop.lo' libtool=yes @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_internal_la-dbus-mainloop.lo `test -f 'dbus-mainloop.c' || echo '$(srcdir)/'`dbus-mainloop.c
+-
+ libdbus_internal_la-dbus-marshal-byteswap-util.lo: dbus-marshal-byteswap-util.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_internal_la-dbus-marshal-byteswap-util.lo -MD -MP -MF $(DEPDIR)/libdbus_internal_la-dbus-marshal-byteswap-util.Tpo -c -o libdbus_internal_la-dbus-marshal-byteswap-util.lo `test -f 'dbus-marshal-byteswap-util.c' || echo '$(srcdir)/'`dbus-marshal-byteswap-util.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_internal_la-dbus-marshal-byteswap-util.Tpo $(DEPDIR)/libdbus_internal_la-dbus-marshal-byteswap-util.Plo
+-- 
+1.7.9.5
+
+
+From 8af15f0e01ab569ab5a4d28b6609997799d0a985 Mon Sep 17 00:00:00 2001
+From: Steve Maynard <steve.maynard@twcable.com>
+Date: Thu, 14 Aug 2014 20:28:51 -0600
+Subject: [PATCH 5/6] fix unresolved externals by moving socket_set to shared
+ lib
+
+---
+ dbus/Makefile.am |    4 ++--
+ dbus/Makefile.in |   43 ++++++++++++++++++++++++++-----------------
+ 2 files changed, 28 insertions(+), 19 deletions(-)
+
+diff --git a/dbus/Makefile.am b/dbus/Makefile.am
+index 5baa04e..9548065 100644
+--- a/dbus/Makefile.am
++++ b/dbus/Makefile.am
+@@ -222,6 +222,8 @@ DBUS_SHARED_SOURCES=				\
+ 	dbus-mempool.h				\
+ 	dbus-pipe.c                 \
+ 	dbus-pipe.h                 \
++	dbus-socket-set.h			\
++	dbus-socket-set.c			\
+ 	dbus-string.c				\
+ 	dbus-string.h				\
+ 	dbus-string-private.h			\
+@@ -249,8 +251,6 @@ DBUS_UTIL_SOURCES=				\
+ 	dbus-shell.c				\
+ 	dbus-shell.h				\
+ 	$(DBUS_UTIL_arch_sources)		\
+-	dbus-socket-set.h			\
+-	dbus-socket-set.c			\
+ 	dbus-socket-set-poll.c			\
+ 	dbus-spawn.h				\
+ 	dbus-string-util.c			\
+diff --git a/dbus/Makefile.in b/dbus/Makefile.in
+index 2444355..c49c580 100644
+--- a/dbus/Makefile.in
++++ b/dbus/Makefile.in
+@@ -161,7 +161,8 @@ am__libdbus_1_la_SOURCES_DIST = dbus-address.c dbus-auth.c dbus-auth.h \
+ 	dbus-internals.h dbus-list.c dbus-list.h dbus-mainloop.c \
+ 	dbus-mainloop.h dbus-marshal-basic.c dbus-marshal-basic.h \
+ 	dbus-memory.c dbus-mempool.c dbus-mempool.h dbus-pipe.c \
+-	dbus-pipe.h dbus-string.c dbus-string.h dbus-string-private.h \
++	dbus-pipe.h dbus-socket-set.h dbus-socket-set.c dbus-string.c \
++	dbus-string.h dbus-string-private.h \
+ 	dbus-server-launchd.h dbus-server-launchd.c dbus-file-unix.c \
+ 	dbus-pipe-unix.c dbus-sysdeps-unix.c dbus-sysdeps-unix.h \
+ 	dbus-sysdeps-pthread.c dbus-transport-unix.c \
+@@ -217,8 +218,8 @@ am__objects_6 = libdbus_1_la-dbus-dataslot.lo \
+ 	libdbus_1_la-dbus-mainloop.lo \
+ 	libdbus_1_la-dbus-marshal-basic.lo libdbus_1_la-dbus-memory.lo \
+ 	libdbus_1_la-dbus-mempool.lo libdbus_1_la-dbus-pipe.lo \
+-	libdbus_1_la-dbus-string.lo $(am__objects_5) \
+-	libdbus_1_la-dbus-sysdeps.lo
++	libdbus_1_la-dbus-socket-set.lo libdbus_1_la-dbus-string.lo \
++	$(am__objects_5) libdbus_1_la-dbus-sysdeps.lo
+ am_libdbus_1_la_OBJECTS = $(am__objects_2) $(am__objects_6)
+ libdbus_1_la_OBJECTS = $(am_libdbus_1_la_OBJECTS)
+ AM_V_lt = $(am__v_lt_@AM_V@)
+@@ -256,7 +257,8 @@ am__libdbus_internal_la_SOURCES_DIST = dbus-address.c dbus-auth.c \
+ 	dbus-internals.h dbus-list.c dbus-list.h dbus-mainloop.c \
+ 	dbus-mainloop.h dbus-marshal-basic.c dbus-marshal-basic.h \
+ 	dbus-memory.c dbus-mempool.c dbus-mempool.h dbus-pipe.c \
+-	dbus-pipe.h dbus-string.c dbus-string.h dbus-string-private.h \
++	dbus-pipe.h dbus-socket-set.h dbus-socket-set.c dbus-string.c \
++	dbus-string.h dbus-string-private.h \
+ 	dbus-server-launchd.h dbus-server-launchd.c dbus-file-unix.c \
+ 	dbus-pipe-unix.c dbus-sysdeps-unix.c dbus-sysdeps-unix.h \
+ 	dbus-sysdeps-pthread.c dbus-transport-unix.c \
+@@ -273,9 +275,8 @@ am__libdbus_internal_la_SOURCES_DIST = dbus-address.c dbus-auth.c \
+ 	dbus-message-factory.h dbus-message-util.c dbus-shell.c \
+ 	dbus-shell.h dbus-sysdeps-util-unix.c dbus-userdb-util.c \
+ 	dbus-spawn.c dbus-socket-set-epoll.c dbus-sysdeps-util-win.c \
+-	dbus-spawn-win.c dbus-socket-set.h dbus-socket-set.c \
+-	dbus-socket-set-poll.c dbus-spawn.h dbus-string-util.c \
+-	dbus-sysdeps-util.c dbus-test.c dbus-test.h
++	dbus-spawn-win.c dbus-socket-set-poll.c dbus-spawn.h \
++	dbus-string-util.c dbus-sysdeps-util.c dbus-test.c dbus-test.h
+ @DBUS_WIN_FALSE@am__objects_7 = libdbus_internal_la-dbus-uuidgen.lo \
+ @DBUS_WIN_FALSE@	libdbus_internal_la-dbus-server-unix.lo
+ @DBUS_WIN_TRUE@am__objects_7 = libdbus_internal_la-dbus-server-win.lo
+@@ -334,6 +335,7 @@ am__objects_12 = libdbus_internal_la-dbus-dataslot.lo \
+ 	libdbus_internal_la-dbus-memory.lo \
+ 	libdbus_internal_la-dbus-mempool.lo \
+ 	libdbus_internal_la-dbus-pipe.lo \
++	libdbus_internal_la-dbus-socket-set.lo \
+ 	libdbus_internal_la-dbus-string.lo $(am__objects_11) \
+ 	libdbus_internal_la-dbus-sysdeps.lo
+ @HAVE_LINUX_EPOLL_TRUE@am__objects_13 = libdbus_internal_la-dbus-socket-set-epoll.lo
+@@ -355,7 +357,6 @@ am__objects_15 = libdbus_internal_la-dbus-auth-script.lo \
+ 	libdbus_internal_la-dbus-message-factory.lo \
+ 	libdbus_internal_la-dbus-message-util.lo \
+ 	libdbus_internal_la-dbus-shell.lo $(am__objects_14) \
+-	libdbus_internal_la-dbus-socket-set.lo \
+ 	libdbus_internal_la-dbus-socket-set-poll.lo \
+ 	libdbus_internal_la-dbus-string-util.lo \
+ 	libdbus_internal_la-dbus-sysdeps-util.lo \
+@@ -828,6 +829,8 @@ DBUS_SHARED_SOURCES = \
+ 	dbus-mempool.h				\
+ 	dbus-pipe.c                 \
+ 	dbus-pipe.h                 \
++	dbus-socket-set.h			\
++	dbus-socket-set.c			\
+ 	dbus-string.c				\
+ 	dbus-string.h				\
+ 	dbus-string-private.h			\
+@@ -856,8 +859,6 @@ DBUS_UTIL_SOURCES = \
+ 	dbus-shell.c				\
+ 	dbus-shell.h				\
+ 	$(DBUS_UTIL_arch_sources)		\
+-	dbus-socket-set.h			\
+-	dbus-socket-set.c			\
+ 	dbus-socket-set-poll.c			\
+ 	dbus-spawn.h				\
+ 	dbus-string-util.c			\
+@@ -1052,6 +1053,7 @@ distclean-compile:
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-server.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-sha.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-signature.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-socket-set.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-string.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-syntax.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-sysdeps-pthread.Plo@am__quote@
+@@ -1464,6 +1466,13 @@ libdbus_1_la-dbus-pipe.lo: dbus-pipe.c
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_1_la-dbus-pipe.lo `test -f 'dbus-pipe.c' || echo '$(srcdir)/'`dbus-pipe.c
+ 
++libdbus_1_la-dbus-socket-set.lo: dbus-socket-set.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_1_la-dbus-socket-set.lo -MD -MP -MF $(DEPDIR)/libdbus_1_la-dbus-socket-set.Tpo -c -o libdbus_1_la-dbus-socket-set.lo `test -f 'dbus-socket-set.c' || echo '$(srcdir)/'`dbus-socket-set.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_1_la-dbus-socket-set.Tpo $(DEPDIR)/libdbus_1_la-dbus-socket-set.Plo
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dbus-socket-set.c' object='libdbus_1_la-dbus-socket-set.lo' libtool=yes @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_1_la-dbus-socket-set.lo `test -f 'dbus-socket-set.c' || echo '$(srcdir)/'`dbus-socket-set.c
++
+ libdbus_1_la-dbus-string.lo: dbus-string.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_1_la-dbus-string.lo -MD -MP -MF $(DEPDIR)/libdbus_1_la-dbus-string.Tpo -c -o libdbus_1_la-dbus-string.lo `test -f 'dbus-string.c' || echo '$(srcdir)/'`dbus-string.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_1_la-dbus-string.Tpo $(DEPDIR)/libdbus_1_la-dbus-string.Plo
+@@ -1870,6 +1879,13 @@ libdbus_internal_la-dbus-pipe.lo: dbus-pipe.c
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_internal_la-dbus-pipe.lo `test -f 'dbus-pipe.c' || echo '$(srcdir)/'`dbus-pipe.c
+ 
++libdbus_internal_la-dbus-socket-set.lo: dbus-socket-set.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_internal_la-dbus-socket-set.lo -MD -MP -MF $(DEPDIR)/libdbus_internal_la-dbus-socket-set.Tpo -c -o libdbus_internal_la-dbus-socket-set.lo `test -f 'dbus-socket-set.c' || echo '$(srcdir)/'`dbus-socket-set.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_internal_la-dbus-socket-set.Tpo $(DEPDIR)/libdbus_internal_la-dbus-socket-set.Plo
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dbus-socket-set.c' object='libdbus_internal_la-dbus-socket-set.lo' libtool=yes @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_internal_la-dbus-socket-set.lo `test -f 'dbus-socket-set.c' || echo '$(srcdir)/'`dbus-socket-set.c
++
+ libdbus_internal_la-dbus-string.lo: dbus-string.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_internal_la-dbus-string.lo -MD -MP -MF $(DEPDIR)/libdbus_internal_la-dbus-string.Tpo -c -o libdbus_internal_la-dbus-string.lo `test -f 'dbus-string.c' || echo '$(srcdir)/'`dbus-string.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_internal_la-dbus-string.Tpo $(DEPDIR)/libdbus_internal_la-dbus-string.Plo
+@@ -2087,13 +2103,6 @@ libdbus_internal_la-dbus-spawn-win.lo: dbus-spawn-win.c
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_internal_la-dbus-spawn-win.lo `test -f 'dbus-spawn-win.c' || echo '$(srcdir)/'`dbus-spawn-win.c
+ 
+-libdbus_internal_la-dbus-socket-set.lo: dbus-socket-set.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_internal_la-dbus-socket-set.lo -MD -MP -MF $(DEPDIR)/libdbus_internal_la-dbus-socket-set.Tpo -c -o libdbus_internal_la-dbus-socket-set.lo `test -f 'dbus-socket-set.c' || echo '$(srcdir)/'`dbus-socket-set.c
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_internal_la-dbus-socket-set.Tpo $(DEPDIR)/libdbus_internal_la-dbus-socket-set.Plo
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dbus-socket-set.c' object='libdbus_internal_la-dbus-socket-set.lo' libtool=yes @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_internal_la-dbus-socket-set.lo `test -f 'dbus-socket-set.c' || echo '$(srcdir)/'`dbus-socket-set.c
+-
+ libdbus_internal_la-dbus-socket-set-poll.lo: dbus-socket-set-poll.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_internal_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_internal_la-dbus-socket-set-poll.lo -MD -MP -MF $(DEPDIR)/libdbus_internal_la-dbus-socket-set-poll.Tpo -c -o libdbus_internal_la-dbus-socket-set-poll.lo `test -f 'dbus-socket-set-poll.c' || echo '$(srcdir)/'`dbus-socket-set-poll.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_internal_la-dbus-socket-set-poll.Tpo $(DEPDIR)/libdbus_internal_la-dbus-socket-set-poll.Plo
+-- 
+1.7.9.5
+
+
+From 9b3ad887ba7e1964008edd0ac4f86a3892fc213c Mon Sep 17 00:00:00 2001
+From: Steve Maynard <steve.maynard@twcable.com>
+Date: Thu, 14 Aug 2014 20:48:46 -0600
+Subject: [PATCH 6/6] fix more unresolved externals by moving socket_set_poll
+ to shared lib
+
+---
+ dbus/Makefile.in |   19 ++++++++++++++++++-
+ 1 file changed, 18 insertions(+), 1 deletion(-)
+
+diff --git a/dbus/Makefile.in b/dbus/Makefile.in
+index c49c580..f52fb76 100644
+--- a/dbus/Makefile.in
++++ b/dbus/Makefile.in
+@@ -162,6 +162,7 @@ am__libdbus_1_la_SOURCES_DIST = dbus-address.c dbus-auth.c dbus-auth.h \
+ 	dbus-mainloop.h dbus-marshal-basic.c dbus-marshal-basic.h \
+ 	dbus-memory.c dbus-mempool.c dbus-mempool.h dbus-pipe.c \
+ 	dbus-pipe.h dbus-socket-set.h dbus-socket-set.c dbus-string.c \
++	dbus-socket-set-epoll.c dbus-socket-set-poll.c \
+ 	dbus-string.h dbus-string-private.h \
+ 	dbus-server-launchd.h dbus-server-launchd.c dbus-file-unix.c \
+ 	dbus-pipe-unix.c dbus-sysdeps-unix.c dbus-sysdeps-unix.h \
+@@ -831,6 +832,7 @@ DBUS_SHARED_SOURCES = \
+ 	dbus-pipe.h                 \
+ 	dbus-socket-set.h			\
+ 	dbus-socket-set.c			\
++	dbus-socket-set-poll.c			\
+ 	dbus-string.c				\
+ 	dbus-string.h				\
+ 	dbus-string-private.h			\
+@@ -859,7 +861,6 @@ DBUS_UTIL_SOURCES = \
+ 	dbus-shell.c				\
+ 	dbus-shell.h				\
+ 	$(DBUS_UTIL_arch_sources)		\
+-	dbus-socket-set-poll.c			\
+ 	dbus-spawn.h				\
+ 	dbus-string-util.c			\
+ 	dbus-sysdeps-util.c			\
+@@ -1053,6 +1054,8 @@ distclean-compile:
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-server.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-sha.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-signature.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-socket-set-epoll.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-socket-set-poll.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-socket-set.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-string.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libdbus_1_la-dbus-syntax.Plo@am__quote@
+@@ -1473,6 +1476,20 @@ libdbus_1_la-dbus-socket-set.lo: dbus-socket-set.c
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_1_la-dbus-socket-set.lo `test -f 'dbus-socket-set.c' || echo '$(srcdir)/'`dbus-socket-set.c
+ 
++libdbus_1_la-dbus-socket-set-epoll.lo: dbus-socket-set-epoll.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_1_la-dbus-socket-set-epoll.lo -MD -MP -MF $(DEPDIR)/libdbus_1_la-dbus-socket-set-epoll.Tpo -c -o libdbus_1_la-dbus-socket-set-epoll.lo `test -f 'dbus-socket-set-epoll.c' || echo '$(srcdir)/'`dbus-socket-set-epoll.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_1_la-dbus-socket-set-epoll.Tpo $(DEPDIR)/libdbus_1_la-dbus-socket-set-epoll.Plo
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dbus-socket-set-epoll.c' object='libdbus_1_la-dbus-socket-set-epoll.lo' libtool=yes @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_1_la-dbus-socket-set-epoll.lo `test -f 'dbus-socket-set-epoll.c' || echo '$(srcdir)/'`dbus-socket-set-epoll.c
++
++libdbus_1_la-dbus-socket-set-poll.lo: dbus-socket-set-poll.c
++@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_1_la-dbus-socket-set-poll.lo -MD -MP -MF $(DEPDIR)/libdbus_1_la-dbus-socket-set-poll.Tpo -c -o libdbus_1_la-dbus-socket-set-poll.lo `test -f 'dbus-socket-set-poll.c' || echo '$(srcdir)/'`dbus-socket-set-poll.c
++@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_1_la-dbus-socket-set-poll.Tpo $(DEPDIR)/libdbus_1_la-dbus-socket-set-poll.Plo
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dbus-socket-set-poll.c' object='libdbus_1_la-dbus-socket-set-poll.lo' libtool=yes @AMDEPBACKSLASH@
++@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o libdbus_1_la-dbus-socket-set-poll.lo `test -f 'dbus-socket-set-poll.c' || echo '$(srcdir)/'`dbus-socket-set-poll.c
++
+ libdbus_1_la-dbus-string.lo: dbus-string.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libdbus_1_la_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT libdbus_1_la-dbus-string.lo -MD -MP -MF $(DEPDIR)/libdbus_1_la-dbus-string.Tpo -c -o libdbus_1_la-dbus-string.lo `test -f 'dbus-string.c' || echo '$(srcdir)/'`dbus-string.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_1_la-dbus-string.Tpo $(DEPDIR)/libdbus_1_la-dbus-string.Plo
+-- 
+1.7.9.5
+

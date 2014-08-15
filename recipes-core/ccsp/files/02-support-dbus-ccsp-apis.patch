@@ -1,0 +1,101 @@
+--- CcspCommonLibrary/source/util_api/ccsp_msg_bus/ccsp_message_bus.c.orig2	2014-08-14 17:41:57.114755740 -0600
++++ CcspCommonLibrary/source/util_api/ccsp_msg_bus/ccsp_message_bus.c	2014-08-14 17:42:29.882756297 -0600
+@@ -205,7 +205,7 @@
+ {
+     CData *cd = data;
+ 
+-    return _dbus_loop_add_watch 
++    return dbus_loop_add_watch 
+                (
+                    cd->loop,
+                    watch
+@@ -227,7 +227,7 @@
+ {
+     CData *cd = data;
+ 
+-    _dbus_loop_remove_watch 
++    dbus_loop_remove_watch 
+         (
+              cd->loop,
+              watch 
+@@ -259,7 +259,7 @@
+     {
+     CData *cd = data;
+ 
+-    return _dbus_loop_add_timeout 
++    return dbus_loop_add_timeout 
+                (
+                    cd->loop,
+                    timeout 
+@@ -281,7 +281,7 @@
+ {
+     CData *cd = data;
+ 
+-    _dbus_loop_remove_timeout 
++    dbus_loop_remove_timeout 
+         (
+             cd->loop,
+             timeout 
+@@ -309,7 +309,7 @@
+     cd->connection = connection;
+ 
+     dbus_connection_ref (cd->connection);
+-    _dbus_loop_ref (cd->loop);
++    dbus_loop_ref (cd->loop);
+ 
+     return cd;
+ }
+@@ -323,7 +323,7 @@
+     CData *cd = data;
+ 
+     dbus_connection_unref (cd->connection);
+-    _dbus_loop_unref (cd->loop);
++    dbus_loop_unref (cd->loop);
+ 
+     dbus_free (cd);
+ }
+@@ -362,7 +362,7 @@
+ 
+     if (new_status != DBUS_DISPATCH_COMPLETE)
+     {
+-        while ( ! _dbus_loop_queue_dispatch (loop, connection))
++        while ( ! dbus_loop_queue_dispatch (loop, connection))
+             _dbus_wait_for_memory ();
+     }
+ }
+@@ -521,7 +521,7 @@
+     // check dispatch status
+     if (dbus_connection_get_dispatch_status (connection) != DBUS_DISPATCH_COMPLETE)
+     {
+-        if ( ! _dbus_loop_queue_dispatch (loop, connection))
++        if ( ! dbus_loop_queue_dispatch (loop, connection))
+             goto NO_MEM;
+     }
+ 
+@@ -577,7 +577,7 @@
+ )
+ {
+     DBusLoop *loop = (DBusLoop *)ptr;
+-    _dbus_loop_run (loop); // main loop, does _ref and _unref
++    dbus_loop_run (loop); // main loop, does _ref and _unref
+     return NULL;
+ }
+ 
+@@ -942,7 +942,7 @@
+                     */
+ 
+         // start the loop and connect threads, should be just one of each, even if count > 1
+-        bus_info->connection[count].loop = _dbus_loop_new();
++        bus_info->connection[count].loop = dbus_loop_new();
+         pthread_create
+             (
+                 &thread_dbus_loop, 
+@@ -1074,7 +1074,7 @@
+ 
+         if(bus_info->connection[i].loop )
+         {
+-            _dbus_loop_quit (bus_info->connection[i].loop);
++            dbus_loop_quit (bus_info->connection[i].loop);
+         }
+     }
+ 
