@@ -23,7 +23,8 @@ export INCLUDES = " -I${STAGING_DIR_HOST}/usr/include/dbus-1.0 \
  -I${STAGING_DIR_HOST}/usr/include/ccsp \
 "
 
-export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
- -ldbus-1 \
-"
-
+#force lib to be built first
+do_compile () {
+    oe_runmake liblmapi.la
+    oe_runmake all
+}
