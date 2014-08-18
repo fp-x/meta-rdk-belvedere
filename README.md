@@ -35,3 +35,11 @@ To test this component against a standard core-image-minimal yocto build:
    <b>TestAndDiagnostic \\</b><br>
 
 3) then execute:<br><b><i>bitbake core-image-minimal</i></b>
+
+
+To Build for the Raspberry PI:<br>
+cd ~/poky<br>
+git clone git://git.yoctoproject.org/meta-raspberrypi<br>
+source oe-init-build-env<br>
+edit conf/bblayers.conf and add ~/poky/meta-raspberrypi to the BBLAYERS<br>
+bitbake rpi-basic-image<br>
