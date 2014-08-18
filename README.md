@@ -42,4 +42,4 @@ cd ~/poky<br>
 git clone git://git.yoctoproject.org/meta-raspberrypi<br>
 source oe-init-build-env<br>
 edit conf/bblayers.conf and add ~/poky/meta-raspberrypi to the BBLAYERS<br>
-bitbake rpi-basic-image<br>
+MACHINE=raspberrypi bitbake rpi-basic-image<br>
