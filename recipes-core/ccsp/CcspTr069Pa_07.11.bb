@@ -37,7 +37,7 @@ do_install_append () {
     install -m 644 ${WORKDIR}/git/config/sdm.xml -t ${D}/usr/ccsp/tr069pa
 }
 
-CONFFILES_${PN} = " \
+FILES_${PN} = " \
     /usr/ccsp/tr069pa/ccsp_tr069_pa_certificate_cfg_pc.xml \
     /usr/ccsp/tr069pa/ccsp_tr069_pa_cfg_pc.xml \
     /usr/ccsp/tr069pa/ccsp_tr069_pa_mapper_pc.xml \

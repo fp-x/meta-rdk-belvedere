@@ -36,7 +36,7 @@ do_install_append () {
     install -m 644 ${WORKDIR}/git/config/TR181-CM_pc.XML -t ${D}/usr/ccsp/cm
 }
 
-CONFFILES_${PN} = " \
+FILES_${PN} = " \
     /usr/ccsp/cm \
     /usr/ccsp/cm/CcspCMDM_pc.cfg \
     /usr/ccsp/cm/CcspCM_pc.cfg \

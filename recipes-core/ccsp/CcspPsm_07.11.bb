@@ -34,7 +34,7 @@ do_install_append () {
     install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_pc.xml -t ${D}/usr/ccsp/config
 }
 
-CONFFILES_${PN} = " \
+FILES_${PN} = " \
     /usr/ccsp/config/bbhm_def_cfg_pc.xml \
 "
 

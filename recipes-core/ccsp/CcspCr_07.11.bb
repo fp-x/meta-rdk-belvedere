@@ -34,7 +34,7 @@ do_install_append () {
     install -m 644 ${WORKDIR}/git/config/cr-deviceprofile_pc.xml -t ${D}/usr/ccsp
 }
 
-CONFFILES_${PN} = " \
+FILES_${PN} = " \
     /usr/ccsp/cr-deviceprofile_pc.xml \
 "
 

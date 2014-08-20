@@ -36,7 +36,7 @@ do_install_append () {
     install -m 644 ${WORKDIR}/git/config/CcspMtaLib_pc.cfg -t ${D}/usr/ccsp/mta
 }
 
-CONFFILES_${PN} = " \
+FILES_${PN} = " \
     /usr/ccsp/mta/CcspMtaAgent_pc.xml \
     /usr/ccsp/mta/CcspMta_pc.cfg \
     /usr/ccsp/mta/CcspMtaLib_pc.cfg \

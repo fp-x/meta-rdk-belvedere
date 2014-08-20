@@ -34,7 +34,7 @@ do_install_append () {
     install -m 644 ${WORKDIR}/git/config/RebootManager_pc.xml -t ${D}/usr/ccsp/rm
 }
 
-CONFFILES_${PN} = " \
+FILES_${PN} = " \
     /usr/ccsp/rm/RebootManager_pc.xml \
 "
 

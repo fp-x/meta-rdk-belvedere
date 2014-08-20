@@ -36,7 +36,7 @@ do_install_append () {
     install -m 644 ${WORKDIR}/git/config/COSAXcalibur.XML -t ${D}/usr/ccsp/pam
 }
 
-CONFFILES_${PN} = " \
+FILES_${PN} = " \
     /usr/ccsp/pam/CcspDmLib_pc.cfg \
     /usr/ccsp/pam/CcspPam.cfg \
     /usr/ccsp/pam/COSAXcalibur.XML \
