@@ -28,17 +28,17 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
  -ldbus-1 \
 "
 
-FILES_${PN} = " \
-    ${WORKDIR}/config/CcspMtaAgent_pc.xml \
-    ${WORKDIR}/config/CcspMta_pc.cfg \
-    ${WORKDIR}/config/CcspMtaLib_pc.cfg \
-"
-
 do_install_append () {
     # Config files and scripts
-    mkdir -p ${D}/usr/ccsp/mta
+    install -d ${D}/usr/ccsp/mta
     install -m 644 ${WORKDIR}/git/config/CcspMtaAgent_pc.xml -t ${D}/usr/ccsp/mta
     install -m 644 ${WORKDIR}/git/config/CcspMta_pc.cfg -t ${D}/usr/ccsp/mta
     install -m 644 ${WORKDIR}/git/config/CcspMtaLib_pc.cfg -t ${D}/usr/ccsp/mta
 }
+
+CONFFILES_${PN} = " \
+    /usr/ccsp/mta/CcspMtaAgent_pc.xml \
+    /usr/ccsp/mta/CcspMta_pc.cfg \
+    /usr/ccsp/mta/CcspMtaLib_pc.cfg \
+"
 

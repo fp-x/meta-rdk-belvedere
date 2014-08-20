@@ -28,19 +28,9 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
  -ldbus-1 \
 "
 
-FILES_${PN} += " \
-    ${WORKDIR}/git/source/util_api/ccsp_msg_bus/basic.conf \
-    ${WORKDIR}/git/source/util_api/ccsp_msg_bus/ccsp_msg.cfg \
-    ${WORKDIR}/git/scripts/cli_start_pc.sh \
-    ${WORKDIR}/git/scripts/cosa_start_pc.sh \
-    ${WORKDIR}/git/config/ccsp_msg_pc.cfg \
-    ${WORKDIR}/git/config/ccsp_msg_pc.cfg \
-    ${WORKDIR}/git/config/ccsp_msg_pc.cfg \
-    ${WORKDIR}/git/config/ccsp_msg_pc.cfg \
-"
-
 do_install_append () {
-    mkdir -p ${D}/usr/include/ccsp/linux
+    install -d ${D}/usr/include/ccsp
+    install -d ${D}/usr/include/ccsp/linux
     install -m 644 ${WORKDIR}/git/source/debug_api/include/*.h ${D}/usr/include/ccsp
     install -m 644 ${WORKDIR}/git/source/util_api/ansc/include/*.h ${D}/usr/include/ccsp
     install -m 644 ${WORKDIR}/git/source/util_api/asn.1/include/*.h ${D}/usr/include/ccsp
@@ -61,10 +51,10 @@ do_install_append () {
     install -m 644 ${WORKDIR}/git/source/ccsp/components/common/PoamIrepFolder/*.h ${D}/usr/include/ccsp
 
     # Config files and scripts
-    mkdir -p ${D}/usr/ccsp/cm
-    mkdir -p ${D}/usr/ccsp/mta
-    mkdir -p ${D}/usr/ccsp/pam
-    mkdir -p ${D}/usr/ccsp/tr069pa
+    install -d ${D}/usr/ccsp/cm
+    install -d ${D}/usr/ccsp/mta
+    install -d ${D}/usr/ccsp/pam
+    install -d ${D}/usr/ccsp/tr069pa
     install -m 644 ${WORKDIR}/git/source/util_api/ccsp_msg_bus/basic.conf -t ${D}/usr/ccsp
     install -m 644 ${WORKDIR}/git/source/util_api/ccsp_msg_bus/ccsp_msg.cfg -t ${D}/usr/ccsp
     install -m 644 ${WORKDIR}/git/scripts/cli_start_pc.sh -t ${D}/usr/ccsp
@@ -75,3 +65,15 @@ do_install_append () {
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg -t ${D}/usr/ccsp/tr069pa
 
 }
+
+CONFFILES_${PN} += " \
+    /usr/ccsp/basic.conf \
+    /usr/ccsp/ccsp_msg.cfg \
+    /usr/ccsp/cli_start_pc.sh \
+    /usr/ccsp/cosa_start_pc.sh \
+    /usr/ccsp/cm/ccsp_msg_pc.cfg \
+    /usr/ccsp/mta/ccsp_msg_pc.cfg \
+    /usr/ccsp/pam/ccsp_msg_pc.cfg \
+    /usr/ccsp/tr069pa/ccsp_msg_pc.cfg \
+"
+

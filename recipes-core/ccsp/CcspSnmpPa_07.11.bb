@@ -31,27 +31,9 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
  -lssl \
 "
 
-FILES_${PN} = " \
-    ${WORKDIR}/config/snmpd.conf \
-    ${WORKDIR}/scripts/run_snmpd.sh \
-    ${WORKDIR}/scripts/run_subagent.sh \
-    ${WORKDIR}/Mib2DmMapping/Ccsp_CLAB-WIFI-MIB.xml \
-    ${WORKDIR}/Mib2DmMapping/CcspMibList.xml \
-    ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-DeviceMgmt.xml \
-    ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-Hotspot.xml \
-    ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-Lan-Dhcp.xml \
-    ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-MoCA.xml \
-    ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-NTP.xml \
-    ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-routing.xml \
-    ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-Tr069Pa.xml \
-    ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-Vlan.xml \
-    ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-WanDns.xml \
-    ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-WiFi-MIB.xml \
-"
-
 do_install_append () {
     # Config files and scripts
-    mkdir -p ${D}/usr/ccsp/snmp
+    install -d ${D}/usr/ccsp/snmp
     install -m 644 ${WORKDIR}/git/config/snmpd.conf -t ${D}/usr/ccsp/snmp
     install -m 644 ${WORKDIR}/git/scripts/run_snmpd.sh -t ${D}/usr/ccsp/snmp
     install -m 644 ${WORKDIR}/git/scripts/run_subagent.sh -t ${D}/usr/ccsp/snmp
@@ -69,3 +51,20 @@ do_install_append () {
     install -m 644 ${WORKDIR}/git/Mib2DmMapping/Ccsp_SA-RG-WiFi-MIB.xml -t ${D}/usr/ccsp/snmp
 }
 
+CONFFILES_${PN} = " \
+    /usr/ccsp/snmp/snmpd.conf \
+    /usr/ccsp/snmp/run_snmpd.sh \
+    /usr/ccsp/snmp/run_subagent.sh \
+    /usr/ccsp/snmp/Ccsp_CLAB-WIFI-MIB.xml \
+    /usr/ccsp/snmp/CcspMibList.xml \
+    /usr/ccsp/snmp/Ccsp_SA-RG-MIB-DeviceMgmt.xml \
+    /usr/ccsp/snmp/Ccsp_SA-RG-MIB-Hotspot.xml \
+    /usr/ccsp/snmp/Ccsp_SA-RG-MIB-Lan-Dhcp.xml \
+    /usr/ccsp/snmp/Ccsp_SA-RG-MIB-MoCA.xml \
+    /usr/ccsp/snmp/Ccsp_SA-RG-MIB-NTP.xml \
+    /usr/ccsp/snmp/Ccsp_SA-RG-MIB-routing.xml \
+    /usr/ccsp/snmp/Ccsp_SA-RG-MIB-Tr069Pa.xml \
+    /usr/ccsp/snmp/Ccsp_SA-RG-MIB-Vlan.xml \
+    /usr/ccsp/snmp/Ccsp_SA-RG-MIB-WanDns.xml \
+    /usr/ccsp/snmp/Ccsp_SA-RG-WiFi-MIB.xml \
+"
