@@ -1,6 +1,11 @@
+SUMMARY = "A console-only image to test the CCSP yocto build"
 
-#require ${HOME}/poky/meta-raspberrypi/recipes-core/images/rpi-basic-image.bb
-require ${HOME}/poky/meta/recipes-core/images/core-image-minimal.bb
+LICENSE = "MIT"
+LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690 \
+                    file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
+
+include core-image-minimal.bb
+#include rpi-basic-image.bb
 
 RDEPENDS_${PN} += " \
 	CcspCommonLibrary \
