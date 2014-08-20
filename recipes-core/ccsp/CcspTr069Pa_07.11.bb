@@ -37,10 +37,10 @@ FILES_${PN} = " \
 
 do_install_append () {
     # Config files and scripts
-    #mkdir -p ${D}/usr/ccsp/tr069pa
-    #install -m 644 ${WORKDIR}/config/ccsp_tr069_pa_certificate_cfg_pc.xml -t ${D}/usr/ccsp/tr069pa
-    #install -m 644 ${WORKDIR}/config/ccsp_tr069_pa_cfg_pc.xml -t ${D}/usr/ccsp/tr069pa
-    #install -m 644 ${WORKDIR}/config/ccsp_tr069_pa_mapper_pc.xml -t ${D}/usr/ccsp/tr069pa
-    #install -m 644 ${WORKDIR}/config/sdm.xml -t ${D}/usr/ccsp/tr069pa
+    mkdir -p ${D}/usr/ccsp/tr069pa
+    install -m 644 ${WORKDIR}/git/config/ccsp_tr069_pa_certificate_cfg_pc.xml -t ${D}/usr/ccsp/tr069pa
+    install -m 644 ${WORKDIR}/git/config/ccsp_tr069_pa_cfg_pc.xml -t ${D}/usr/ccsp/tr069pa
+    install -m 644 ${WORKDIR}/git/config/ccsp_tr069_pa_mapper_pc.xml -t ${D}/usr/ccsp/tr069pa
+    install -m 644 ${WORKDIR}/git/config/sdm.xml -t ${D}/usr/ccsp/tr069pa
 }
 

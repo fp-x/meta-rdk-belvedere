@@ -34,7 +34,7 @@ FILES_${PN} = " \
 
 do_install_append () {
     # Config files and scripts
-    #mkdir -p ${D}/usr/ccsp
-    #install -m 644 ${WORKDIR}/config/cr-deviceprofile_pc.xml -t ${D}/usr/ccsp
+    mkdir -p ${D}/usr/ccsp
+    install -m 644 ${WORKDIR}/git/config/cr-deviceprofile_pc.xml -t ${D}/usr/ccsp
 }
 

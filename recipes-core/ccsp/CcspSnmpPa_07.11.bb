@@ -51,21 +51,21 @@ FILES_${PN} = " \
 
 do_install_append () {
     # Config files and scripts
-    #mkdir -p ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/config/snmpd.conf -t ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/scripts/run_snmpd.sh -t ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/scripts/run_subagent.sh -t ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/Mib2DmMapping/Ccsp_CLAB-WIFI-MIB.xml -t ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/Mib2DmMapping/CcspMibList.xml -t ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-DeviceMgmt.xml -t ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-Hotspot.xml -t ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-Lan-Dhcp.xml -t ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-MoCA.xml -t ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-NTP.xml -t ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-routing.xml -t ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-Tr069Pa.xml -t ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-Vlan.xml -t ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-MIB-WanDns.xml -t ${D}/usr/ccsp/snmp
-    #install -m 644 ${WORKDIR}/Mib2DmMapping/Ccsp_SA-RG-WiFi-MIB.xml -t ${D}/usr/ccsp/snmp
+    mkdir -p ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/config/snmpd.conf -t ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/scripts/run_snmpd.sh -t ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/scripts/run_subagent.sh -t ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/Mib2DmMapping/Ccsp_CLAB-WIFI-MIB.xml -t ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/Mib2DmMapping/CcspMibList.xml -t ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/Mib2DmMapping/Ccsp_SA-RG-MIB-DeviceMgmt.xml -t ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/Mib2DmMapping/Ccsp_SA-RG-MIB-Hotspot.xml -t ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/Mib2DmMapping/Ccsp_SA-RG-MIB-Lan-Dhcp.xml -t ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/Mib2DmMapping/Ccsp_SA-RG-MIB-MoCA.xml -t ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/Mib2DmMapping/Ccsp_SA-RG-MIB-NTP.xml -t ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/Mib2DmMapping/Ccsp_SA-RG-MIB-routing.xml -t ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/Mib2DmMapping/Ccsp_SA-RG-MIB-Tr069Pa.xml -t ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/Mib2DmMapping/Ccsp_SA-RG-MIB-Vlan.xml -t ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/Mib2DmMapping/Ccsp_SA-RG-MIB-WanDns.xml -t ${D}/usr/ccsp/snmp
+    install -m 644 ${WORKDIR}/git/Mib2DmMapping/Ccsp_SA-RG-WiFi-MIB.xml -t ${D}/usr/ccsp/snmp
 }
 

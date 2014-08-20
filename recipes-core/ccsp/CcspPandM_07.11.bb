@@ -36,9 +36,9 @@ FILES_${PN} = " \
 
 do_install_append () {
     # Config files and scripts
-    #mkdir -p ${D}/usr/ccsp/pam
-    #install -m 644 ${WORKDIR}/config/CcspDmLib_pc.cfg -t ${D}/usr/ccsp/pam
-    #install -m 644 ${WORKDIR}/config/CcspPam.cfg -t ${D}/usr/ccsp/pam
-    #install -m 644 ${WORKDIR}/config/COSAXcalibur.XML -t ${D}/usr/ccsp/pam
+    mkdir -p ${D}/usr/ccsp/pam
+    install -m 644 ${WORKDIR}/git/config/CcspDmLib_pc.cfg -t ${D}/usr/ccsp/pam
+    install -m 644 ${WORKDIR}/git/config/CcspPam.cfg -t ${D}/usr/ccsp/pam
+    install -m 644 ${WORKDIR}/git/config/COSAXcalibur.XML -t ${D}/usr/ccsp/pam
 }
 

@@ -34,7 +34,7 @@ FILES_${PN} = " \
 
 do_install_append () {
     # Config files and scripts
-    #mkdir -p ${D}/usr/ccsp/rm
-    #install -m 644 ${WORKDIR}/config/RebootManager_pc.xml -t ${D}/usr/ccsp/rm
+    mkdir -p ${D}/usr/ccsp/rm
+    install -m 644 ${WORKDIR}/git/config/RebootManager_pc.xml -t ${D}/usr/ccsp/rm
 }
 

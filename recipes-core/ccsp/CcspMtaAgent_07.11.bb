@@ -36,9 +36,9 @@ FILES_${PN} = " \
 
 do_install_append () {
     # Config files and scripts
-    #mkdir -p ${D}/usr/ccsp/mta
-    #install -m 644 ${WORKDIR}/config/CcspMtaAgent_pc.xml -t ${D}/usr/ccsp/mta
-    #install -m 644 ${WORKDIR}/config/CcspMta_pc.cfg -t ${D}/usr/ccsp/mta
-    #install -m 644 ${WORKDIR}/config/CcspMtaLib_pc.cfg -t ${D}/usr/ccsp/mta
+    mkdir -p ${D}/usr/ccsp/mta
+    install -m 644 ${WORKDIR}/git/config/CcspMtaAgent_pc.xml -t ${D}/usr/ccsp/mta
+    install -m 644 ${WORKDIR}/git/config/CcspMta_pc.cfg -t ${D}/usr/ccsp/mta
+    install -m 644 ${WORKDIR}/git/config/CcspMtaLib_pc.cfg -t ${D}/usr/ccsp/mta
 }
 

@@ -36,9 +36,9 @@ FILES_${PN} = " \
 
 do_install_append () {
     # Config files and scripts
-    #mkdir -p ${D}/usr/ccsp/cm
-    #install -m 644 ${WORKDIR}/config/CcspCMDM_pc.cfg -t ${D}/usr/ccsp/cm
-    #install -m 644 ${WORKDIR}/config/CcspCM_pc.cfg -t ${D}/usr/ccsp/cm
-    #install -m 644 ${WORKDIR}/config/TR181-CM_pc.XML -t ${D}/usr/ccsp/cm
+    mkdir -p ${D}/usr/ccsp/cm
+    install -m 644 ${WORKDIR}/git/config/CcspCMDM_pc.cfg -t ${D}/usr/ccsp/cm
+    install -m 644 ${WORKDIR}/git/config/CcspCM_pc.cfg -t ${D}/usr/ccsp/cm
+    install -m 644 ${WORKDIR}/git/config/TR181-CM_pc.XML -t ${D}/usr/ccsp/cm
 }
 
