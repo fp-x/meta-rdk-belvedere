@@ -28,3 +28,19 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
  -ldbus-1 \
 "
 
+FILES_${PN} = " \
+    ${WORKDIR}/config/ccsp_tr069_pa_certificate_cfg_pc.xml \
+    ${WORKDIR}/config/ccsp_tr069_pa_cfg_pc.xml \
+    ${WORKDIR}/config/ccsp_tr069_pa_mapper_pc.xml \
+    ${WORKDIR}/config/sdm.xml \
+"
+
+do_install_append () {
+    # Config files and scripts
+    mkdir -p ${D}/usr/ccsp/tr069pa
+    install -m 644 ${WORKDIR}/git/config/ccsp_tr069_pa_certificate_cfg_pc.xml -t ${D}/usr/ccsp/tr069pa
+    install -m 644 ${WORKDIR}/git/config/ccsp_tr069_pa_cfg_pc.xml -t ${D}/usr/ccsp/tr069pa
+    install -m 644 ${WORKDIR}/git/config/ccsp_tr069_pa_mapper_pc.xml -t ${D}/usr/ccsp/tr069pa
+    install -m 644 ${WORKDIR}/git/config/sdm.xml -t ${D}/usr/ccsp/tr069pa
+}
+
