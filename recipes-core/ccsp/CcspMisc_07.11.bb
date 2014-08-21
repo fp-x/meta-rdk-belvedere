@@ -27,8 +27,8 @@ export INCLUDES = " -I${STAGING_DIR_HOST}/usr/include/dbus-1.0 \
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp
-    install -m 777 ${WORKDIR}/git/source/Ccsp_bus_client_tool/dmcli -t ${D}/usr/ccsp
-    install -m 777 ${WORKDIR}/git/source/Psmcli/psmcli -t ${D}/usr/ccsp
+    install -m 777 ${WORKDIR}/build/source/Ccsp_bus_client_tool/dmcli -t ${D}/usr/ccsp
+    install -m 777 ${WORKDIR}/build/source/Psmcli/psmcli -t ${D}/usr/ccsp
 }
 
 FILES_${PN} = " \

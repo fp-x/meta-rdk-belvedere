@@ -31,7 +31,7 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/mta
-    install -m 777 ${WORKDIR}/git/source/MtaAgentSsp/CcspMtaAgentSsp -t ${D}/usr/ccsp/mta
+    install -m 777 ${WORKDIR}/build/source/MtaAgentSsp/CcspMtaAgentSsp -t ${D}/usr/ccsp/mta
     install -m 644 ${WORKDIR}/git/config/CcspMtaAgent_pc.xml -t ${D}/usr/ccsp/mta
     install -m 644 ${WORKDIR}/git/config/CcspMta_pc.cfg -t ${D}/usr/ccsp/mta
     install -m 644 ${WORKDIR}/git/config/CcspMtaLib_pc.cfg -t ${D}/usr/ccsp/mta

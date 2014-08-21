@@ -31,7 +31,7 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/config
-    install -m 777 ${WORKDIR}/git/source/PsmSsp -t ${D}/usr/ccsp
+    install -m 777 ${WORKDIR}/build/source/PsmSsp -t ${D}/usr/ccsp
     install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_pc.xml -t ${D}/usr/ccsp/config
 }
 

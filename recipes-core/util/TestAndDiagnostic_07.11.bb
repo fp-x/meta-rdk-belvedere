@@ -31,7 +31,7 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/tad
-    install -m 777 ${WORKDIR}/git/source/TandDSsp/CcspTandDSsp -t ${D}/usr/ccsp/tad
+    install -m 777 ${WORKDIR}/build/source/TandDSsp/CcspTandDSsp -t ${D}/usr/ccsp/tad
 }
 
 FILES_${PN} = " \

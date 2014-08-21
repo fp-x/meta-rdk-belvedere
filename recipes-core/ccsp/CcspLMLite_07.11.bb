@@ -32,7 +32,7 @@ do_compile () {
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/lm
-    install -m 777 ${WORKDIR}/git/source/CcspLMLite -t ${D}/usr/ccsp/lm
+    install -m 777 ${WORKDIR}/build/source/CcspLMLite -t ${D}/usr/ccsp/lm
 }
 
 FILES_${PN} = " \
