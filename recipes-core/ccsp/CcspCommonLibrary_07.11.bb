@@ -51,7 +51,6 @@ do_install_append () {
     install -m 644 ${WORKDIR}/git/source/ccsp/components/common/PoamIrepFolder/*.h ${D}/usr/include/ccsp
 
     # Config files and scripts
-    install -d ${D}${bindir}
     install -d ${D}/usr/ccsp
     install -d ${D}/usr/ccsp/cm
     install -d ${D}/usr/ccsp/mta
@@ -59,8 +58,8 @@ do_install_append () {
     install -d ${D}/usr/ccsp/tr069pa
     install -m 644 ${WORKDIR}/git/source/util_api/ccsp_msg_bus/basic.conf -t ${D}/usr/ccsp
     install -m 644 ${WORKDIR}/git/source/util_api/ccsp_msg_bus/ccsp_msg.cfg -t ${D}/usr/ccsp
-    install -m 777 ${WORKDIR}/git/scripts/cli_start_pc.sh -t ${D}${bindir}
-    install -m 777 ${WORKDIR}/git/scripts/cosa_start_pc.sh -t ${D}${bindir}
+    install -m 777 ${WORKDIR}/git/scripts/cli_start_pc.sh -t ${D}/usr/ccsp
+    install -m 777 ${WORKDIR}/git/scripts/cosa_start_pc.sh -t ${D}/usr/ccsp
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg -t ${D}/usr/ccsp/cm
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg -t ${D}/usr/ccsp/mta
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg -t ${D}/usr/ccsp/pam
@@ -71,8 +70,8 @@ do_install_append () {
 FILES_${PN} += " \
     /usr/ccsp/basic.conf \
     /usr/ccsp/ccsp_msg.cfg \
-    /usr/bin/cli_start_pc.sh \
-    /usr/bin/cosa_start_pc.sh \
+    /usr/ccsp/cli_start_pc.sh \
+    /usr/ccsp/cosa_start_pc.sh \
     /usr/ccsp/cm/ccsp_msg_pc.cfg \
     /usr/ccsp/mta/ccsp_msg_pc.cfg \
     /usr/ccsp/pam/ccsp_msg_pc.cfg \

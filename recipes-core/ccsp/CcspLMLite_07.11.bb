@@ -28,3 +28,14 @@ do_compile () {
     oe_runmake liblmapi.la
     oe_runmake all
 }
+
+do_install_append () {
+    # Config files and scripts
+    install -d ${D}/usr/ccsp/lm
+    install -m 777 ${WORKDIR}/git/source/CcspLMLite -t ${D}/usr/ccsp/lm
+}
+
+FILES_${PN} = " \
+    /usr/ccsp/lm/CcspLMLite \
+"
+

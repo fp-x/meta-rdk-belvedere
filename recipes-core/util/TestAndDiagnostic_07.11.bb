@@ -28,3 +28,13 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
  -ldbus-1 \
 "
 
+do_install_append () {
+    # Config files and scripts
+    install -d ${D}/usr/ccsp/tad
+    install -m 777 ${WORKDIR}/git/source/TandDSsp/CcspTandDSsp -t ${D}/usr/ccsp/tad
+}
+
+FILES_${PN} = " \
+    /usr/ccsp/tad/CcspTandDSsp \
+"
+

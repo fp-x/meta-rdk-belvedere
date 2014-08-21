@@ -31,10 +31,12 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp
+    install -m 777 ${WORKDIR}/git/source/CcspCrSsp -t ${D}/usr/ccsp
     install -m 644 ${WORKDIR}/git/config/cr-deviceprofile_pc.xml -t ${D}/usr/ccsp
 }
 
 FILES_${PN} = " \
+    /usr/ccsp/CcspCrSsp \
     /usr/ccsp/cr-deviceprofile_pc.xml \
 "
 

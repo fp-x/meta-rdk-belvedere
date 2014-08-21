@@ -31,13 +31,14 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/cm
+    install -m 777 ${WORKDIR}/git/source/CMAgentSsp/CcspCMAgentSsp -t ${D}/usr/ccsp/cm
     install -m 644 ${WORKDIR}/git/config/CcspCMDM_pc.cfg -t ${D}/usr/ccsp/cm
     install -m 644 ${WORKDIR}/git/config/CcspCM_pc.cfg -t ${D}/usr/ccsp/cm
     install -m 644 ${WORKDIR}/git/config/TR181-CM_pc.XML -t ${D}/usr/ccsp/cm
 }
 
 FILES_${PN} = " \
-    /usr/ccsp/cm \
+    /usr/ccsp/cm/CcspCMAgentSsp \
     /usr/ccsp/cm/CcspCMDM_pc.cfg \
     /usr/ccsp/cm/CcspCM_pc.cfg \
     /usr/ccsp/cm/TR181-CM_pc.XML \

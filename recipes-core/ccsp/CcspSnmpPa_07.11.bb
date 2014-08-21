@@ -35,8 +35,8 @@ do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/snmp
     install -m 644 ${WORKDIR}/git/config/snmpd.conf -t ${D}/usr/ccsp/snmp
-    install -m 777 ${WORKDIR}/git/scripts/run_snmpd.sh -t ${D}${bindir}
-    install -m 777 ${WORKDIR}/git/scripts/run_subagent.sh -t ${D}${bindir}
+    install -m 777 ${WORKDIR}/git/scripts/run_snmpd.sh -t ${D}/usr/ccsp/snmp
+    install -m 777 ${WORKDIR}/git/scripts/run_subagent.sh -t ${D}/usr/ccsp/snmp
     install -m 644 ${WORKDIR}/git/Mib2DmMapping/Ccsp_CLAB-WIFI-MIB.xml -t ${D}/usr/ccsp/snmp
     install -m 644 ${WORKDIR}/git/Mib2DmMapping/CcspMibList.xml -t ${D}/usr/ccsp/snmp
     install -m 644 ${WORKDIR}/git/Mib2DmMapping/Ccsp_SA-RG-MIB-DeviceMgmt.xml -t ${D}/usr/ccsp/snmp

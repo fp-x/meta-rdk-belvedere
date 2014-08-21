@@ -31,12 +31,14 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/pam
+    install -m 777 ${WORKDIR}/git/source/PandMSsp/CcspPandMSsp -t ${D}/usr/ccsp/pam
     install -m 644 ${WORKDIR}/git/config/CcspDmLib_pc.cfg -t ${D}/usr/ccsp/pam
     install -m 644 ${WORKDIR}/git/config/CcspPam.cfg -t ${D}/usr/ccsp/pam
     install -m 644 ${WORKDIR}/git/config/COSAXcalibur.XML -t ${D}/usr/ccsp/pam
 }
 
 FILES_${PN} = " \
+    /usr/ccsp/pam/CcspPandMSsp \
     /usr/ccsp/pam/CcspDmLib_pc.cfg \
     /usr/ccsp/pam/CcspPam.cfg \
     /usr/ccsp/pam/COSAXcalibur.XML \
