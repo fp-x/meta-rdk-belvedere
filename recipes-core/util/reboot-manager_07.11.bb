@@ -1,13 +1,13 @@
-SUMMARY = "CCSP PsmSsp component"
-HOMEPAGE = "http://github.com/ccsp-yocto/CcspPsm"
+SUMMARY = "CCSP Reboot Manager utility."
+HOMEPAGE = "http://github.com/ccsp-yocto/RebootManager"
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 
-DEPENDS = "CcspCommonLibrary"
+DEPENDS = "ccsp-common-library"
 
 SRC_URI = "\
-git://github.com/ccsp-yocto/CcspPsm.git;protocol=git;branch=daisy;rev=daisy \
+git://github.com/ccsp-yocto/RebootManager.git;protocol=git;branch=daisy;rev=daisy \
     "
 
 SRC_URI[md5sum] = "d338d61e396d5038025339bf5bdb169d"
@@ -17,7 +17,7 @@ S = "${WORKDIR}/git"
 
 inherit autotools
 
-PACKAGECONFIG ??= "CcspCommonLibrary"
+PACKAGECONFIG ??= "ccsp-common-library"
 
 export INCLUDES = " -I${STAGING_DIR_HOST}/usr/include/dbus-1.0 \
  -I${STAGING_DIR_HOST}/usr/lib/dbus-1.0/include \
@@ -30,13 +30,13 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
 
 do_install_append () {
     # Config files and scripts
-    install -d ${D}/usr/ccsp/config
-    install -m 777 ${WORKDIR}/build/source/PsmSsp -t ${D}/usr/ccsp
-    install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_pc.xml -t ${D}/usr/ccsp/config
+    install -d ${D}/usr/ccsp/rm
+    install -m 777 ${WORKDIR}/build/source/RmSsp/CcspRmSsp -t ${D}/usr/ccsp/rm
+    install -m 644 ${WORKDIR}/git/config/RebootManager_pc.xml -t ${D}/usr/ccsp/rm
 }
 
 FILES_${PN} = " \
-    /usr/ccsp/PsmSsp \
-    /usr/ccsp/config/bbhm_def_cfg_pc.xml \
+    /usr/ccsp/rm/CcspRmSsp \
+    /usr/ccsp/rm/RebootManager_pc.xml \
 "
 
