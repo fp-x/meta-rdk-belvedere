@@ -31,7 +31,7 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/rm
-    install -m 777 ${WORKDIR}/build/source/RmSsp/CcspRmSsp -t ${D}/usr/ccsp/rm
+    install -m 777 ${D}/usr/bin/CcspRmSsp -t ${D}/usr/ccsp/rm
     install -m 644 ${WORKDIR}/git/config/RebootManager_pc.xml -t ${D}/usr/ccsp/rm
 }
 
