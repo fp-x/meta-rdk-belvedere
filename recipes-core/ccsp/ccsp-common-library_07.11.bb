@@ -56,25 +56,61 @@ do_install_append () {
     install -d ${D}/usr/ccsp/mta
     install -d ${D}/usr/ccsp/pam
     install -d ${D}/usr/ccsp/tr069pa
-    install -m 644 ${WORKDIR}/git/source/util_api/ccsp_msg_bus/basic.conf -t ${D}/usr/ccsp
-    install -m 644 ${WORKDIR}/git/source/util_api/ccsp_msg_bus/ccsp_msg.cfg -t ${D}/usr/ccsp
-    install -m 777 ${WORKDIR}/git/scripts/cli_start_pc.sh -t ${D}/usr/ccsp
-    install -m 777 ${WORKDIR}/git/scripts/cosa_start_pc.sh -t ${D}/usr/ccsp
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg -t ${D}/usr/ccsp/cm
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg -t ${D}/usr/ccsp/mta
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg -t ${D}/usr/ccsp/pam
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg -t ${D}/usr/ccsp/tr069pa
+    install -m 777 ${WORKDIR}/git/scripts/cosa_stop.sh -t ${D}/usr/ccsp
+}
 
+do_install_append_qemux86 () {
+    # Config files and scripts
+    install -m 777 ${WORKDIR}/git/scripts/cli_start_pc.sh ${D}/usr/ccsp/cli_start.sh 
+    install -m 777 ${WORKDIR}/git/scripts/cosa_start_pc.sh ${D}/usr/ccsp/cosa_start.sh 
+    install -m 644 ${WORKDIR}/git/config/basic_pc.conf ${D}/usr/ccsp/basic.conf 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
+}
+
+do_install_append_atom () {
+    # Config files and scripts
+    install -m 777 ${WORKDIR}/git/scripts/cli_start_atom.sh ${D}/usr/ccsp/cli_start.sh 
+    install -m 777 ${WORKDIR}/git/scripts/cosa_start_atom.sh ${D}/usr/ccsp/cosa_start.sh 
+    install -m 644 ${WORKDIR}/git/config/basic_atom.conf ${D}/usr/ccsp/basic.conf 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_atom.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_atom.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_atom.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_atom.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
+}
+
+do_install_append_qemuarm () {
+    # Config files and scripts
+    install -m 777 ${WORKDIR}/git/scripts/cli_start_arm.sh ${D}/usr/ccsp/cli_start.sh 
+    install -m 777 ${WORKDIR}/git/scripts/cosa_start_arm.sh ${D}/usr/ccsp/cosa_start.sh 
+    install -m 644 ${WORKDIR}/git/config/basic_arm.conf ${D}/usr/ccsp/basic.conf 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
+}
+
+do_install_append_raspberrypi () {
+    # Config files and scripts
+    install -m 777 ${WORKDIR}/git/scripts/cli_start_arm.sh ${D}/usr/ccsp/cli_start.sh 
+    install -m 777 ${WORKDIR}/git/scripts/cosa_start_arm.sh ${D}/usr/ccsp/cosa_start.sh 
+    install -m 644 ${WORKDIR}/git/config/basic_arm.conf ${D}/usr/ccsp/basic.conf 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
 }
 
 FILES_${PN} += " \
     /usr/ccsp/basic.conf \
-    /usr/ccsp/ccsp_msg.cfg \
-    /usr/ccsp/cli_start_pc.sh \
-    /usr/ccsp/cosa_start_pc.sh \
-    /usr/ccsp/cm/ccsp_msg_pc.cfg \
-    /usr/ccsp/mta/ccsp_msg_pc.cfg \
-    /usr/ccsp/pam/ccsp_msg_pc.cfg \
-    /usr/ccsp/tr069pa/ccsp_msg_pc.cfg \
+    /usr/ccsp/cli_start.sh \
+    /usr/ccsp/cosa_start.sh \
+    /usr/ccsp/cosa_stop.sh \
+    /usr/ccsp/cm/ccsp_msg.cfg \
+    /usr/ccsp/mta/ccsp_msg.cfg \
+    /usr/ccsp/pam/ccsp_msg.cfg \
+    /usr/ccsp/tr069pa/ccsp_msg.cfg \
 "
 

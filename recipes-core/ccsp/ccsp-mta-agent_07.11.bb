@@ -32,15 +32,33 @@ do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/mta
     install -m 777 ${D}/usr/bin/CcspMtaAgentSsp -t ${D}/usr/ccsp/mta
-    install -m 644 ${WORKDIR}/git/config/CcspMtaAgent_pc.xml -t ${D}/usr/ccsp/mta
-    install -m 644 ${WORKDIR}/git/config/CcspMta_pc.cfg -t ${D}/usr/ccsp/mta
-    install -m 644 ${WORKDIR}/git/config/CcspMtaLib_pc.cfg -t ${D}/usr/ccsp/mta
+}
+
+do_install_append_qemux86 () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/CcspMtaAgent_pc.xml ${D}/usr/ccsp/mta/CcspMtaAgent.xml 
+    install -m 644 ${WORKDIR}/git/config/CcspMta_pc.cfg ${D}/usr/ccsp/mta/CcspMta.cfg 
+    install -m 644 ${WORKDIR}/git/config/CcspMtaLib_pc.cfg ${D}/usr/ccsp/mta/CcspMtaLib.cfg 
+}
+
+do_install_append_qemuarm () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/CcspMtaAgent_arm.xml ${D}/usr/ccsp/mta/CcspMtaAgent.xml 
+    install -m 644 ${WORKDIR}/git/config/CcspMta_arm.cfg ${D}/usr/ccsp/mta/CcspMta.cfg 
+    install -m 644 ${WORKDIR}/git/config/CcspMtaLib_arm.cfg ${D}/usr/ccsp/mta/CcspMtaLib.cfg 
+}
+
+do_install_append_raspberrypi () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/CcspMtaAgent_arm.xml ${D}/usr/ccsp/mta/CcspMtaAgent.xml 
+    install -m 644 ${WORKDIR}/git/config/CcspMta_arm.cfg ${D}/usr/ccsp/mta/CcspMta.cfg 
+    install -m 644 ${WORKDIR}/git/config/CcspMtaLib_arm.cfg ${D}/usr/ccsp/mta/CcspMtaLib.cfg 
 }
 
 FILES_${PN} = " \
     /usr/ccsp/mta/CcspMtaAgentSsp \
-    /usr/ccsp/mta/CcspMtaAgent_pc.xml \
-    /usr/ccsp/mta/CcspMta_pc.cfg \
-    /usr/ccsp/mta/CcspMtaLib_pc.cfg \
+    /usr/ccsp/mta/CcspMtaAgent.xml \
+    /usr/ccsp/mta/CcspMta.cfg \
+    /usr/ccsp/mta/CcspMtaLib.cfg \
 "
 

@@ -32,11 +32,25 @@ do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/config
     install -m 777 ${D}/usr/bin/PsmSsp -t ${D}/usr/ccsp
-    install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_pc.xml -t ${D}/usr/ccsp/config
+}
+
+do_install_append_qemux86 () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_pc.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
+}
+
+do_install_append_qemuarm () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_arm.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
+}
+
+do_install_append_raspberrypi () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_arm.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
 }
 
 FILES_${PN} = " \
     /usr/ccsp/PsmSsp \
-    /usr/ccsp/config/bbhm_def_cfg_pc.xml \
+    /usr/ccsp/config/bbhm_def_cfg.xml \
 "
 

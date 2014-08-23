@@ -32,14 +32,32 @@ do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/cm
     install -m 777 ${D}/usr/bin/CcspCMAgentSsp -t ${D}/usr/ccsp/cm
-    install -m 644 ${WORKDIR}/git/config/CcspCMDM_pc.cfg -t ${D}/usr/ccsp/cm
-    install -m 644 ${WORKDIR}/git/config/CcspCM_pc.cfg -t ${D}/usr/ccsp/cm
-    install -m 644 ${WORKDIR}/git/config/TR181-CM_pc.XML -t ${D}/usr/ccsp/cm
+}
+
+do_install_append_qemux86 () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/CcspCMDM_pc.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
+    install -m 644 ${WORKDIR}/git/config/CcspCM_pc.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
+    install -m 644 ${WORKDIR}/git/config/TR181-CM_pc.XML ${D}/usr/ccsp/cm/TR181-CM.XML
+}
+
+do_install_append_qemuarm () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/CcspCMDM_arm.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
+    install -m 644 ${WORKDIR}/git/config/CcspCM_arm.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
+    install -m 644 ${WORKDIR}/git/config/TR181-CM_arm.XML ${D}/usr/ccsp/cm/TR181-CM.XML
+}
+
+do_install_append_raspberrypi () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/CcspCMDM_arm.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
+    install -m 644 ${WORKDIR}/git/config/CcspCM_arm.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
+    install -m 644 ${WORKDIR}/git/config/TR181-CM_arm.XML ${D}/usr/ccsp/cm/TR181-CM.XML
 }
 
 FILES_${PN} = " \
     /usr/ccsp/cm/CcspCMAgentSsp \
-    /usr/ccsp/cm/CcspCMDM_pc.cfg \
-    /usr/ccsp/cm/CcspCM_pc.cfg \
-    /usr/ccsp/cm/TR181-CM_pc.XML \
+    /usr/ccsp/cm/CcspCMDM.cfg \
+    /usr/ccsp/cm/CcspCM.cfg \
+    /usr/ccsp/cm/TR181-CM.XML \
 "

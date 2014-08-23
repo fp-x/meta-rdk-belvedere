@@ -32,11 +32,25 @@ do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp
     install -m 777 ${D}/usr/bin/CcspCrSsp -t ${D}/usr/ccsp
-    install -m 644 ${WORKDIR}/git/config/cr-deviceprofile_pc.xml -t ${D}/usr/ccsp
+}
+
+do_install_append_qemux86 () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/cr-deviceprofile_pc.xml ${D}/usr/ccsp/cr-deviceprofile.xml
+}
+
+do_install_append_qemuarm () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/cr-deviceprofile_arm.xml ${D}/usr/ccsp/cr-deviceprofile.xml
+}
+
+do_install_append_raspberrypi () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/cr-deviceprofile_arm.xml ${D}/usr/ccsp/cr-deviceprofile.xml
 }
 
 FILES_${PN} = " \
     /usr/ccsp/CcspCrSsp \
-    /usr/ccsp/cr-deviceprofile_pc.xml \
+    /usr/ccsp/cr-deviceprofile.xml \
 "
 

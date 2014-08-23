@@ -32,15 +32,31 @@ do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/pam
     install -m 777 ${D}/usr/bin/CcspPandMSsp -t ${D}/usr/ccsp/pam
-    install -m 644 ${WORKDIR}/git/config/CcspDmLib_pc.cfg -t ${D}/usr/ccsp/pam
     install -m 644 ${WORKDIR}/git/config/CcspPam.cfg -t ${D}/usr/ccsp/pam
     install -m 644 ${WORKDIR}/git/config/COSAXcalibur.XML -t ${D}/usr/ccsp/pam
+    install -m 644 ${WORKDIR}/git/config/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
+}
+
+do_install_append_qemux86 () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/CcspDmLib_pc.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
+}
+
+do_install_append_qemuarm () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/CcspDmLib_arm.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
+}
+
+do_install_append_raspberrypi () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/CcspDmLib_arm.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
 }
 
 FILES_${PN} = " \
     /usr/ccsp/pam/CcspPandMSsp \
-    /usr/ccsp/pam/CcspDmLib_pc.cfg \
+    /usr/ccsp/pam/CcspDmLib.cfg \
     /usr/ccsp/pam/CcspPam.cfg \
     /usr/ccsp/pam/COSAXcalibur.XML \
+    /usr/ccsp/pam/TR181-USGv2.XML  \
 "
 

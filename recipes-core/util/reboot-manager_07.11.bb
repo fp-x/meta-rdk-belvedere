@@ -32,11 +32,25 @@ do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/rm
     install -m 777 ${D}/usr/bin/CcspRmSsp -t ${D}/usr/ccsp/rm
-    install -m 644 ${WORKDIR}/git/config/RebootManager_pc.xml -t ${D}/usr/ccsp/rm
+}
+
+do_install_append_qemux86 () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/RebootManager_pc.xml ${D}/usr/ccsp/rm/RebootManager.xml 
+}
+
+do_install_append_qemuarm () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/RebootManager_arm.xml ${D}/usr/ccsp/rm/RebootManager.xml 
+}
+
+do_install_append_raspberrypi () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/RebootManager_arm.xml ${D}/usr/ccsp/rm/RebootManager.xml 
 }
 
 FILES_${PN} = " \
     /usr/ccsp/rm/CcspRmSsp \
-    /usr/ccsp/rm/RebootManager_pc.xml \
+    /usr/ccsp/rm/RebootManager.xml \
 "
 
