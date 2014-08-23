@@ -16,18 +16,22 @@ To test this component against a standard core-image-minimal yocto build:
    <b>/home/smaynard/poky/meta-openembedded/meta-networking \\</b><br>
    <b>/home/smaynard/yocto/ccsp/meta-rdk-ccsp \\</b>
 
-2a) To build:<br>
-<b><i>bitbake core-image-minimal</i></b>
+2a) To build for x86:<br>
+<b><i>cd ~/poky</i></b><br>
+<b><i>source oe-init-build-env</i></b><br>
+<b><i>bitbake ccsp-test-image</i></b><br>
+<b><i>runqemu qemux86</i></b><br>
 
 2b) To Build for the qemuarm:<br>
 <b><i>cd ~/poky</i></b><br>
-<b><i>source oe-init-build-env</i></b><br>
-<b><i>MACHINE=qemuarm bitbake rpi-basic-image</i></b><br>
+<b><i>MACHINE=qemuarm source oe-init-build-env</i></b><br>
+<b><i>MACHINE=qemuarm bitbake ccsp-test-image</i></b><br>
+<b><i>runqemu qemuarm</i></b><br>
 
 2c) To Build for the Raspberry PI:<br>
 <b><i>cd ~/poky</i></b><br>
 <b><i>git clone git://git.yoctoproject.org/meta-raspberrypi</i></b><br>
-<b><i>source oe-init-build-env</i></b><br>
+<b><i>MACHINE=raspberrypi source oe-init-build-env</i></b><br>
 <b><i>edit conf/bblayers.conf and add ~/poky/meta-raspberrypi to the BBLAYERS</i></b><br>
-<b><i>cp meta-rdk-ccsp/images/core-image-minimal.bbappend meta-rdk-ccsp/images/rpi-basic-image.bbappend</i></b><br>
-<b><i>MACHINE=raspberrypi bitbake rpi-basic-image</i></b><br>
+<b><i>MACHINE=raspberrypi bitbake ccsp-test-image</i></b><br>
+<b><i>dd resultant image to Raspberry Pi SD-Card</i></b><br>
