@@ -28,6 +28,18 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
  -ldbus-1 \
 "
 
+do_configure_append_qemux86 () {
+    install -m 644 ${WORKDIR}/git/source-pc/ssp_HAL_apis.c ${WORKDIR}/git/source/Ssp/psm_hal_apis.c
+}
+
+do_configure_append_qemuarm () {
+    install -m 644 ${WORKDIR}/git/source-arm/psm_hal_apis.c -t ${WORKDIR}/git/source/Ssp
+}
+
+do_configure_append_raspberrypi () {
+    install -m 644 ${WORKDIR}/git/source-arm/psm_hal_apis.c -t ${WORKDIR}/git/source/Ssp
+}
+
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/config
