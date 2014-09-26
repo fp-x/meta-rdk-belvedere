@@ -28,3 +28,12 @@ export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
  -ldbus-1 \
 "
 
+do_install_append () {
+    # Config files and scripts
+    install -d ${D}/usr/ccsp/wifi
+    install -m 777 ${D}/usr/bin/CcspWifiSsp -t ${D}/usr/ccsp/wifi
+}
+
+FILES_${PN} = " \
+    /usr/ccsp/wifi/CcspWifiSsp \
+"

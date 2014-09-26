@@ -64,6 +64,7 @@ do_install_append_qemux86 () {
     install -m 777 ${WORKDIR}/git/scripts/cli_start_pc.sh ${D}/usr/ccsp/cli_start.sh 
     install -m 777 ${WORKDIR}/git/scripts/cosa_start_pc.sh ${D}/usr/ccsp/cosa_start.sh 
     install -m 644 ${WORKDIR}/git/config/basic_pc.conf ${D}/usr/ccsp/basic.conf 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg ${D}/usr/ccsp/ccsp_msg.cfg 
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
@@ -75,6 +76,7 @@ do_install_append_atom () {
     install -m 777 ${WORKDIR}/git/scripts/cli_start_atom.sh ${D}/usr/ccsp/cli_start.sh 
     install -m 777 ${WORKDIR}/git/scripts/cosa_start_atom.sh ${D}/usr/ccsp/cosa_start.sh 
     install -m 644 ${WORKDIR}/git/config/basic_atom.conf ${D}/usr/ccsp/basic.conf 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_atom.cfg ${D}/usr/ccsp/ccsp_msg.cfg 
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_atom.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_atom.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_atom.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
@@ -86,6 +88,7 @@ do_install_append_qemuarm () {
     install -m 777 ${WORKDIR}/git/scripts/cli_start_arm.sh ${D}/usr/ccsp/cli_start.sh 
     install -m 777 ${WORKDIR}/git/scripts/cosa_start_arm.sh ${D}/usr/ccsp/cosa_start.sh 
     install -m 644 ${WORKDIR}/git/config/basic_arm.conf ${D}/usr/ccsp/basic.conf 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/ccsp_msg.cfg 
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
@@ -97,6 +100,7 @@ do_install_append_raspberrypi () {
     install -m 777 ${WORKDIR}/git/scripts/cli_start_arm.sh ${D}/usr/ccsp/cli_start.sh 
     install -m 777 ${WORKDIR}/git/scripts/cosa_start_arm.sh ${D}/usr/ccsp/cosa_start.sh 
     install -m 644 ${WORKDIR}/git/config/basic_arm.conf ${D}/usr/ccsp/basic.conf 
+    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/ccsp_msg.cfg 
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
@@ -105,6 +109,7 @@ do_install_append_raspberrypi () {
 
 FILES_${PN} += " \
     /usr/ccsp/basic.conf \
+    /usr/ccsp/ccsp_msg.cfg \
     /usr/ccsp/cli_start.sh \
     /usr/ccsp/cosa_start.sh \
     /usr/ccsp/cosa_stop.sh \
