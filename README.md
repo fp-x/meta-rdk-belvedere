@@ -30,7 +30,7 @@ To test this component against a standard core-image-minimal yocto build:
 
 2c) To Build for the Raspberry PI:<br>
 <b><i>cd ~/poky</i></b><br>
-<b><i>git clone git://git.yoctoproject.org/meta-raspberrypi</i></b><br>
+<b><i>git clone -b daisy git://git.yoctoproject.org/meta-raspberrypi</i></b><br>
 <b><i>cd meta-raspberrypi; git checkout daisy; cd ..</i></b><br>
 <b><i>MACHINE=raspberrypi source oe-init-build-env</i></b><br>
 <b><i>edit conf/bblayers.conf and add ~/poky/meta-raspberrypi to the BBLAYERS</i></b><br>
