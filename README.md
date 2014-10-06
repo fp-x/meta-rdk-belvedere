@@ -10,7 +10,7 @@ Depending on your Yocto installation of poky, you maye have to:<br>
 <b><i>git pull</i></b><br>
 <b><i>git clone -b daisy git://git.openembedded.org/meta-openembedded</i></b><br>
 
-To test this component against a standard core-image-minimal yocto build:
+To test this component against a standard core-image-minimal yocto build:<br>
 1a) To build for qemux86:<br>
 <b><i>cd ~/poky</i></b><br>
 <b><i>source oe-init-build-env</i></b><br>
