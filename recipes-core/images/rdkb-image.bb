@@ -13,8 +13,12 @@ include recipes-core/images/core-image-minimal.bb
 
 IMAGE_INSTALL_append += " \
     packagegroup-rdkb-ccsp \
-    python \
+    python-core \
+    python-modules \
     perl \
+    connman \
+    wireless-tools \
+    wpa-supplicant \
 	"
 
 IMAGE_INSTALL_append_qemux86 += " \
@@ -25,7 +29,6 @@ IMAGE_INSTALL_append_qemuarm += " \
 
 IMAGE_INSTALL_append_raspberrypi += " \
     kernel-modules \
-    apt \
 	"
 
 export IMAGE_BASENAME = "rdkb"
