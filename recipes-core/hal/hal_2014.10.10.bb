@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 
 SRC_URI = "\
-git://github.com/ccsp-yocto/hal.git;protocol=git;branch=daisy;rev=daisy \
+    git://github.com/ccsp-yocto/hal.git;protocol=git;branch=daisy;rev=daisy \
     "
 
 SRC_URI[md5sum] = "d338d61e396d5038025339bf5bdb169d"
@@ -20,3 +20,4 @@ do_install_append () {
     install -d ${D}/usr/include/ccsp
     install -m 644 ${WORKDIR}/git/include/*.h ${D}/usr/include/ccsp
 }
+

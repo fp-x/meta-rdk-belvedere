@@ -4,10 +4,10 @@ HOMEPAGE = "http://github.com/ccsp-yocto/CcspPsm"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d41d8cd98f00b204e9800998ecf8427e"
 
-DEPENDS = "ccsp-common-library"
+DEPENDS = "ccsp-common-library dbus"
 
 SRC_URI = "\
-git://github.com/ccsp-yocto/CcspPsm.git;protocol=git;branch=daisy;rev=daisy \
+    git://github.com/ccsp-yocto/CcspPsm.git;protocol=git;branch=daisy;rev=daisy \
     "
 
 SRC_URI[md5sum] = "d338d61e396d5038025339bf5bdb169d"
@@ -17,16 +17,15 @@ S = "${WORKDIR}/git"
 
 inherit autotools
 
-PACKAGECONFIG ??= "ccsp-common-library"
+CFLAGS_append = " \
+    -I=${includedir}/dbus-1.0 \
+    -I=${libdir}/dbus-1.0/include \
+    -I=${includedir}/ccsp \
+    "
 
-export INCLUDES = " -I${STAGING_DIR_HOST}/usr/include/dbus-1.0 \
- -I${STAGING_DIR_HOST}/usr/lib/dbus-1.0/include \
- -I${STAGING_DIR_HOST}/usr/include/ccsp \
-"
-
-export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
- -ldbus-1 \
-"
+LDFLAGS_append = " \
+    -ldbus-1 \
+    "
 
 do_configure_append_qemux86 () {
     install -m 644 ${WORKDIR}/git/source-pc/ssp_HAL_apis.c ${WORKDIR}/git/source/Ssp/psm_hal_apis.c
@@ -61,8 +60,16 @@ do_install_append_raspberrypi () {
     install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_arm.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
 }
 
-FILES_${PN} = " \
-    /usr/ccsp/PsmSsp \
-    /usr/ccsp/config/bbhm_def_cfg.xml \
+PACKAGES += "${PN}-ccsp"
+
+FILES_${PN}-ccsp = " \
+    ${prefix}/ccsp/PsmSsp \
+    ${prefix}/ccsp/config/bbhm_def_cfg.xml \
 "
 
+FILES_${PN}-dbg = " \
+    ${prefix}/ccsp/.debug \
+    ${prefix}/src/debug \
+    ${bindir}/.debug \
+    ${libdir}/.debug \
+"

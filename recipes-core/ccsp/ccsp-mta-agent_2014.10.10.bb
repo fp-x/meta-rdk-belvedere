@@ -17,16 +17,11 @@ S = "${WORKDIR}/git"
 
 inherit autotools
 
-PACKAGECONFIG ??= "ccsp-common-library"
-
-export INCLUDES = " -I${STAGING_DIR_HOST}/usr/include/dbus-1.0 \
- -I${STAGING_DIR_HOST}/usr/lib/dbus-1.0/include \
- -I${STAGING_DIR_HOST}/usr/include/ccsp \
-"
-
-export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
- -ldbus-1 \
-"
+CFLAGS_append = " \
+    -I=${includedir}/dbus-1.0 \
+    -I=${libdir}/dbus-1.0/include \
+    -I=${includedir}/ccsp \
+    "
 
 do_install_append () {
     # Config files and scripts
@@ -55,10 +50,18 @@ do_install_append_raspberrypi () {
     install -m 644 ${WORKDIR}/git/config/CcspMtaLib_arm.cfg ${D}/usr/ccsp/mta/CcspMtaLib.cfg 
 }
 
-FILES_${PN} = " \
-    /usr/ccsp/mta/CcspMtaAgentSsp \
-    /usr/ccsp/mta/CcspMtaAgent.xml \
-    /usr/ccsp/mta/CcspMta.cfg \
-    /usr/ccsp/mta/CcspMtaLib.cfg \
+PACKAGES += "${PN}-ccsp"
+
+FILES_${PN}-ccsp = " \
+    ${prefix}/ccsp/mta/CcspMtaAgentSsp \
+    ${prefix}/ccsp/mta/CcspMtaAgent.xml \
+    ${prefix}/ccsp/mta/CcspMta.cfg \
+    ${prefix}/ccsp/mta/CcspMtaLib.cfg \
 "
 
+FILES_${PN}-dbg = " \
+    ${prefix}/ccsp/mta/.debug \
+    ${prefix}/src/debug \
+    ${bindir}/.debug \
+    ${libdir}/.debug \
+"

@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/ccsp-yocto/CcspPsm"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 
-DEPENDS = "ccsp-common-library"
+DEPENDS = "ccsp-common-library dbus"
 
 SRC_URI = "\
 git://github.com/ccsp-yocto/CcspTr069Pa.git;protocol=git;branch=daisy;rev=daisy \
@@ -17,16 +17,15 @@ S = "${WORKDIR}/git"
 
 inherit autotools
 
-PACKAGECONFIG ??= "ccsp-common-library"
+CFLAGS_append = " \
+    -I=${includedir}/dbus-1.0 \
+    -I=${libdir}/dbus-1.0/include \
+    -I=${includedir}/ccsp \
+    "
 
-export INCLUDES = " -I${STAGING_DIR_HOST}/usr/include/dbus-1.0 \
- -I${STAGING_DIR_HOST}/usr/lib/dbus-1.0/include \
- -I${STAGING_DIR_HOST}/usr/include/ccsp \
-"
-
-export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
- -ldbus-1 \
-"
+LDFLAGS_append = " \
+    -ldbus-1 \
+    "
 
 do_configure_append_qemux86 () {
     install -m 644 ${WORKDIR}/git/source-pc/ccsp_tr069_pa_custom_apis.c -t ${WORKDIR}/git/source/Ssp
@@ -70,11 +69,19 @@ do_install_append_raspberrypi () {
     install -m 644 ${WORKDIR}/git/config/sdm_arm.xml ${D}/usr/ccsp/tr069pa/sdm.xml
 }
 
-FILES_${PN} = " \
-    /usr/ccsp/tr069pa/CcspTr069PaSsp \
-    /usr/ccsp/tr069pa/ccsp_tr069_pa_certificate_cfg.xml \
-    /usr/ccsp/tr069pa/ccsp_tr069_pa_cfg.xml \
-    /usr/ccsp/tr069pa/ccsp_tr069_pa_mapper.xml \
-    /usr/ccsp/tr069pa/sdm.xml \
+PACKAGES += "${PN}-ccsp"
+
+FILES_${PN}-ccsp = " \
+    ${prefix}/ccsp/tr069pa/CcspTr069PaSsp \
+    ${prefix}/ccsp/tr069pa/ccsp_tr069_pa_certificate_cfg.xml \
+    ${prefix}/ccsp/tr069pa/ccsp_tr069_pa_cfg.xml \
+    ${prefix}/ccsp/tr069pa/ccsp_tr069_pa_mapper.xml \
+    ${prefix}/ccsp/tr069pa/sdm.xml \
 "
 
+FILES_${PN}-dbg = " \
+    ${prefix}/ccsp/tr069pa/.debug \
+    ${prefix}/src/debug \
+    ${bindir}/.debug \
+    ${libdir}/.debug \
+"

@@ -7,9 +7,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d41d8cd98f00b204e9800998ecf8427e"
 DEPENDS = "dbus openssl"
 
 SRC_URI = "\
-git://github.com/ccsp-yocto/CcspCommonLibrary.git;protocol=git;branch=daisy;rev=daisy \
-file://01-support-newer-dbus-apis.patch \
-file://02-support-dbus-ccsp-apis.patch \
+    git://github.com/ccsp-yocto/CcspCommonLibrary.git;protocol=git;branch=daisy;rev=daisy \
+    file://01-support-newer-dbus-apis.patch \
+    file://02-support-dbus-ccsp-apis.patch \
     "
 
 SRC_URI[md5sum] = "d338d61e396d5038025339bf5bdb169d"
@@ -19,14 +19,14 @@ S = "${WORKDIR}/git"
 
 inherit autotools
 
-PACKAGECONFIG ??= "dbus"
+CFLAGS_append = " \
+    -I=${includedir}/dbus-1.0 \
+    -I=${libdir}/dbus-1.0/include \
+    "
 
-export INCLUDES = " -I${STAGING_DIR_HOST}/usr/include/dbus-1.0 \
- -I${STAGING_DIR_HOST}/usr/lib/dbus-1.0/include \
-"
-export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
- -ldbus-1 \
-"
+LDFLAGS_append = " \
+    -ldbus-1 \
+    "
 
 do_install_append () {
     install -d ${D}/usr/include/ccsp
@@ -103,14 +103,22 @@ do_install_append_raspberrypi () {
     install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
 }
 
-FILES_${PN} += " \
-    /usr/ccsp/basic.conf \
-    /usr/ccsp/cli_start.sh \
-    /usr/ccsp/cosa_start.sh \
-    /usr/ccsp/cosa_stop.sh \
-    /usr/ccsp/cm/ccsp_msg.cfg \
-    /usr/ccsp/mta/ccsp_msg.cfg \
-    /usr/ccsp/pam/ccsp_msg.cfg \
-    /usr/ccsp/tr069pa/ccsp_msg.cfg \
+PACKAGES += "${PN}-ccsp"
+
+FILES_${PN}-ccsp = " \
+    ${prefix}/ccsp/basic.conf \
+    ${prefix}/ccsp/cli_start.sh \
+    ${prefix}/ccsp/cosa_start.sh \
+    ${prefix}/ccsp/cosa_stop.sh \
+    ${prefix}/ccsp/cm/ccsp_msg.cfg \
+    ${prefix}/ccsp/mta/ccsp_msg.cfg \
+    ${prefix}/ccsp/pam/ccsp_msg.cfg \
+    ${prefix}/ccsp/tr069pa/ccsp_msg.cfg \
 "
 
+FILES_${PN}-dbg = " \
+    ${prefix}/ccsp/.debug \
+    ${prefix}/src/debug \
+    ${bindir}/.debug \
+    ${libdir}/.debug \
+"

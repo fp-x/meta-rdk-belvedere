@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d41d8cd98f00b204e9800998ecf8427e"
 DEPENDS = "ccsp-common-library"
 
 SRC_URI = "\
-git://github.com/ccsp-yocto/RebootManager.git;protocol=git;branch=daisy;rev=daisy \
+    git://github.com/ccsp-yocto/RebootManager.git;protocol=git;branch=daisy;rev=daisy \
     "
 
 SRC_URI[md5sum] = "d338d61e396d5038025339bf5bdb169d"
@@ -17,16 +17,15 @@ S = "${WORKDIR}/git"
 
 inherit autotools
 
-PACKAGECONFIG ??= "ccsp-common-library"
+CFLAGS_append = " \
+    -I=${includedir}/dbus-1.0 \
+    -I=${libdir}/dbus-1.0/include \
+    -I=${includedir}/ccsp \
+    "
 
-export INCLUDES = " -I${STAGING_DIR_HOST}/usr/include/dbus-1.0 \
- -I${STAGING_DIR_HOST}/usr/lib/dbus-1.0/include \
- -I${STAGING_DIR_HOST}/usr/include/ccsp \
-"
-
-export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
- -ldbus-1 \
-"
+LDFLAGS_append = " \
+    -ldbus-1 \
+    "
 
 do_configure_append_qemux86 () {
     install -m 644 ${WORKDIR}/git/source-pc/CcspRmHal.c -t ${WORKDIR}/git/source/RmSsp
@@ -61,8 +60,16 @@ do_install_append_raspberrypi () {
     install -m 644 ${WORKDIR}/git/config/RebootManager_arm.xml ${D}/usr/ccsp/rm/RebootManager.xml 
 }
 
-FILES_${PN} = " \
-    /usr/ccsp/rm/CcspRmSsp \
-    /usr/ccsp/rm/RebootManager.xml \
+PACKAGES += "${PN}-ccsp"
+
+FILES_${PN}-ccsp = " \
+    ${prefix}/ccsp/rm/CcspRmSsp \
+    ${prefix}/ccsp/rm/RebootManager.xml \
 "
 
+FILES_${PN}-dbg = " \
+    ${prefix}/ccsp/rm/.debug \
+    ${prefix}/src/debug \
+    ${bindir}/.debug \
+    ${libdir}/.debug \
+"

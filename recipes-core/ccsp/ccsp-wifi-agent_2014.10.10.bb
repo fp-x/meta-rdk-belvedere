@@ -17,16 +17,15 @@ S = "${WORKDIR}/git"
 
 inherit autotools
 
-PACKAGECONFIG ??= "ccsp-common-library"
+CFLAGS_append = " \
+    -I=${includedir}/dbus-1.0 \
+    -I=${libdir}/dbus-1.0/include \
+    -I=${includedir}/ccsp \
+    "
 
-export INCLUDES = " -I${STAGING_DIR_HOST}/usr/include/dbus-1.0 \
- -I${STAGING_DIR_HOST}/usr/lib/dbus-1.0/include \
- -I${STAGING_DIR_HOST}/usr/include/ccsp \
-"
-
-export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
- -ldbus-1 \
-"
+LDFLAGS_append = " \
+    -ldbus-1 \
+    "
 
 do_install_append () {
     # Config files and scripts
@@ -35,5 +34,14 @@ do_install_append () {
 }
 
 FILES_${PN} = " \
-    /usr/ccsp/wifi/CcspWifiSsp \
+    ${bindir}/CcspWifiSsp \
+    ${prefix}/ccsp/wifi/CcspWifiSsp \
+    ${libdir}/libwifi.so.* \
+"
+
+FILES_${PN}-dbg = " \
+    ${prefix}/ccsp/wifi/.debug \
+    ${prefix}/src/debug \
+    ${bindir}/.debug \
+    ${libdir}/.debug \
 "

@@ -17,16 +17,11 @@ S = "${WORKDIR}/git"
 
 inherit autotools
 
-PACKAGECONFIG ??= "ccsp-common-library"
-
-export INCLUDES = " -I${STAGING_DIR_HOST}/usr/include/dbus-1.0 \
- -I${STAGING_DIR_HOST}/usr/lib/dbus-1.0/include \
- -I${STAGING_DIR_HOST}/usr/include/ccsp \
-"
-
-export LDFLAGS = " -L${STAGING_DIR_HOST}/usr/lib \
- -ldbus-1 \
-"
+CFLAGS_append = " \
+    -I=${includedir}/dbus-1.0 \
+    -I=${libdir}/dbus-1.0/include \
+    -I=${includedir}/ccsp \
+    "
 
 do_install_append () {
     # Config files and scripts
@@ -49,8 +44,16 @@ do_install_append_raspberrypi () {
     install -m 644 ${WORKDIR}/git/config/cr-deviceprofile_arm.xml ${D}/usr/ccsp/cr-deviceprofile.xml
 }
 
-FILES_${PN} = " \
-    /usr/ccsp/CcspCrSsp \
-    /usr/ccsp/cr-deviceprofile.xml \
+PACKAGES += "${PN}-ccsp"
+
+FILES_${PN}-ccsp = " \
+    ${prefix}/ccsp/CcspCrSsp \
+    ${prefix}/ccsp/cr-deviceprofile.xml \
 "
 
+FILES_${PN}-dbg = " \
+    ${prefix}/ccsp/.debug \
+    ${prefix}/src/debug \
+    ${bindir}/.debug \
+    ${libdir}/.debug \
+"

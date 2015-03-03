@@ -16,12 +16,11 @@ S = "${WORKDIR}/git"
 
 inherit autotools
 
-PACKAGECONFIG ??= "ccsp-common-library"
-
-export INCLUDES = " -I${STAGING_DIR_HOST}/usr/include/dbus-1.0 \
- -I${STAGING_DIR_HOST}/usr/lib/dbus-1.0/include \
- -I${STAGING_DIR_HOST}/usr/include/ccsp \
-"
+CFLAGS_append = " \
+    -I=${includedir}/dbus-1.0 \
+    -I=${libdir}/dbus-1.0/include \
+    -I=${includedir}/ccsp \
+    "
 
 #force lib to be built first
 do_compile () {
@@ -35,7 +34,15 @@ do_install_append () {
     install -m 777 ${D}/usr/bin/CcspLMLite -t ${D}/usr/ccsp/lm
 }
 
-FILES_${PN} = " \
-    /usr/ccsp/lm/CcspLMLite \
+PACKAGES += "${PN}-ccsp"
+
+FILES_${PN}-ccsp = " \
+    ${prefix}/ccsp/lm/CcspLMLite \
 "
 
+FILES_${PN}-dbg = " \
+    ${prefix}/ccsp/lm/.debug \
+    ${prefix}/src/debug \
+    ${bindir}/.debug \
+    ${libdir}/.debug \
+"
