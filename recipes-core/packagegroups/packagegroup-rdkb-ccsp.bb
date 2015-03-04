@@ -14,6 +14,7 @@ RDEPENDS_packagegroup-rdkb-ccsp = "\
 	hal \
 	ccsp-cm-agent \
 	ccsp-cr \
+	ccsp-dmcli \
 	ccsp-lm-lite \
 	ccsp-misc \
 	ccsp-mta-agent \

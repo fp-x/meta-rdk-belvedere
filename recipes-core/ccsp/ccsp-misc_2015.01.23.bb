@@ -26,14 +26,12 @@ CFLAGS_append = " \
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp
-    install -m 777 ${D}/usr/bin/dmcli -t ${D}/usr/ccsp
     install -m 777 ${D}/usr/bin/psmcli -t ${D}/usr/ccsp
 }
 
 PACKAGES += "${PN}-ccsp"
 
 FILES_${PN}-ccsp = " \
-    /usr/ccsp/dmcli \
     /usr/ccsp/psmcli \
 "
 
