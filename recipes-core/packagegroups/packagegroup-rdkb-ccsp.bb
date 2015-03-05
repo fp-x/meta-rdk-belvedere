@@ -22,6 +22,7 @@ RDEPENDS_packagegroup-rdkb-ccsp = "\
 	ccsp-psm \
 	ccsp-snmp-pa \
 	ccsp-tr069-pa \
+	ccsp-wecb-controller \
 	ccsp-wifi-agent \
 	reboot-manager \
 	test-and-diagnostic \
