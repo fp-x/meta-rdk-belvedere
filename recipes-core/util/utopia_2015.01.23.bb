@@ -7,8 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 DEPENDS = "ccsp-common-library hal zlib"
 
 SRC_URI = "\
-    git://github.com/ccsp-yocto/Utopia.git;protocol=git;branch=150123-merge \
-    file://0001-autotools-Use-internal-lsyscfg-lsysevent-lulog-libra.patch \
+    git://github.com/ccsp-yocto/Utopia.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
     "
 
 SRCREV = "${AUTOREV}"
@@ -38,8 +37,16 @@ do_install_append () {
     install -D -p -m 777 source/services/lib/.libs/*.so* ${D}${libdir}
     install -D -p -m 777 source/utctx/lib/.libs/*.so* ${D}${libdir}
     install -D -p -m 777 source/utapi/lib/.libs/*.so* ${D}${libdir}
+    install -D -p -m 644 source/include/autoconf.h ${D}${includedir}/utctx/autoconf.h
+    install -D -p -m 644 source/ulog/ulog.h ${D}${includedir}/ulog/ulog.h
+    install -D -p -m 644 source/utapi/lib/utapi.h ${D}${includedir}/utapi/utapi.h
     install -D -p -m 644 source/utapi/lib/utapi_wlan.h ${D}${includedir}/utapi/utapi_wlan.h
+    install -D -p -m 644 source/utapi/lib/utapi_util.h ${D}${includedir}/utapi/utapi_util.h
+    install -D -p -m 644 source/utctx/lib/utctx.h ${D}${includedir}/utctx/utctx.h
+    install -D -p -m 644 source/utctx/lib/utctx_api.h ${D}${includedir}/utctx/utctx_api.h
+    install -D -p -m 644 source/utctx/lib/utctx_rwlock.h ${D}${includedir}/utctx/utctx_rwlock.h
     install -D -p -m 644 source/syscfg/lib/syscfg.h ${D}${includedir}/syscfg/syscfg.h
+    install -D -p -m 644 source/sysevent/lib/sysevent.h ${D}${includedir}/sysevent/sysevent.h
     install -D -p -m 644 source/sysevent/lib/libsysevent_internal.h ${D}${includedir}/sysevent/libsysevent_internal.h
 
 }
