@@ -1,7 +1,7 @@
-meta-rdk-ccsp
+meta-rdk-belvedere
 =============
 
-All CCSP recipes are in these subdirectories.
+All Belvedere (formerly CCSP) recipes are in these subdirectories.
 
 As recipes are written for components, the SRCREV should be made automatic based on each components branch "daisy"; i.e. each component's master branch will be buildable on the pc where as it's daisy branch will be buildable in yocto.
 
