@@ -1,5 +1,5 @@
 SUMMARY = "CCSP PandMSsp component"
-HOMEPAGE = "http://github.com/ccsp-yocto/CcspPandM"
+HOMEPAGE = "http://github.com/belvedere-yocto/CcspPandM"
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d41d8cd98f00b204e9800998ecf8427e"
@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d41d8cd98f00b204e9800998ecf8427e"
 DEPENDS = "ccsp-common-library"
 
 SRC_URI = "\
-    git://github.com/ccsp-yocto/CcspPandM.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
+    git://github.com/belvedere-yocto/CcspPandM.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
     "
 
 SRCREV = "${AUTOREV}"
@@ -31,24 +31,28 @@ do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/pam
     install -m 777 ${D}/usr/bin/CcspPandMSsp -t ${D}/usr/ccsp/pam
-    install -m 644 ${WORKDIR}/git/config/CcspPam.cfg -t ${D}/usr/ccsp/pam
-    install -m 644 ${WORKDIR}/git/config/COSAXcalibur.XML -t ${D}/usr/ccsp/pam
-    install -m 644 ${WORKDIR}/git/config/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
+    install -m 644 ${WORKDIR}/git/config-pc/COSAXcalibur.XML -t ${D}/usr/ccsp/pam
 }
 
 do_install_append_qemux86 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/CcspDmLib_pc.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
+    install -m 644 ${WORKDIR}/git/config-pc/CcspDmLib.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
+    install -m 644 ${WORKDIR}/git/config-pc/CcspPam.cfg -t ${D}/usr/ccsp/pam
+    install -m 644 ${WORKDIR}/git/config-pc/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
 }
 
 do_install_append_qemuarm () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/CcspDmLib_arm.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/CcspDmLib.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/CcspPam.cfg -t ${D}/usr/ccsp/pam
+    install -m 644 ${WORKDIR}/git/config-arm/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
 }
 
 do_install_append_raspberrypi () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/CcspDmLib_arm.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/CcspDmLib.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/CcspPam.cfg -t ${D}/usr/ccsp/pam
+    install -m 644 ${WORKDIR}/git/config-arm/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
 }
 
 PACKAGES += "${PN}-ccsp"

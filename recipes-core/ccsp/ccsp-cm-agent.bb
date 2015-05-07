@@ -1,5 +1,5 @@
 SUMMARY = "CCSP CcspCMAgent component"
-HOMEPAGE = "http://github.com/ccsp-yocto/CcspCMAgent"
+HOMEPAGE = "http://github.com/belvedere-yocto/CcspCMAgent"
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 DEPENDS = "ccsp-common-library hal"
 
 SRC_URI = "\
-    git://github.com/ccsp-yocto/CcspCMAgent.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
+    git://github.com/belvedere-yocto/CcspCMAgent.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
     "
 
 SRCREV = "${AUTOREV}"
@@ -35,23 +35,23 @@ do_install_append () {
 
 do_install_append_qemux86 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/CcspCMDM_pc.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
-    install -m 644 ${WORKDIR}/git/config/CcspCM_pc.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
-    install -m 644 ${WORKDIR}/git/config/TR181-CM_pc.XML ${D}/usr/ccsp/cm/TR181-CM.XML
+    install -m 644 ${WORKDIR}/git/config-pc/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
+    install -m 644 ${WORKDIR}/git/config-pc/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
+    install -m 644 ${WORKDIR}/git/config-pc/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
 }
 
 do_install_append_qemuarm () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/CcspCMDM_arm.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
-    install -m 644 ${WORKDIR}/git/config/CcspCM_arm.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
-    install -m 644 ${WORKDIR}/git/config/TR181-CM_arm.XML ${D}/usr/ccsp/cm/TR181-CM.XML
+    install -m 644 ${WORKDIR}/git/config-arm/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
+    install -m 644 ${WORKDIR}/git/config-arm/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
+    install -m 644 ${WORKDIR}/git/config-arm/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
 }
 
 do_install_append_raspberrypi () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/CcspCMDM_arm.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
-    install -m 644 ${WORKDIR}/git/config/CcspCM_arm.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
-    install -m 644 ${WORKDIR}/git/config/TR181-CM_arm.XML ${D}/usr/ccsp/cm/TR181-CM.XML
+    install -m 644 ${WORKDIR}/git/config-arm/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
+    install -m 644 ${WORKDIR}/git/config-arm/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
+    install -m 644 ${WORKDIR}/git/config-arm/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
 }
 
 PACKAGES += "${PN}-ccsp"

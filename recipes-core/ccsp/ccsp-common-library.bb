@@ -1,5 +1,5 @@
 SUMMARY = "CCSP libccsp_common component"
-HOMEPAGE = "http://github.com/ccsp-yocto/CcspCommonLibrary"
+HOMEPAGE = "http://github.com/belvedere-yocto/CcspCommonLibrary"
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d41d8cd98f00b204e9800998ecf8427e"
@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d41d8cd98f00b204e9800998ecf8427e"
 DEPENDS = "dbus openssl"
 
 SRC_URI = "\
-    git://github.com/ccsp-yocto/CcspCommonLibrary.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
+    git://github.com/belvedere-yocto/CcspCommonLibrary.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
     file://01-support-newer-dbus-apis.patch \
     file://02-support-dbus-ccsp-apis.patch \
     "
@@ -63,44 +63,44 @@ do_install_append_qemux86 () {
     # Config files and scripts
     install -m 777 ${WORKDIR}/git/scripts/cli_start_pc.sh ${D}/usr/ccsp/cli_start.sh 
     install -m 777 ${WORKDIR}/git/scripts/cosa_start_pc.sh ${D}/usr/ccsp/cosa_start.sh 
-    install -m 644 ${WORKDIR}/git/config/basic_pc.conf ${D}/usr/ccsp/basic.conf 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_pc.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-pc/basic.conf ${D}/usr/ccsp/basic.conf 
+    install -m 644 ${WORKDIR}/git/config-pc/ccsp_msg.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-pc/ccsp_msg.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-pc/ccsp_msg.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-pc/ccsp_msg.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
 }
 
 do_install_append_atom () {
     # Config files and scripts
     install -m 777 ${WORKDIR}/git/scripts/cli_start_atom.sh ${D}/usr/ccsp/cli_start.sh 
     install -m 777 ${WORKDIR}/git/scripts/cosa_start_atom.sh ${D}/usr/ccsp/cosa_start.sh 
-    install -m 644 ${WORKDIR}/git/config/basic_atom.conf ${D}/usr/ccsp/basic.conf 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_atom.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_atom.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_atom.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_atom.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-atom/basic.conf ${D}/usr/ccsp/basic.conf 
+    install -m 644 ${WORKDIR}/git/config-atom/ccsp_msg.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-atom/ccsp_msg.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-atom/ccsp_msg.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-atom/ccsp_msg.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
 }
 
 do_install_append_qemuarm () {
     # Config files and scripts
     install -m 777 ${WORKDIR}/git/scripts/cli_start_arm.sh ${D}/usr/ccsp/cli_start.sh 
     install -m 777 ${WORKDIR}/git/scripts/cosa_start_arm.sh ${D}/usr/ccsp/cosa_start.sh 
-    install -m 644 ${WORKDIR}/git/config/basic_arm.conf ${D}/usr/ccsp/basic.conf 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/basic.conf ${D}/usr/ccsp/basic.conf 
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
 }
 
 do_install_append_raspberrypi () {
     # Config files and scripts
     install -m 777 ${WORKDIR}/git/scripts/cli_start_arm.sh ${D}/usr/ccsp/cli_start.sh 
     install -m 777 ${WORKDIR}/git/scripts/cosa_start_arm.sh ${D}/usr/ccsp/cosa_start.sh 
-    install -m 644 ${WORKDIR}/git/config/basic_arm.conf ${D}/usr/ccsp/basic.conf 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
-    install -m 644 ${WORKDIR}/git/config/ccsp_msg_arm.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/basic.conf ${D}/usr/ccsp/basic.conf 
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
 }
 
 PACKAGES += "${PN}-ccsp"

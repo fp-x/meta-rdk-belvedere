@@ -1,5 +1,5 @@
 SUMMARY = "CCSP CcspCrSsp component"
-HOMEPAGE = "http://github.com/ccsp-yocto/CcspCr"
+HOMEPAGE = "http://github.com/belvedere-yocto/CcspCr"
 
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 DEPENDS = "ccsp-common-library"
 
 SRC_URI = "\
-    git://github.com/ccsp-yocto/CcspCr.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
+    git://github.com/belvedere-yocto/CcspCr.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
     "
 
 SRCREV = "${AUTOREV}"
