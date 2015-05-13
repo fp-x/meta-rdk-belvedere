@@ -12,8 +12,8 @@ PR = "r1"
 LEAD_SONAME = "libupnp"
 
 SRC_URI = "${SOURCEFORGE_MIRROR}/pupnp/${P}.tar.bz2"
-SRC_URI[md5sum] = "2b0370e7c405a5bc80880085e6d7d827"
-SRC_URI[sha256sum] = "95b11e2db04c2e714c2f4fb05d9d31351d3388dababd4e1dd5300f4b0d5e8767"
+SRC_URI[md5sum] = "ee16e5d33a3ea7506f38d71facc057dd"
+SRC_URI[sha256sum] = "b3142b39601243b50532eec90f4a27dba85eb86f58d4b849ac94edeb29d9b22a"
 
 PACKAGECONFIG ??= ""
 
