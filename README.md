@@ -28,7 +28,7 @@ To test this component against a standard core-image-minimal yocto build:<br>
 
 2) edit <i>poky/build/conf/bblayers.conf</i> and add the following to BBLAYERS<br>
 <b>/home/smaynard/poky/meta-openembedded/meta-networking \\</b><br>
-<b>/home/smaynard/yocto/ccsp/meta-rdk-ccsp \\</b>
+<b>/home/smaynard/yocto/ccsp/meta-rdk-belvedere \\</b>
 
 3a) To build for x86:<br>
 <b><i>bitbake ccsp-test-image</i></b><br>
