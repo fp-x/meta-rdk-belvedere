@@ -44,6 +44,11 @@ do_install_append_raspberrypi () {
     install -m 644 ${WORKDIR}/git/config/cr-deviceprofile_arm.xml ${D}/usr/ccsp/cr-deviceprofile.xml
 }
 
+do_install_append_puma6 () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/cr-deviceprofile_arm.xml ${D}/usr/ccsp/cr-deviceprofile.xml
+}
+
 PACKAGES += "${PN}-ccsp"
 
 FILES_${PN}-ccsp = " \

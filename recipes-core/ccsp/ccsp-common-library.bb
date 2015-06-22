@@ -103,6 +103,17 @@ do_install_append_raspberrypi () {
     install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
 }
 
+do_install_append_puma6 () {
+    # Config files and scripts
+    install -m 777 ${WORKDIR}/git/scripts/cli_start_arm.sh ${D}/usr/ccsp/cli_start.sh 
+    install -m 777 ${WORKDIR}/git/scripts/cosa_start_arm.sh ${D}/usr/ccsp/cosa_start.sh 
+    install -m 644 ${WORKDIR}/git/config-arm/basic.conf ${D}/usr/ccsp/basic.conf 
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
+}
+
 PACKAGES += "${PN}-ccsp"
 
 FILES_${PN}-ccsp = " \

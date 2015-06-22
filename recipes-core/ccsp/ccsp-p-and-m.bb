@@ -55,6 +55,13 @@ do_install_append_raspberrypi () {
     install -m 644 ${WORKDIR}/git/config-arm/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
 }
 
+do_install_append_puma6 () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config-arm/CcspDmLib.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/CcspPam.cfg -t ${D}/usr/ccsp/pam
+    install -m 644 ${WORKDIR}/git/config-arm/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
+}
+
 PACKAGES += "${PN}-ccsp"
 
 FILES_${PN}-ccsp = " \
