@@ -39,6 +39,10 @@ do_configure_append_raspberrypi () {
     install -m 644 ${WORKDIR}/git/source-arm/CcspRmHal.c -t ${WORKDIR}/git/source/RmSsp
 }
 
+do_configure_append_puma6 () {
+    install -m 644 ${WORKDIR}/git/source-arm/CcspRmHal.c -t ${WORKDIR}/git/source/RmSsp
+}
+
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/rm
@@ -56,6 +60,11 @@ do_install_append_qemuarm () {
 }
 
 do_install_append_raspberrypi () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/RebootManager_arm.xml ${D}/usr/ccsp/rm/RebootManager.xml 
+}
+
+do_install_append_puma6 () {
     # Config files and scripts
     install -m 644 ${WORKDIR}/git/config/RebootManager_arm.xml ${D}/usr/ccsp/rm/RebootManager.xml 
 }

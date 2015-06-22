@@ -50,6 +50,13 @@ do_install_append_raspberrypi () {
     install -m 644 ${WORKDIR}/git/config-arm/CcspMtaLib.cfg ${D}/usr/ccsp/mta/CcspMtaLib.cfg 
 }
 
+do_install_append_puma6 () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config-arm/CcspMtaAgent.xml ${D}/usr/ccsp/mta/CcspMtaAgent.xml 
+    install -m 644 ${WORKDIR}/git/config-arm/CcspMta.cfg ${D}/usr/ccsp/mta/CcspMta.cfg 
+    install -m 644 ${WORKDIR}/git/config-arm/CcspMtaLib.cfg ${D}/usr/ccsp/mta/CcspMtaLib.cfg 
+}
+
 PACKAGES += "${PN}-ccsp"
 
 FILES_${PN}-ccsp = " \

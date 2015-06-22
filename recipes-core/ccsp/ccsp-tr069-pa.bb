@@ -39,6 +39,10 @@ do_configure_append_raspberrypi () {
     install -m 644 ${WORKDIR}/git/source-arm/ccsp_tr069_pa_custom_apis.c -t ${WORKDIR}/git/source/Ssp
 }
 
+do_configure_append_puma6 () {
+    install -m 644 ${WORKDIR}/git/source-arm/ccsp_tr069_pa_custom_apis.c -t ${WORKDIR}/git/source/Ssp
+}
+
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/tr069pa
@@ -62,6 +66,14 @@ do_install_append_qemuarm () {
 }
 
 do_install_append_raspberrypi () {
+    # Config files and scripts
+    install -m 644 ${WORKDIR}/git/config/ccsp_tr069_pa_certificate_cfg_arm.xml ${D}/usr/ccsp/tr069pa/ccsp_tr069_pa_certificate_cfg.xml
+    install -m 644 ${WORKDIR}/git/config/ccsp_tr069_pa_cfg_arm.xml ${D}/usr/ccsp/tr069pa/ccsp_tr069_pa_cfg.xml
+    install -m 644 ${WORKDIR}/git/config/ccsp_tr069_pa_mapper_arm.xml ${D}/usr/ccsp/tr069pa/ccsp_tr069_pa_mapper.xml
+    install -m 644 ${WORKDIR}/git/config/sdm_arm.xml ${D}/usr/ccsp/tr069pa/sdm.xml
+}
+
+do_install_append_puma6 () {
     # Config files and scripts
     install -m 644 ${WORKDIR}/git/config/ccsp_tr069_pa_certificate_cfg_arm.xml ${D}/usr/ccsp/tr069pa/ccsp_tr069_pa_certificate_cfg.xml
     install -m 644 ${WORKDIR}/git/config/ccsp_tr069_pa_cfg_arm.xml ${D}/usr/ccsp/tr069pa/ccsp_tr069_pa_cfg.xml
