@@ -1,0 +1,14 @@
+Index: git/source/Psmcli/psmcli.c
+===================================================================
+--- git.orig/source/Psmcli/psmcli.c
++++ git/source/Psmcli/psmcli.c
+@@ -26,7 +26,7 @@
+ #include "ccsp_psm_helper.h"    // for PSM_Get/Set_Record_Value2 
+ #include "ccsp_psmcli.h"        // for extern psmcli_debug_level psmcli_debug_print
+ 
+-#include <ucontext.h>           // for ccsp_exception_handler
++#include <sys/ucontext.h>           // for ccsp_exception_handler
+ #include <signal.h>             // for sigaction
+ 
+ #include "ccsp_trace.h"         // for CcspTraceXYZ
+

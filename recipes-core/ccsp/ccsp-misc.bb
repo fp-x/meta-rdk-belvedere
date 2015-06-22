@@ -10,6 +10,10 @@ SRC_URI = "\
     git://github.com/belvedere-yocto/CcspMisc.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
     "
 
+SRC_URI_append_puma6 = "\
+    file://03-support-ucontext-t-move.patch \
+    "
+
 SRCREV = "${AUTOREV}"
 PV = "${RDK_RELEASE}+git${SRCPV}"
 
