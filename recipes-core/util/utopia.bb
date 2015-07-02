@@ -50,9 +50,20 @@ do_install_append () {
     install -D -p -m 644 source/sysevent/lib/libsysevent_internal.h ${D}${includedir}/sysevent/libsysevent_internal.h
 
 }
+
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
+  ${bindir}/utcmd \
+  ${bindir}/dhcp_proxy \
+  ${bindir}/GenFWLog \
+  ${bindir}/utctx_cmd \
+  ${libdir}/libutctx.so* \
+  ${libdir}/libsyscfg.so* \
+  ${libdir}/libulog.so* \
+  ${libdir}/libutapi.so* \
+  ${libdir}/libsrvmgr.so* \
+  ${libdir}/libsysevent.so* \
 "
 
 FILES_${PN}-dbg += " \

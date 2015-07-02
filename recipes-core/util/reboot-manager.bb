@@ -71,7 +71,8 @@ do_install_append_puma6 () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
+    ${bindir}/CcspRmSsp \
     ${prefix}/ccsp/rm/CcspRmSsp \
     ${prefix}/ccsp/rm/RebootManager.xml \
 "
