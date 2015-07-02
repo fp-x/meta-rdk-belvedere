@@ -51,7 +51,8 @@ do_install_append_puma6 () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
+    ${bindir}/CcspCrSsp \
     ${prefix}/ccsp/CcspCrSsp \
     ${prefix}/ccsp/cr-deviceprofile.xml \
 "

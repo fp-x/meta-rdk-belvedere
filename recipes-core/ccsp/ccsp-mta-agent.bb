@@ -59,11 +59,13 @@ do_install_append_puma6 () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
+    ${bindir}/CcspMtaAgentSsp \
     ${prefix}/ccsp/mta/CcspMtaAgentSsp \
     ${prefix}/ccsp/mta/CcspMtaAgent.xml \
     ${prefix}/ccsp/mta/CcspMta.cfg \
     ${prefix}/ccsp/mta/CcspMtaLib.cfg \
+    ${libdir}/libmta_tr181.so* \
 "
 
 FILES_${PN}-dbg = " \

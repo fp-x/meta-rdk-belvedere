@@ -71,7 +71,8 @@ do_install_append_puma6 () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
+    ${bindir}/PsmSsp \
     ${prefix}/ccsp/PsmSsp \
     ${prefix}/ccsp/config/bbhm_def_cfg.xml \
 "

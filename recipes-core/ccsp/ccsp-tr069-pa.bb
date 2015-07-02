@@ -84,7 +84,8 @@ do_install_append_puma6 () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
+    ${bindir}/CcspTr069PaSsp \
     ${prefix}/ccsp/tr069pa/CcspTr069PaSsp \
     ${prefix}/ccsp/tr069pa/ccsp_tr069_pa_certificate_cfg.xml \
     ${prefix}/ccsp/tr069pa/ccsp_tr069_pa_cfg.xml \

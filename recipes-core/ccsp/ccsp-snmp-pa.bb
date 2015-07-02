@@ -49,7 +49,8 @@ do_install_append () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
+    ${bindir}/snmp_subagent \
     ${prefix}/ccsp/snmp/snmpd.conf \
     ${prefix}/ccsp/snmp/run_snmpd.sh \
     ${prefix}/ccsp/snmp/run_subagent.sh \
@@ -65,6 +66,8 @@ FILES_${PN}-ccsp = " \
     ${prefix}/ccsp/snmp/Ccsp_SA-RG-MIB-Vlan.xml \
     ${prefix}/ccsp/snmp/Ccsp_SA-RG-MIB-WanDns.xml \
     ${prefix}/ccsp/snmp/Ccsp_SA-RG-WiFi-MIB.xml \
+    ${libdir}/libsnmp_plugin.so* \
+    ${libdir}/libsnmp_custom.so* \
 "
 
 FILES_${PN}-dbg = " \

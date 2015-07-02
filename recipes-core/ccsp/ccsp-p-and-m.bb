@@ -64,12 +64,14 @@ do_install_append_puma6 () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
+    ${bindir}/CcspPandMSsp \
     ${prefix}/ccsp/pam/CcspPandMSsp \
     ${prefix}/ccsp/pam/CcspDmLib.cfg \
     ${prefix}/ccsp/pam/CcspPam.cfg \
     ${prefix}/ccsp/pam/COSAXcalibur.XML \
     ${prefix}/ccsp/pam/TR181-USGv2.XML  \
+    ${libdir}/libtr181.so* \
 "
 
 FILES_${PN}-dbg = " \

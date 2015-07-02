@@ -31,8 +31,9 @@ do_install_append () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
-    /usr/ccsp/dmcli \
+FILES_${PN} = " \
+    ${bindir}/dmcli \
+    ${prefix}/ccsp/dmcli \
 "
 
 FILES_${PN}-dbg = " \

@@ -25,11 +25,16 @@ CFLAGS_append = " \
     "
 
 do_install_append () {
+    # Config files and scripts
+    install -d ${D}/usr/ccsp
+    install -m 777 ${D}/usr/bin/CcspHomeSecurity -t ${D}/usr/ccsp
 }
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
+    ${bindir}/CcspHomeSecurity \
+    ${prefix}/ccsp/CcspHomeSecurity \
 "
 
 FILES_${PN}-dbg = " \

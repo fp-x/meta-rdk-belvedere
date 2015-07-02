@@ -37,8 +37,10 @@ do_install_append () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
+    ${bindir}/CcspLMLite \
     ${prefix}/ccsp/lm/CcspLMLite \
+    ${libdir}/liblmapi.so* \
 "
 
 FILES_${PN}-dbg = " \

@@ -116,7 +116,7 @@ do_install_append_puma6 () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
     ${prefix}/ccsp/basic.conf \
     ${prefix}/ccsp/cli_start.sh \
     ${prefix}/ccsp/cosa_start.sh \
@@ -125,6 +125,7 @@ FILES_${PN}-ccsp = " \
     ${prefix}/ccsp/mta/ccsp_msg.cfg \
     ${prefix}/ccsp/pam/ccsp_msg.cfg \
     ${prefix}/ccsp/tr069pa/ccsp_msg.cfg \
+    ${libdir}/libccsp_common.so* \
 "
 
 FILES_${PN}-dbg = " \

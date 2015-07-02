@@ -32,9 +32,11 @@ do_install_append () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
-    /usr/ccsp/CcspWecbController \
-    #/usr/ccsp/wecb_master \
+FILES_${PN} = " \
+    ${bindir}/CcspWecbController \
+    ${prefix}/ccsp/CcspWecbController \
+    #${prefix}/ccsp/wecb_master \
+    ${libdir}/libwecb.so* \
 "
 
 FILES_${PN}-dbg = " \
