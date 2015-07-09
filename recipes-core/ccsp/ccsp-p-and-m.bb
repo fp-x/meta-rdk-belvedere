@@ -31,35 +31,35 @@ do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/pam
     install -m 777 ${D}/usr/bin/CcspPandMSsp -t ${D}/usr/ccsp/pam
-    install -m 644 ${WORKDIR}/git/config-pc/COSAXcalibur.XML -t ${D}/usr/ccsp/pam
+    install -m 644 ${S}/config-pc/COSAXcalibur.XML -t ${D}/usr/ccsp/pam
 }
 
 do_install_append_qemux86 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-pc/CcspDmLib.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
-    install -m 644 ${WORKDIR}/git/config-pc/CcspPam.cfg -t ${D}/usr/ccsp/pam
-    install -m 644 ${WORKDIR}/git/config-pc/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
+    install -m 644 ${S}/config-pc/CcspDmLib.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
+    install -m 644 ${S}/config-pc/CcspPam.cfg -t ${D}/usr/ccsp/pam
+    install -m 644 ${S}/config-pc/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
 }
 
 do_install_append_qemuarm () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-arm/CcspDmLib.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
-    install -m 644 ${WORKDIR}/git/config-arm/CcspPam.cfg -t ${D}/usr/ccsp/pam
-    install -m 644 ${WORKDIR}/git/config-arm/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
+    install -m 644 ${S}/config-arm/CcspDmLib.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
+    install -m 644 ${S}/config-arm/CcspPam.cfg -t ${D}/usr/ccsp/pam
+    install -m 644 ${S}/config-arm/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
 }
 
 do_install_append_raspberrypi () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-arm/CcspDmLib.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
-    install -m 644 ${WORKDIR}/git/config-arm/CcspPam.cfg -t ${D}/usr/ccsp/pam
-    install -m 644 ${WORKDIR}/git/config-arm/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
+    install -m 644 ${S}/config-arm/CcspDmLib.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
+    install -m 644 ${S}/config-arm/CcspPam.cfg -t ${D}/usr/ccsp/pam
+    install -m 644 ${S}/config-arm/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
 }
 
 do_install_append_puma6 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-arm/CcspDmLib.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
-    install -m 644 ${WORKDIR}/git/config-arm/CcspPam.cfg -t ${D}/usr/ccsp/pam
-    install -m 644 ${WORKDIR}/git/config-arm/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
+    install -m 644 ${S}/config-arm/CcspDmLib.cfg ${D}/usr/ccsp/pam/CcspDmLib.cfg 
+    install -m 644 ${S}/config-arm/CcspPam.cfg -t ${D}/usr/ccsp/pam
+    install -m 644 ${S}/config-arm/TR181-USGv2.XML -t ${D}/usr/ccsp/pam
 }
 
 PACKAGES += "${PN}-ccsp"

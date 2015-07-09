@@ -28,19 +28,19 @@ LDFLAGS_append = " \
     "
 
 do_configure_append_qemux86 () {
-    install -m 644 ${WORKDIR}/git/source-pc/ssp_HAL_apis.c ${WORKDIR}/git/source/Ssp/psm_hal_apis.c
+    install -m 644 ${S}/source-pc/ssp_HAL_apis.c ${S}/source/Ssp/psm_hal_apis.c
 }
 
 do_configure_append_qemuarm () {
-    install -m 644 ${WORKDIR}/git/source-arm/psm_hal_apis.c -t ${WORKDIR}/git/source/Ssp
+    install -m 644 ${S}/source-arm/psm_hal_apis.c -t ${S}/source/Ssp
 }
 
 do_configure_append_raspberrypi () {
-    install -m 644 ${WORKDIR}/git/source-arm/psm_hal_apis.c -t ${WORKDIR}/git/source/Ssp
+    install -m 644 ${S}/source-arm/psm_hal_apis.c -t ${S}/source/Ssp
 }
 
 do_configure_append_puma6 () {
-    install -m 644 ${WORKDIR}/git/source-arm/psm_hal_apis.c -t ${WORKDIR}/git/source/Ssp
+    install -m 644 ${S}/source-arm/psm_hal_apis.c -t ${S}/source/Ssp
 }
 
 do_install_append () {
@@ -51,22 +51,22 @@ do_install_append () {
 
 do_install_append_qemux86 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_pc.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
+    install -m 644 ${S}/config/bbhm_def_cfg_pc.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
 }
 
 do_install_append_qemuarm () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_arm.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
+    install -m 644 ${S}/config/bbhm_def_cfg_arm.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
 }
 
 do_install_append_raspberrypi () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_arm.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
+    install -m 644 ${S}/config/bbhm_def_cfg_arm.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
 }
 
 do_install_append_puma6 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_arm.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
+    install -m 644 ${S}/config/bbhm_def_cfg_arm.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
 }
 
 PACKAGES += "${PN}-ccsp"

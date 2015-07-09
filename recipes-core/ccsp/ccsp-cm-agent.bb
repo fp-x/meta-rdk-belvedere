@@ -35,30 +35,30 @@ do_install_append () {
 
 do_install_append_qemux86 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-pc/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
-    install -m 644 ${WORKDIR}/git/config-pc/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
-    install -m 644 ${WORKDIR}/git/config-pc/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
+    install -m 644 ${S}/config-pc/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
+    install -m 644 ${S}/config-pc/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
+    install -m 644 ${S}/config-pc/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
 }
 
 do_install_append_qemuarm () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-arm/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
-    install -m 644 ${WORKDIR}/git/config-arm/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
-    install -m 644 ${WORKDIR}/git/config-arm/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
+    install -m 644 ${S}/config-arm/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
+    install -m 644 ${S}/config-arm/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
+    install -m 644 ${S}/config-arm/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
 }
 
 do_install_append_raspberrypi () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-arm/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
-    install -m 644 ${WORKDIR}/git/config-arm/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
-    install -m 644 ${WORKDIR}/git/config-arm/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
+    install -m 644 ${S}/config-arm/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
+    install -m 644 ${S}/config-arm/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
+    install -m 644 ${S}/config-arm/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
 }
 
 do_install_append_puma6 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-arm/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
-    install -m 644 ${WORKDIR}/git/config-arm/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
-    install -m 644 ${WORKDIR}/git/config-arm/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
+    install -m 644 ${S}/config-arm/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
+    install -m 644 ${S}/config-arm/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
+    install -m 644 ${S}/config-arm/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
 }
 
 PACKAGES += "${PN}-ccsp"

@@ -29,8 +29,6 @@ LDFLAGS_append = " \
 
 do_install_append () {
     # Config files and scripts
-    echo "CcspWifiAgent do_install_append."
-    echo "     D = ${D}"
     install -d ${D}/usr/ccsp/wifi
     install -m 777 ${D}/usr/bin/CcspWifiSsp -t ${D}/usr/ccsp/wifi
 }

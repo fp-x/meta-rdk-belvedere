@@ -18,6 +18,6 @@ inherit autotools
 
 do_install_append () {
     install -d ${D}/usr/include/ccsp
-    install -m 644 ${WORKDIR}/git/include/*.h ${D}/usr/include/ccsp
+    install -m 644 ${S}/include/*.h ${D}/usr/include/ccsp
 }
 

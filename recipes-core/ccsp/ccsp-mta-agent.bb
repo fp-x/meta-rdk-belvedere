@@ -31,30 +31,30 @@ do_install_append () {
 
 do_install_append_qemux86 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-pc/CcspMtaAgent.xml ${D}/usr/ccsp/mta/CcspMtaAgent.xml 
-    install -m 644 ${WORKDIR}/git/config-pc/CcspMta.cfg ${D}/usr/ccsp/mta/CcspMta.cfg 
-    install -m 644 ${WORKDIR}/git/config-pc/CcspMtaLib.cfg ${D}/usr/ccsp/mta/CcspMtaLib.cfg 
+    install -m 644 ${S}/config-pc/CcspMtaAgent.xml ${D}/usr/ccsp/mta/CcspMtaAgent.xml 
+    install -m 644 ${S}/config-pc/CcspMta.cfg ${D}/usr/ccsp/mta/CcspMta.cfg 
+    install -m 644 ${S}/config-pc/CcspMtaLib.cfg ${D}/usr/ccsp/mta/CcspMtaLib.cfg 
 }
 
 do_install_append_qemuarm () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-arm/CcspMtaAgent.xml ${D}/usr/ccsp/mta/CcspMtaAgent.xml 
-    install -m 644 ${WORKDIR}/git/config-arm/CcspMta.cfg ${D}/usr/ccsp/mta/CcspMta.cfg 
-    install -m 644 ${WORKDIR}/git/config-arm/CcspMtaLib.cfg ${D}/usr/ccsp/mta/CcspMtaLib.cfg 
+    install -m 644 ${S}/config-arm/CcspMtaAgent.xml ${D}/usr/ccsp/mta/CcspMtaAgent.xml 
+    install -m 644 ${S}/config-arm/CcspMta.cfg ${D}/usr/ccsp/mta/CcspMta.cfg 
+    install -m 644 ${S}/config-arm/CcspMtaLib.cfg ${D}/usr/ccsp/mta/CcspMtaLib.cfg 
 }
 
 do_install_append_raspberrypi () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-arm/CcspMtaAgent.xml ${D}/usr/ccsp/mta/CcspMtaAgent.xml 
-    install -m 644 ${WORKDIR}/git/config-arm/CcspMta.cfg ${D}/usr/ccsp/mta/CcspMta.cfg 
-    install -m 644 ${WORKDIR}/git/config-arm/CcspMtaLib.cfg ${D}/usr/ccsp/mta/CcspMtaLib.cfg 
+    install -m 644 ${S}/config-arm/CcspMtaAgent.xml ${D}/usr/ccsp/mta/CcspMtaAgent.xml 
+    install -m 644 ${S}/config-arm/CcspMta.cfg ${D}/usr/ccsp/mta/CcspMta.cfg 
+    install -m 644 ${S}/config-arm/CcspMtaLib.cfg ${D}/usr/ccsp/mta/CcspMtaLib.cfg 
 }
 
 do_install_append_puma6 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-arm/CcspMtaAgent.xml ${D}/usr/ccsp/mta/CcspMtaAgent.xml 
-    install -m 644 ${WORKDIR}/git/config-arm/CcspMta.cfg ${D}/usr/ccsp/mta/CcspMta.cfg 
-    install -m 644 ${WORKDIR}/git/config-arm/CcspMtaLib.cfg ${D}/usr/ccsp/mta/CcspMtaLib.cfg 
+    install -m 644 ${S}/config-arm/CcspMtaAgent.xml ${D}/usr/ccsp/mta/CcspMtaAgent.xml 
+    install -m 644 ${S}/config-arm/CcspMta.cfg ${D}/usr/ccsp/mta/CcspMta.cfg 
+    install -m 644 ${S}/config-arm/CcspMtaLib.cfg ${D}/usr/ccsp/mta/CcspMtaLib.cfg 
 }
 
 PACKAGES += "${PN}-ccsp"

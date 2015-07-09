@@ -28,19 +28,19 @@ LDFLAGS_append = " \
     "
 
 do_configure_append_qemux86 () {
-    install -m 644 ${WORKDIR}/git/source-pc/CcspRmHal.c -t ${WORKDIR}/git/source/RmSsp
+    install -m 644 ${S}/source-pc/CcspRmHal.c -t ${S}/source/RmSsp
 }
 
 do_configure_append_qemuarm () {
-    install -m 644 ${WORKDIR}/git/source-arm/CcspRmHal.c -t ${WORKDIR}/git/source/RmSsp
+    install -m 644 ${S}/source-arm/CcspRmHal.c -t ${S}/source/RmSsp
 }
 
 do_configure_append_raspberrypi () {
-    install -m 644 ${WORKDIR}/git/source-arm/CcspRmHal.c -t ${WORKDIR}/git/source/RmSsp
+    install -m 644 ${S}/source-arm/CcspRmHal.c -t ${S}/source/RmSsp
 }
 
 do_configure_append_puma6 () {
-    install -m 644 ${WORKDIR}/git/source-arm/CcspRmHal.c -t ${WORKDIR}/git/source/RmSsp
+    install -m 644 ${S}/source-arm/CcspRmHal.c -t ${S}/source/RmSsp
 }
 
 do_install_append () {
@@ -51,22 +51,22 @@ do_install_append () {
 
 do_install_append_qemux86 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/RebootManager_pc.xml ${D}/usr/ccsp/rm/RebootManager.xml 
+    install -m 644 ${S}/config/RebootManager_pc.xml ${D}/usr/ccsp/rm/RebootManager.xml 
 }
 
 do_install_append_qemuarm () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/RebootManager_arm.xml ${D}/usr/ccsp/rm/RebootManager.xml 
+    install -m 644 ${S}/config/RebootManager_arm.xml ${D}/usr/ccsp/rm/RebootManager.xml 
 }
 
 do_install_append_raspberrypi () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/RebootManager_arm.xml ${D}/usr/ccsp/rm/RebootManager.xml 
+    install -m 644 ${S}/config/RebootManager_arm.xml ${D}/usr/ccsp/rm/RebootManager.xml 
 }
 
 do_install_append_puma6 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/RebootManager_arm.xml ${D}/usr/ccsp/rm/RebootManager.xml 
+    install -m 644 ${S}/config/RebootManager_arm.xml ${D}/usr/ccsp/rm/RebootManager.xml 
 }
 
 PACKAGES += "${PN}-ccsp"
