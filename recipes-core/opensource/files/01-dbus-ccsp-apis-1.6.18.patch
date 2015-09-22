@@ -1,15 +1,9 @@
-From 4dff482c2fc0c400bfc133341c11e2562c6e84ac Mon Sep 17 00:00:00 2001
-From: Steve Maynard <steve.maynard@twcable.com>
-Date: Fri, 15 Aug 2014 10:25:03 -0600
-Subject: [PATCH] add new dbus-ccsp-apis
-
----
- dbus/Makefile.am      |   14 ++-
- dbus/Makefile.in      |  307 +++++++++++++++++++++++++++++--------------------
- dbus/dbus-ccsp-apis.c |  100 ++++++++++++++++
- dbus/dbus-ccsp-apis.h |  101 ++++++++++++++++
- dbus/dbus.h           |    1 +
- 5 files changed, 390 insertions(+), 133 deletions(-)
+ dbus/Makefile.am      |  14 ++-
+ dbus/Makefile.in      | 307 +++++++++++++++++++++++++++++---------------------
+ dbus/dbus-ccsp-apis.c | 105 +++++++++++++++++
+ dbus/dbus-ccsp-apis.h | 105 +++++++++++++++++
+ dbus/dbus.h           |   1 +
+ 5 files changed, 399 insertions(+), 133 deletions(-)
  create mode 100644 dbus/dbus-ccsp-apis.c
  create mode 100644 dbus/dbus-ccsp-apis.h
 
@@ -664,10 +658,10 @@ index d30696d..499aabe 100644
  @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libdbus_internal_la-dbus-string-util.Tpo $(DEPDIR)/libdbus_internal_la-dbus-string-util.Plo
 diff --git a/dbus/dbus-ccsp-apis.c b/dbus/dbus-ccsp-apis.c
 new file mode 100644
-index 0000000..97e4da4
+index 0000000..147f05e
 --- /dev/null
 +++ b/dbus/dbus-ccsp-apis.c
-@@ -0,0 +1,100 @@
+@@ -0,0 +1,105 @@
 +/* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*- */
 +/* dbus-ccsp-apis.c
 + *
@@ -715,6 +709,11 @@ index 0000000..97e4da4
 +void dbus_loop_remove_watch(DBusLoop *loop, DBusWatch *watch)
 +{
 +    _dbus_loop_remove_watch(loop, watch);
++}
++
++void dbus_loop_toggle_watch(DBusLoop *loop, DBusWatch *watch)
++{
++    _dbus_loop_toggle_watch(loop, watch);
 +}
 +
 +dbus_bool_t dbus_loop_add_timeout(DBusLoop *loop, DBusTimeout *timeout)
@@ -770,10 +769,10 @@ index 0000000..97e4da4
 +
 diff --git a/dbus/dbus-ccsp-apis.h b/dbus/dbus-ccsp-apis.h
 new file mode 100644
-index 0000000..4e1acec
+index 0000000..7bec5c2
 --- /dev/null
 +++ b/dbus/dbus-ccsp-apis.h
-@@ -0,0 +1,101 @@
+@@ -0,0 +1,105 @@
 +/* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*- */
 +/* dbus-ccsp-apis.h
 + *
@@ -834,6 +833,10 @@ index 0000000..4e1acec
 +                                      DBusWatch           *watch);
 +
 +DBUS_EXPORT
++void        dbus_loop_toggle_watch   (DBusLoop            *loop,
++                                      DBusWatch           *watch);
++
++DBUS_EXPORT
 +dbus_bool_t dbus_loop_add_timeout    (DBusLoop            *loop,
 +                                      DBusTimeout         *timeout);
 +
@@ -887,6 +890,3 @@ index 932ceab..5bb4097 100644
  #include <dbus/dbus-connection.h>
  #include <dbus/dbus-errors.h>
  #include <dbus/dbus-macros.h>
--- 
-1.7.9.5
-
