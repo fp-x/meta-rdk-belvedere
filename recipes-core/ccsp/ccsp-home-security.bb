@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d41d8cd98f00b204e9800998ecf8427e"
 DEPENDS = "libxml2 ccsp-common-library utopia curl"
 
 SRC_URI = "\
-    git://github.com/belvedere-yocto/CcspHomeSecurity.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
+    git://github.com/belvedere-yocto/CcspHomeSecurity.git;protocol=git;branch=remove_cosa_sim \
     "
 
 SRCREV = "${AUTOREV}"
@@ -24,7 +24,7 @@ CFLAGS_append = " \
     -I=${includedir}/libxml2 \
     "
 
-CFLAGS_append_qemux86 += -D_COSA_SIM_
+CFLAGS_append_qemux86 += "-D_COSA_SIM_"
 
 do_install_append () {
     # Config files and scripts
