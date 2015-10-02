@@ -22,6 +22,7 @@ CFLAGS_append = " \
     -I=${libdir}/dbus-1.0/include \
     -I=${includedir}/ccsp \
     "
+CFLAGS_append_qemux86 += -d_COSA_SIM_
 
 do_install_append () {
     # Config files and scripts

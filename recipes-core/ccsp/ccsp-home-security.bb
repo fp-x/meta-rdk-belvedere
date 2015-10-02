@@ -24,6 +24,8 @@ CFLAGS_append = " \
     -I=${includedir}/libxml2 \
     "
 
+CFLAGS_append_qemux86 += -D_COSA_SIM_
+
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp

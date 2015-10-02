@@ -23,6 +23,8 @@ CFLAGS_append = " \
     -I=${includedir}/ccsp \
     "
 
+CFLAGS_append_qemux86 += -D_COSA_SIM_
+
 LDFLAGS_append = " \
     -ldbus-1 \
     "
