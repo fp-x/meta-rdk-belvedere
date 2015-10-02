@@ -24,6 +24,8 @@ CFLAGS_append = " \
     -I=${libdir}/dbus-1.0/include \
     "
 
+CFLAGS_append_qemux86 += -D_COSA_SIM_
+
 LDFLAGS_append = " \
     -ldbus-1 \
     "
