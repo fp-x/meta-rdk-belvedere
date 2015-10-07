@@ -1,7 +1,23 @@
-Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
-===================================================================
---- git.orig/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
-+++ git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
+ source/ccsp/include/ccsp_message_bus.h          |  1 -
+ source/util_api/ccsp_msg_bus/ccsp_message_bus.c | 89 +++++++++++--------------
+ 2 files changed, 39 insertions(+), 51 deletions(-)
+
+diff --git a/source/ccsp/include/ccsp_message_bus.h b/source/ccsp/include/ccsp_message_bus.h
+index 1e1e8cd..70e768b 100644
+--- a/source/ccsp/include/ccsp_message_bus.h
++++ b/source/ccsp/include/ccsp_message_bus.h
+@@ -56,7 +56,6 @@
+ #ifndef CCSP_MESSAGE_BUS_H
+ #define CCSP_MESSAGE_BUS_H
+ #include <dbus/dbus.h>
+-#include <dbus/dbus-mainloop.h>
+ 
+ /*
+ notes: see readme.txt
+diff --git a/source/util_api/ccsp_msg_bus/ccsp_message_bus.c b/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
+index e212749..662378f 100644
+--- a/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
++++ b/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
 @@ -19,7 +19,6 @@
  #include <string.h>
  #include <pthread.h>
@@ -10,7 +26,7 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
  #include <ccsp_message_bus.h>
  #include "ccsp_base_api.h"
  #include "ccsp_trace.h"
-@@ -37,8 +36,8 @@ const int NANOSEC_PER_MILLISEC = 1000000
+@@ -37,8 +36,8 @@ const int NANOSEC_PER_MILLISEC = 1000000;
  #endif
  
  // EXTERNAL
@@ -21,7 +37,15 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
  
  extern CCSP_DEADLOCK_DETECTION_INFO deadlock_detection_info;
  extern int   CcspBaseIf_timeout_protect_plus_seconds;
-@@ -205,7 +204,7 @@ add_watch
+@@ -75,6 +74,7 @@ inline static PCCSP_MSG_SINGLE_LINK_ENTRY   CcspMsgQueuePopEntry(CCSP_MSG_QUEUE
+ static dbus_bool_t       connection_watch_callback(DBusWatch*, unsigned int, void*);
+ static dbus_bool_t       add_watch(DBusWatch*, void*);
+ static void              remove_watch(DBusWatch*, void*);
++static void              toggle_watch(DBusWatch*, void*);
+ static void              connection_timeout_callback(DBusTimeout*, void*);
+ static dbus_bool_t       add_timeout(DBusTimeout*, void*);
+ static void              remove_timeout(DBusTimeout*, void*);
+@@ -205,16 +205,10 @@ add_watch
  {
      CData *cd = data;
      
@@ -30,16 +54,49 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
                 (
                     cd->loop,
                     watch
-@@ -227,7 +226,7 @@ remove_watch
+-#if 0
+-                   watch,
+-                   connection_watch_callback,
+-                   cd, 
+-                   NULL
+-#endif
+                 );
+ }
+ 
+@@ -227,15 +221,26 @@ remove_watch
  {
      CData *cd = data;
      
 -    _dbus_loop_remove_watch 
 +    dbus_loop_remove_watch 
++        (
++             cd->loop,
++             watch 
++         );
++}
++
++static void 
++toggle_watch 
++(
++    DBusWatch *watch,
++    void      *data
++)
++{
++    CData *cd = data;
++    
++    dbus_loop_toggle_watch 
          (
               cd->loop,
               watch 
-@@ -259,7 +258,7 @@ add_timeout
+-#if 0
+-             watch, 
+-             connection_watch_callback, 
+-             cd
+-#endif
+          );
+ }
+ 
+@@ -259,16 +264,10 @@ add_timeout
  {
      CData *cd = data;
  
@@ -48,7 +105,16 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
                 (
                     cd->loop,
                     timeout 
-@@ -281,7 +280,7 @@ remove_timeout
+-#if 0
+-                   timeout, 
+-                   connection_timeout_callback, 
+-                   cd, 
+-                   NULL
+-#endif
+                 );
+ }
+ 
+@@ -281,15 +280,10 @@ remove_timeout
  {
      CData *cd = data;
  
@@ -57,7 +123,15 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
          (
              cd->loop,
              timeout 
-@@ -309,7 +308,7 @@ cdata_new
+-#if 0
+-            timeout, 
+-            connection_timeout_callback, 
+-            cd
+-#endif
+          );
+ }
+ 
+@@ -309,7 +303,7 @@ cdata_new
      cd->connection = connection;
      
      dbus_connection_ref (cd->connection);
@@ -66,7 +140,7 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
  
      return cd;
  }
-@@ -323,7 +322,7 @@ cdata_free
+@@ -323,7 +317,7 @@ cdata_free
      CData *cd = data;
  
      dbus_connection_unref (cd->connection);
@@ -75,7 +149,7 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
  
      dbus_free (cd);
  }
-@@ -362,8 +361,8 @@ dispatch_status_func
+@@ -362,8 +356,8 @@ dispatch_status_func
  
      if (new_status != DBUS_DISPATCH_COMPLETE)
      {
@@ -86,7 +160,26 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
      }
  }
  
-@@ -521,7 +520,7 @@ ccsp_connection_setup
+@@ -487,17 +481,12 @@ ccsp_connection_setup
+     cd = cdata_new (loop, connection);
+     if (cd == NULL) goto NO_MEM;
+ 
+-    /* Because dbus-mainloop.c checks dbus_timeout_get_enabled(),
+-     * dbus_watch_get_enabled() directly, we don't have to provide
+-     * "toggled" callbacks.
+-     */
+-
+     if ( ! dbus_connection_set_watch_functions 
+                (
+                    connection,
+                    add_watch,
+                    remove_watch,
+-                   NULL,
++                   toggle_watch,
+                    cd, 
+                    cdata_free
+                 ))
+@@ -521,7 +510,7 @@ ccsp_connection_setup
      // check dispatch status
      if (dbus_connection_get_dispatch_status (connection) != DBUS_DISPATCH_COMPLETE)
      {
@@ -95,7 +188,7 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
              goto NO_MEM;
      }
  
-@@ -577,7 +576,7 @@ CCSP_Message_Bus_Loop_Thread
+@@ -577,7 +566,7 @@ CCSP_Message_Bus_Loop_Thread
  )
  {
      DBusLoop *loop = (DBusLoop *)ptr;
@@ -104,7 +197,7 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
      return NULL;
  }
  
-@@ -946,7 +945,7 @@ CCSP_Message_Bus_Init
+@@ -946,7 +935,7 @@ CCSP_Message_Bus_Init
          */
  
          // start the loop and connect threads, should be just one of each, even if count > 1
@@ -113,7 +206,7 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
          pthread_create
              (
                  &thread_dbus_loop, 
-@@ -1078,7 +1077,7 @@ CCSP_Message_Bus_Exit
+@@ -1078,7 +1067,7 @@ CCSP_Message_Bus_Exit
  
          if(bus_info->connection[i].loop )
          {
@@ -122,7 +215,7 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
          }
      }
  
-@@ -1571,7 +1570,7 @@ CCSP_Message_Bus_Send_Str
+@@ -1571,7 +1560,7 @@ CCSP_Message_Bus_Send_Str
      }
  
      // get reply
@@ -131,7 +224,7 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
      reply = dbus_pending_call_steal_reply(pcall);
  
      if( ! reply) 
-@@ -1591,7 +1590,7 @@ CCSP_Message_Bus_Send_Str
+@@ -1591,7 +1580,7 @@ CCSP_Message_Bus_Send_Str
          pthread_mutex_lock(&cb_data->count_mutex);
          dbus_pending_call_set_notify (pcall, ccsp_msg_check_resp_sync, (void *)cb_data, NULL);
  
@@ -140,7 +233,7 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
  
  #ifndef WIN32 
          gettimeofday(&now, NULL);
-@@ -1630,7 +1629,7 @@ CCSP_Message_Bus_Send_Str
+@@ -1630,7 +1619,7 @@ CCSP_Message_Bus_Send_Str
      }
      else
      {
@@ -149,7 +242,7 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
          ret = analyze_reply(message, reply, NULL);
      }
  
-@@ -1707,7 +1706,7 @@ CCSP_Message_Bus_Send_Msg
+@@ -1707,7 +1696,7 @@ CCSP_Message_Bus_Send_Msg
          goto EXIT;
      }
  
@@ -158,7 +251,7 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
      reply = dbus_pending_call_steal_reply(pcall);
      if( ! reply)  
      {
-@@ -1723,7 +1722,7 @@ CCSP_Message_Bus_Send_Msg
+@@ -1723,7 +1712,7 @@ CCSP_Message_Bus_Send_Msg
          if( ! cb_data)
          {
              CcspTraceError(("<%s>: cb_data malloc fail \n", __FUNCTION__));
@@ -167,7 +260,7 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
              ret = CCSP_Message_Bus_OOM;
              goto EXIT;
          }
-@@ -1736,7 +1735,7 @@ CCSP_Message_Bus_Send_Msg
+@@ -1736,7 +1725,7 @@ CCSP_Message_Bus_Send_Msg
          pthread_mutex_lock(&cb_data->count_mutex);
          dbus_pending_call_set_notify (pcall, ccsp_msg_check_resp_sync, (void *)cb_data, NULL);
  
@@ -176,7 +269,7 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
  
  #ifndef WIN32 
          gettimeofday(&now, NULL);
-@@ -1775,7 +1774,7 @@ CCSP_Message_Bus_Send_Msg
+@@ -1775,7 +1764,7 @@ CCSP_Message_Bus_Send_Msg
      }
      else
      {
@@ -185,15 +278,3 @@ Index: git/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
          ret = analyze_reply(message, reply, result);
      }
  
-Index: git/source/ccsp/include/ccsp_message_bus.h
-===================================================================
---- git.orig/source/ccsp/include/ccsp_message_bus.h
-+++ git/source/ccsp/include/ccsp_message_bus.h
-@@ -56,7 +56,6 @@
- #ifndef CCSP_MESSAGE_BUS_H
- #define CCSP_MESSAGE_BUS_H
- #include <dbus/dbus.h>
--#include <dbus/dbus-mainloop.h>
- 
- /*
- notes: see readme.txt

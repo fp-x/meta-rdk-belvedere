@@ -9,6 +9,7 @@ DEPENDS_append_puma6 = " util-linux"
 
 SRC_URI = "\
     git://github.com/belvedere-yocto/CcspTr069Pa.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
+    file://01-fix-ccsp-tr069-pc-crash.patch \
     "
 
 SRCREV = "${AUTOREV}"

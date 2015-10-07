@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 DEPENDS = "ccsp-common-library"
 
 SRC_URI = "\
-    git://github.com/belvedere-yocto/CcspCr.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
+    git://github.com/belvedere-yocto/CcspCr.git;protocol=git;branch=remove_cosa_sim \
     "
 
 SRCREV = "${AUTOREV}"
@@ -22,6 +22,7 @@ CFLAGS_append = " \
     -I=${libdir}/dbus-1.0/include \
     -I=${includedir}/ccsp \
     "
+CFLAGS_append_qemux86 += "-D_COSA_SIM_"
 
 do_install_append () {
     # Config files and scripts
