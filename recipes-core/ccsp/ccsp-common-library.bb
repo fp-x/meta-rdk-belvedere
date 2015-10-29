@@ -7,9 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d41d8cd98f00b204e9800998ecf8427e"
 DEPENDS = "dbus openssl"
 
 SRC_URI = "\
-    git://github.com/belvedere-yocto/CcspCommonLibrary.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
-    file://01-support-newer-dbus-apis.patch \
-    file://02-support-dbus-ccsp-apis.patch \
+    git://github.com/belvedere-yocto/CcspCommonLibrary.git;protocol=git;branch=dbus_refactor_daisy \
     "
 
 SRCREV = "${AUTOREV}"

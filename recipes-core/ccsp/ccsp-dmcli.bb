@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 DEPENDS = "ccsp-common-library"
 
 SRC_URI = "\
-    git://github.com/belvedere-yocto/CcspDmCli.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
+    git://github.com/belvedere-yocto/CcspDmCli.git;protocol=git;branch=dbus_refactor_daisy \
     "
 
 SRCREV = "${AUTOREV}"
