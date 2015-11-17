@@ -21,13 +21,13 @@ To test this component against a standard core-image-minimal yocto build:<br>
 
 1c) To Build for the Raspberry PI:<br>
 <b><i>cd ~/poky</i></b><br>
-<b><i>git clone -b daisy git://git.yoctoproject.org/meta-raspberrypi</i></b><br>
-<b><i>cd meta-raspberrypi; git checkout daisy; cd ..</i></b><br>
+<b><i>git clone -b fido git://git.yoctoproject.org/meta-raspberrypi</i></b><br>
 <b><i>MACHINE=raspberrypi source oe-init-build-env</i></b><br>
 <b><i>edit conf/bblayers.conf and add ~/poky/meta-raspberrypi to the BBLAYERS</i></b><br>
 
 2) edit <i>poky/build/conf/bblayers.conf</i> and add the following to BBLAYERS<br>
 <b>/home/smaynard/poky/meta-openembedded/meta-networking \\</b><br>
+<b>/home/smaynard/poky/meta-openembedded/meta-oe \\</b><br>
 <b>/home/smaynard/yocto/ccsp/meta-rdk-belvedere \\</b>
 
 3a) To build for x86:<br>
