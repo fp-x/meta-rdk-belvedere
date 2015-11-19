@@ -119,6 +119,24 @@ do_install_append_puma6 () {
     install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg 
     install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/pam/ccsp_msg.cfg 
     install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/tr069pa/ccsp_msg.cfg 
+    
+    
+    install -d ${IMAGE_ROOTFS}/fss/gw/usr/ccsp
+    install -d ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/cm
+    install -d ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/mta
+    install -d ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/pam
+    install -d ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/tr069pa
+    install -m 777 ${WORKDIR}/git/scripts/cosa_stop.sh -t ${IMAGE_ROOTFS}/fss/gw/usr/ccsp
+
+    install -m 777 ${WORKDIR}/git/scripts/cli_start_arm.sh ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/cli_start.sh
+    install -m 777 ${WORKDIR}/git/scripts/cosa_start_arm.sh ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/cosa_start.sh
+    install -m 644 ${WORKDIR}/git/config-arm/basic.conf ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/basic.conf
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/ccsp_msg.cfg
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/cm/ccsp_msg.cfg
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/mta/ccsp_msg.cfg
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/pam/ccsp_msg.cfg
+    install -m 644 ${WORKDIR}/git/config-arm/ccsp_msg.cfg ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/tr069pa/ccsp_msg.cfg
+    
 }
 
 PACKAGES += "${PN}-ccsp"
