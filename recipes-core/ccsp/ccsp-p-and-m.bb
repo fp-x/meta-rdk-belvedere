@@ -31,93 +31,12 @@ LDFLAGS_append = " \
 
 do_install_pc_sources () {
     echo "=================== running do_install_pc_sources..."
-    install -d ${WORKDIR}/git/source/TR-181/board_include
-    install -d ${WORKDIR}/git/source/TR-181/board_sbapi
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_include/dml_tr181_custom_cfg.h -t ${WORKDIR}/git/source/TR-181/board_include/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_bridging_apis.c
-    -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_bridging_apis_ext.h -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_deviceinfo_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_dhcpv4_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_dhcpv6_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_dns_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_drg_common.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_ethernet_apis.c
-    -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_ethernet_apis_ext.h -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_firewall_apis.c
-    -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_gatewayinfo_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_hosts_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_interfacestack_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_ip_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_ipv6rd_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_moca_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_nat_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_neighdisc_apis.c
-    -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_ppp_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_ra_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_routing_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_time_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_upnp_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_userinterface_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_users_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_x_cisco_com_ddns_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_x_cisco_com_devicecontrol_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_x_cisco_com_diagnostics_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_x_cisco_com_mld_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_x_cisco_com_rlog_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_x_cisco_com_security_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/cosa_x_comcast_com_parentalcontrol_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-pc/TR-181/board_sbapi/Makefile.am -t ${WORKDIR}/git/source/TR-181/board_sbapi/
+    install -m 644 ${WORKDIR}/git/Makefile.am.pc ${WORKDIR}/git/Makefile.am
 }
 
 do_install_arm_sources () {
     echo "=================== running do_install_arm_sources..."
-    install -d ${WORKDIR}/git/source/TR-181/board_include
-    install -d ${WORKDIR}/git/source/TR-181/board_ml
-    install -d ${WORKDIR}/git/source/TR-181/board_sbapi
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_include/dml_tr181_custom_cfg.h -t ${WORKDIR}/git/source/TR-181/board_include/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_ml/cosa_x_cisco_com_filetransfer_dml.c -t ${WORKDIR}/git/source/TR-181/board_ml/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_ml/cosa_x_cisco_com_filetransfer_dml.h -t ${WORKDIR}/git/source/TR-181/board_ml/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_ml/cosa_x_cisco_com_filetransfer_internal.c -t ${WORKDIR}/git/source/TR-181/board_ml/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_ml/cosa_x_cisco_com_filetransfer_internal.h -t ${WORKDIR}/git/source/TR-181/board_ml/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_bridging_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_bridging_apis_ext.h -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_common_util.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_common_util.h -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_deviceinfo_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_dhcpv4_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_dhcpv6_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_dns_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_drg_common.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_ethernet_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_ethernet_apis_ext.h -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_firewall_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_gatewayinfo_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_hosts_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_interfacestack_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_ip_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_ipv6rd_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_moca_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_nat_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_neighdisc_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_ppp_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_ra_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_routing_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_time_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_upnp_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_userinterface_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_users_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_x_cisco_com_ddns_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_x_cisco_com_devicecontrol_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_x_cisco_com_diagnostics_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_x_cisco_com_filetransfer_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_x_cisco_com_mld_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_x_cisco_com_rlog_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_x_cisco_com_security_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
-    install -m 644 ${WORKDIR}/git/source-arm/TR-181/board_sbapi/cosa_x_comcast_com_parentalcontrol_apis.c -t ${WORKDIR}/git/source/TR-181/board_sbapi/
+    install -m 644 ${WORKDIR}/git/Makefile.am.arm ${WORKDIR}/git/Makefile.am
 }
 
 do_configure_prepend_qemux86 () {
