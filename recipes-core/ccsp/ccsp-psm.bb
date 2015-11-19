@@ -29,20 +29,25 @@ LDFLAGS_append = " \
     -ldbus-1 \
     "
 
-do_configure_append_qemux86 () {
+do_install_arm_sources () {
+    echo "=================== running do_install_arm_sources..."
+    install -m 644 ${WORKDIR}/git/source-arm/psm_hal_apis.c -t ${WORKDIR}/git/source/Ssp
+}
+
+do_configure_prepend_qemux86 () {
     install -m 644 ${WORKDIR}/git/source-pc/ssp_HAL_apis.c ${WORKDIR}/git/source/Ssp/psm_hal_apis.c
 }
 
-do_configure_append_qemuarm () {
-    install -m 644 ${WORKDIR}/git/source-arm/psm_hal_apis.c -t ${WORKDIR}/git/source/Ssp
+do_configure_prepend_qemuarm () {
+    do_install_arm_sources
 }
 
-do_configure_append_raspberrypi () {
-    install -m 644 ${WORKDIR}/git/source-arm/psm_hal_apis.c -t ${WORKDIR}/git/source/Ssp
+do_configure_prepend_raspberrypi () {
+    do_install_arm_sources
 }
 
-do_configure_append_puma6 () {
-    install -m 644 ${WORKDIR}/git/source-arm/psm_hal_apis.c -t ${WORKDIR}/git/source/Ssp
+do_configure_prepend_puma6 () {
+    do_install_arm_sources
 }
 
 do_install_append () {
