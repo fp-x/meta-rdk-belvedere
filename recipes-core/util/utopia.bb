@@ -42,6 +42,10 @@ do_install_append () {
     install -D -p -m 644 source/utapi/lib/utapi.h ${D}${includedir}/utapi/utapi.h
     install -D -p -m 644 source/utapi/lib/utapi_wlan.h ${D}${includedir}/utapi/utapi_wlan.h
     install -D -p -m 644 source/utapi/lib/utapi_util.h ${D}${includedir}/utapi/utapi_util.h
+    install -D -p -m 644 source/utapi/lib/utapi_security.h ${D}${includedir}/utapi/utapi_security.h
+    install -D -p -m 644 source/utapi/lib/utapi_parental_control.h ${D}${includedir}/utapi/utapi_parental_control.h
+    install -D -p -m 644 source/utapi/lib/utapi_tr_dhcp.h ${D}${includedir}/utapi/utapi_tr_dhcp.h
+    install -D -p -m 644 source/utapi/lib/utapi_tr_user.h ${D}${includedir}/utapi/utapi_tr_user.h
     install -D -p -m 644 source/utctx/lib/utctx.h ${D}${includedir}/utctx/utctx.h
     install -D -p -m 644 source/utctx/lib/utctx_api.h ${D}${includedir}/utctx/utctx_api.h
     install -D -p -m 644 source/utctx/lib/utctx_rwlock.h ${D}${includedir}/utctx/utctx_rwlock.h

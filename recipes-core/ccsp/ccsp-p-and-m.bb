@@ -4,7 +4,7 @@ HOMEPAGE = "http://github.com/belvedere-yocto/CcspPandM"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d41d8cd98f00b204e9800998ecf8427e"
 
-DEPENDS = "ccsp-common-library utopia"
+DEPENDS = "ccsp-common-library utopia ccsp-lm-lite"
 
 SRC_URI = "\
     git://github.com/belvedere-yocto/CcspPandM.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
@@ -21,9 +21,13 @@ CFLAGS_append = " \
     -I=${includedir}/dbus-1.0 \
     -I=${libdir}/dbus-1.0/include \
     -I=${includedir}/ccsp \
+    -I=$(includedir)/utapi \
+    -I=$(includedir)/utctx \
+    -I=$(includedir)/ulog \
     "
 
 CFLAGS_append_qemux86 += "-D_COSA_SIM_"
+CFLAGS_append_puma6 += "-D_COSA_INTEL_USG_ARM_"
 
 LDFLAGS_append = " \
     -ldbus-1 \

@@ -33,6 +33,7 @@ do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp/lm
     install -m 777 ${D}/usr/bin/CcspLMLite -t ${D}/usr/ccsp/lm
+    install -D -p -m 644 source/lm_api.h ${D}${includedir}/lm_api.h
 }
 
 PACKAGES += "${PN}-ccsp"
