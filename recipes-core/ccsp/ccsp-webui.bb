@@ -64,12 +64,12 @@ do_install() {
     install ${S}/modules/*.so ${D}/fss/gw/usr/ccsp/
 #    install -d ${D}/usr/lib/extensions/no-debug-non-zts-20100525/
 #    install ${S}/modules/*.so ${D}/usr/lib/extensions/no-debug-non-zts-20100525/
-    install -d ${D}/var/
-    touch ${D}/var/ui_dev_debug
-    touch ${D}/var/ui_dev_mode
-    touch ${D}/var/cosa_php_debug
-    install -d ${D}/var/tmp/logs
-    touch ${D}/var/tmp/logs/test
+    install -d ${D}/var/ccsp/
+    touch ${D}/var/ccsp/ui_dev_debug
+    touch ${D}/var/ccsp/ui_dev_mode
+    touch ${D}/var/ccsp/cosa_php_debug
+#    install -d ${D}/var/tmp/logs
+#    touch ${D}/var/tmp/logs/test
 }
 
 SYSTEMD_SERVICE_${PN} = "cosalogs.service"
