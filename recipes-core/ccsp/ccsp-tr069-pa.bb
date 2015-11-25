@@ -9,7 +9,6 @@ DEPENDS_append_puma6 = " util-linux"
 
 SRC_URI = "\
     git://github.com/belvedere-yocto/CcspTr069Pa.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
-    file://01-fix-ccsp-tr069-pc-crash.patch \
     "
 
 SRCREV = "${AUTOREV}"
@@ -29,20 +28,34 @@ LDFLAGS_append = " \
     -ldbus-1 \
     "
 
-do_configure_append_qemux86 () {
+do_install_pc_sources () {
+    echo "=================== running do_install_pc_sources..."
     install -m 644 ${WORKDIR}/git/source-pc/ccsp_tr069_pa_custom_apis.c -t ${WORKDIR}/git/source/Ssp
 }
 
-do_configure_append_qemuarm () {
+do_install_arm_sources () {
+    echo "=================== running do_install_arm_sources..."
     install -m 644 ${WORKDIR}/git/source-arm/ccsp_tr069_pa_custom_apis.c -t ${WORKDIR}/git/source/Ssp
 }
 
-do_configure_append_raspberrypi () {
-    install -m 644 ${WORKDIR}/git/source-arm/ccsp_tr069_pa_custom_apis.c -t ${WORKDIR}/git/source/Ssp
+do_configure_prepend_qemux86 () {
+    do_install_pc_sources
 }
 
-do_configure_append_puma6 () {
-    install -m 644 ${WORKDIR}/git/source-arm/ccsp_tr069_pa_custom_apis.c -t ${WORKDIR}/git/source/Ssp
+do_configure_prepend_qemuarm () {
+    do_install_arm_sources
+}
+
+do_configure_prepend_raspberrypi () {
+    do_install_arm_sources
+}
+
+do_configure_prepend_armeb () {
+    do_install_arm_sources
+}
+
+do_configure_prepend_puma6 () {
+    do_install_arm_sources
 }
 
 do_install_append () {

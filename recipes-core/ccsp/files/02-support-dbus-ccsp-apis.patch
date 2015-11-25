@@ -2,18 +2,6 @@
  source/util_api/ccsp_msg_bus/ccsp_message_bus.c | 89 +++++++++++--------------
  2 files changed, 39 insertions(+), 51 deletions(-)
 
-diff --git a/source/ccsp/include/ccsp_message_bus.h b/source/ccsp/include/ccsp_message_bus.h
-index 1e1e8cd..70e768b 100644
---- a/source/ccsp/include/ccsp_message_bus.h
-+++ b/source/ccsp/include/ccsp_message_bus.h
-@@ -56,7 +56,6 @@
- #ifndef CCSP_MESSAGE_BUS_H
- #define CCSP_MESSAGE_BUS_H
- #include <dbus/dbus.h>
--#include <dbus/dbus-mainloop.h>
- 
- /*
- notes: see readme.txt
 diff --git a/source/util_api/ccsp_msg_bus/ccsp_message_bus.c b/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
 index e212749..662378f 100644
 --- a/source/util_api/ccsp_msg_bus/ccsp_message_bus.c
