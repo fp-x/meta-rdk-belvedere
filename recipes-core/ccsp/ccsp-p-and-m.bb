@@ -103,7 +103,7 @@ FILES_${PN} = " \
     ${prefix}/ccsp/pam/CcspPam.cfg \
     ${prefix}/ccsp/pam/COSAXcalibur.XML \
     ${prefix}/ccsp/pam/TR181-USGv2.XML  \
-    ${libdir}/libtr181.so* \
+    ${libdir}/libtr181.* \
 "
 
 FILES_${PN}-dbg = " \
