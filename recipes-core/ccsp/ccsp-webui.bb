@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://README;beginline=1;endline=18;md5=17835e4bef073e5070f
 DEPENDS = "ccsp-common-library php php-native"
 
 SRC_URI = "\
-    git://bitbucket.org/ccsptwc/webui;protocol=https;branch=api-cleanup \
+    git://github.com/belvedere-yocto/webui.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
     file://LICENSE \
     file://cosalogs.service \
     file://cosalogs.sh \
