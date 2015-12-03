@@ -4,13 +4,13 @@ HOMEPAGE = "http://github.com/belvedere-yocto/CcspCMAgent"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 
-DEPENDS = "ccsp-common-library hal"
+DEPENDS = "ccsp-common-library virtual/ccsp-hal"
 
-SRC_URI = "\
-    git://github.com/belvedere-yocto/CcspCMAgent.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
-    "
+require ccsp_common.inc
 
-SRCREV = "${AUTOREV}"
+SRC_URI = "${RDKB_CCSP_ROOT_GIT}/CcspCMAgent${CCSP_EXT};protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=CcspCMAgent"
+
+SRCREV_CcspCMAgent = "${AUTOREV}"
 PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
@@ -35,41 +35,41 @@ do_install_append () {
 
 do_install_append_qemux86 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-pc/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
-    install -m 644 ${WORKDIR}/git/config-pc/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
-    install -m 644 ${WORKDIR}/git/config-pc/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
+    install -m 644 ${S}/config-pc/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
+    install -m 644 ${S}/config-pc/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
+    install -m 644 ${S}/config-pc/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
+}
+
+do_install_for_arm() {
+    # Config files and scripts
+    install -m 644 ${S}/config-arm/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
+    install -m 644 ${S}/config-arm/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
+    install -m 644 ${S}/config-arm/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
 }
 
 do_install_append_qemuarm () {
-    # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-arm/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
-    install -m 644 ${WORKDIR}/git/config-arm/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
-    install -m 644 ${WORKDIR}/git/config-arm/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
+    do_install_for_arm
 }
 
 do_install_append_raspberrypi () {
-    # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-arm/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
-    install -m 644 ${WORKDIR}/git/config-arm/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
-    install -m 644 ${WORKDIR}/git/config-arm/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
+    do_install_for_arm
 }
 
-do_install_append_puma6 () {
-    # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config-arm/CcspCMDM.cfg ${D}/usr/ccsp/cm/CcspCMDM.cfg
-    install -m 644 ${WORKDIR}/git/config-arm/CcspCM.cfg ${D}/usr/ccsp/cm/CcspCM.cfg
-    install -m 644 ${WORKDIR}/git/config-arm/TR181-CM.XML ${D}/usr/ccsp/cm/TR181-CM.XML
+do_install_append_armeb() {
+    do_install_for_arm
+}
+
+do_install_append_puma6() {
+    do_install_for_arm
 }
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN} = " \
-    ${bindir}/CcspCMAgentSsp \
-    ${prefix}/ccsp/cm/CcspCMAgentSsp \
-    ${prefix}/ccsp/cm/CcspCMDM.cfg \
-    ${prefix}/ccsp/cm/CcspCM.cfg \
-    ${prefix}/ccsp/cm/TR181-CM.XML \
-    ${libdir}/libcm_tr181.so* \
+FILES_${PN}-ccsp = " \
+    /usr/ccsp/cm/CcspCMAgentSsp \
+    /usr/ccsp/cm/CcspCMDM.cfg \
+    /usr/ccsp/cm/CcspCM.cfg \
+    /usr/ccsp/cm/TR181-CM.XML \
 "
 
 FILES_${PN}-dbg = " \

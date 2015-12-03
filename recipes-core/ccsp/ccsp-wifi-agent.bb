@@ -4,23 +4,21 @@ HOMEPAGE = "http://github.com/belvedere-yocto/CcspWifiAgent"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 
-DEPENDS = "ccsp-common-library hal"
+DEPENDS = "ccsp-common-library virtual/ccsp-hal"
+require ccsp_common.inc
+SRC_URI = "${RDKB_CCSP_ROOT_GIT}/CcspWifiAgent${CCSP_EXT};protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=CcspWifiAgent"
 
-SRC_URI = "\
-    git://github.com/belvedere-yocto/CcspWifiAgent.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
-    "
-
-SRCREV = "${AUTOREV}"
+SRCREV_CcspWifiAgent = "${AUTOREV}"
 PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit autotools
+inherit autotools pkgconfig
 
 CFLAGS_append = " \
-    -I=${includedir}/dbus-1.0 \
-    -I=${libdir}/dbus-1.0/include \
-    -I=${includedir}/ccsp \
+    -I${STAGING_INCDIR}/dbus-1.0 \
+    -I${STAGING_LIBDIR}/dbus-1.0/include \
+    -I${STAGING_INCDIR}/ccsp \
     "
 
 LDFLAGS_append = " \
@@ -29,8 +27,6 @@ LDFLAGS_append = " \
 
 do_install_append () {
     # Config files and scripts
-    echo "CcspWifiAgent do_install_append."
-    echo "     D = ${D}"
     install -d ${D}/usr/ccsp/wifi
     install -m 777 ${D}/usr/bin/CcspWifiSsp -t ${D}/usr/ccsp/wifi
 }
@@ -38,7 +34,7 @@ do_install_append () {
 FILES_${PN} = " \
     ${bindir}/CcspWifiSsp \
     ${prefix}/ccsp/wifi/CcspWifiSsp \
-    ${libdir}/libwifi.so.* \
+    ${libdir}/libwifi.so* \
 "
 
 FILES_${PN}-dbg = " \

@@ -5,16 +5,14 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 
 DEPENDS = "ccsp-common-library"
-
-SRC_URI = "\
-    git://github.com/belvedere-yocto/CcspMisc.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
-    "
+require ccsp_common.inc
+SRC_URI = "${RDKB_CCSP_ROOT_GIT}/CcspMisc${CCSP_EXT};protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=CcspMisc"
 
 SRC_URI_append_puma6 = "\
     file://03-support-ucontext-t-move.patch \
     "
 
-SRCREV = "${AUTOREV}"
+SRCREV_CcspMisc = "${AUTOREV}"
 PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
@@ -22,9 +20,9 @@ S = "${WORKDIR}/git"
 inherit autotools
 
 CFLAGS_append = " \
-    -I=${includedir}/dbus-1.0 \
-    -I=${libdir}/dbus-1.0/include \
-    -I=${includedir}/ccsp \
+    -I${STAGING_INCDIR}/dbus-1.0 \
+    -I${STAGING_LIBDIR}/dbus-1.0/include \
+    -I${STAGING_INCDIR}/ccsp \
     "
 
 do_install_append () {
@@ -35,9 +33,8 @@ do_install_append () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN} = " \
-    ${bindir}/psmcli \
-    ${prefix}/ccsp/psmcli \
+FILES_${PN}-ccsp = " \
+    /usr/ccsp/psmcli \
 "
 
 FILES_${PN}-dbg = " \

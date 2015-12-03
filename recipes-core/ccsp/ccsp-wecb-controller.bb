@@ -4,23 +4,23 @@ HOMEPAGE = "http://github.com/belvedere-yocto/CcspWecbController"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 
-DEPENDS = "ccsp-common-library utopia libupnp curl"
+DEPENDS = "ccsp-common-library utopia libupnp curl libxml2"
+require ccsp_common.inc
+SRC_URI = "${RDKB_CCSP_ROOT_GIT}/CcspWecbController${CCSP_EXT};protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=CcspWecbController"
 
-SRC_URI = "\
-git://github.com/belvedere-yocto/CcspWecbController.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
-    "
+SRCREV_CcspWecbController = "${AUTOREV}"
+SRCREV_FORMAT = "CcspWecbController"
 
-SRCREV = "${AUTOREV}"
 PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit autotools
+inherit autotools pkgconfig
 
-CFLAGS_append = " \
-    -I=${includedir}/dbus-1.0 \
-    -I=${libdir}/dbus-1.0/include \
-    -I=${includedir}/ccsp \
+CFLAGS += " \
+    -I${STAGING_INCDIR}/dbus-1.0 \
+    -I${STAGING_LIBDIR}/dbus-1.0/include \
+    -I${STAGING_INCDIR}/ccsp \
     "
 
 do_install_arm_sources () {
@@ -38,6 +38,10 @@ do_configure_prepend_raspberrypi () {
     do_install_arm_sources
 }
 
+do_configure_prepend_armeb () {
+    do_install_arm_sources
+}
+
 do_configure_prepend_puma6 () {
     do_install_arm_sources
 }
@@ -45,17 +49,27 @@ do_configure_prepend_puma6 () {
 do_install_append () {
     # Config files and scripts
     install -d ${D}/usr/ccsp
+    install -d ${D}/usr/ccsp/wecb
     install -m 777 ${D}/usr/bin/CcspWecbController -t ${D}/usr/ccsp
     #install -m 777 ${D}/usr/bin/wecb_master -t ${D}/usr/ccsp
 }
 
+do_install_append_armeb () {
+    # Config files and scripts
+    install -m 644 ${S}/config/CcspWecb.cfg ${D}/usr/ccsp/wecb/CcspWecb.cfg 
+    install -m 644 ${S}/config/CcspWecbController_dm.xml ${D}/usr/ccsp/wecb/CcspWecbController_dm.xml
+    install -m 644 ${S}/config/CcspWecbLib.cfg ${D}/usr/ccsp/wecb/CcspWecbLib.cfg 
+}
+
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN} = " \
-    ${bindir}/CcspWecbController \
-    ${prefix}/ccsp/CcspWecbController \
-    #${prefix}/ccsp/wecb_master \
-    ${libdir}/libwecb.so* \
+FILES_${PN}-ccsp = " \
+    /usr/ccsp/CcspWecbController \
+    /usr/ccsp/* \
+    /usr/ccsp/wecb/* \
+    /usr/ccsp/wecb/CcspWecb.cfg \
+    /usr/ccsp/wecb/CcspWecbController_dm.xml \
+    /usr/ccsp/wecb/CcspWecbLib.cfg  \
 "
 
 FILES_${PN}-dbg = " \

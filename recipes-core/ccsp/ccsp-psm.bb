@@ -6,11 +6,12 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d41d8cd98f00b204e9800998ecf8427e"
 
 DEPENDS = "ccsp-common-library dbus"
 
-SRC_URI = "\
-    git://github.com/belvedere-yocto/CcspPsm.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
-    "
+require ccsp_common.inc
 
-SRCREV = "${AUTOREV}"
+
+SRC_URI = "${RDKB_CCSP_ROOT_GIT}/CcspPsm${CCSP_EXT};protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=CcspPsm"
+
+SRCREV_CcspPsm = "${AUTOREV}"
 PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
@@ -23,19 +24,32 @@ CFLAGS_append = " \
     -I=${includedir}/ccsp \
     "
 
-CFLAGS_append_qemux86 += "-D_COSA_SIM_"
-
 LDFLAGS_append = " \
     -ldbus-1 \
     "
 
+do_install_pc_sources () {
+    echo "=================== running do_install_arm_sources..."
+    install -m 644 ${S}/source-pc/ssp_HAL_apis.c ${S}/source/Ssp/psm_hal_apis.c
+}
+
+do_install_pc_config () {
+    echo "=================== running do_install_arm_config..."
+    install -m 644 ${S}/config/bbhm_def_cfg_pc.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
+}
+
 do_install_arm_sources () {
     echo "=================== running do_install_arm_sources..."
-    install -m 644 ${WORKDIR}/git/source-arm/psm_hal_apis.c -t ${WORKDIR}/git/source/Ssp
+    install -m 644 ${S}/source-arm/psm_hal_apis.c -t ${S}/source/Ssp
+}
+
+do_install_arm_config () {
+    echo "=================== running do_install_arm_config..."
+    install -m 644 ${S}/config/bbhm_def_cfg_arm.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
 }
 
 do_configure_prepend_qemux86 () {
-    install -m 644 ${WORKDIR}/git/source-pc/ssp_HAL_apis.c ${WORKDIR}/git/source/Ssp/psm_hal_apis.c
+    do_install_pc_sources
 }
 
 do_configure_prepend_qemuarm () {
@@ -58,28 +72,32 @@ do_install_append () {
 
 do_install_append_qemux86 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_pc.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
+    do_install_pc_config
 }
 
 do_install_append_qemuarm () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_arm.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
+    do_install_arm_config
 }
 
 do_install_append_raspberrypi () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_arm.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
+    do_install_arm_config
+}
+
+do_install_append_armeb () {
+    # Config files and scripts
+    do_install_arm_config
 }
 
 do_install_append_puma6 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/bbhm_def_cfg_arm.xml ${D}/usr/ccsp/config/bbhm_def_cfg.xml
+    do_install_arm_config
 }
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN} = " \
-    ${bindir}/PsmSsp \
+FILES_${PN}-ccsp = " \
     ${prefix}/ccsp/PsmSsp \
     ${prefix}/ccsp/config/bbhm_def_cfg.xml \
 "

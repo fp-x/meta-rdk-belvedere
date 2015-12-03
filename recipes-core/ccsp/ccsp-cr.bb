@@ -6,11 +6,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=1b9c3a810ba2d91cab5522ca08f70b47"
 
 DEPENDS = "ccsp-common-library"
 
-SRC_URI = "\
-    git://github.com/belvedere-yocto/CcspCr.git;protocol=git;branch=${CCSP_GIT_BRANCH} \
-    "
+require ccsp_common.inc
 
-SRCREV = "${AUTOREV}"
+SRC_URI = "${RDKB_CCSP_ROOT_GIT}/CcspCr${CCSP_EXT};protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=CcspCr"
+
+SRCREV_CcspCr = "${AUTOREV}"
 PV = "${RDK_RELEASE}+git${SRCPV}"
 
 S = "${WORKDIR}/git"
@@ -22,7 +22,6 @@ CFLAGS_append = " \
     -I=${libdir}/dbus-1.0/include \
     -I=${includedir}/ccsp \
     "
-CFLAGS_append_qemux86 += "-D_COSA_SIM_"
 
 do_install_append () {
     # Config files and scripts
@@ -32,28 +31,27 @@ do_install_append () {
 
 do_install_append_qemux86 () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/cr-deviceprofile_pc.xml ${D}/usr/ccsp/cr-deviceprofile.xml
+    install -m 644 ${S}/config/cr-deviceprofile_pc.xml ${D}/usr/ccsp/cr-deviceprofile.xml
 }
 
 do_install_append_qemuarm () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/cr-deviceprofile_arm.xml ${D}/usr/ccsp/cr-deviceprofile.xml
+    install -m 644 ${S}/config/cr-deviceprofile_arm.xml ${D}/usr/ccsp/cr-deviceprofile.xml
 }
 
 do_install_append_raspberrypi () {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/cr-deviceprofile_arm.xml ${D}/usr/ccsp/cr-deviceprofile.xml
+    install -m 644 ${S}/config/cr-deviceprofile_arm.xml ${D}/usr/ccsp/cr-deviceprofile.xml
 }
 
-do_install_append_puma6 () {
+do_install_append_armeb() {
     # Config files and scripts
-    install -m 644 ${WORKDIR}/git/config/cr-deviceprofile_arm.xml ${D}/usr/ccsp/cr-deviceprofile.xml
+    install -m 644 ${S}/config/cr-deviceprofile_arm.xml ${D}/usr/ccsp/cr-deviceprofile.xml
 }
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN} = " \
-    ${bindir}/CcspCrSsp \
+FILES_${PN}-ccsp = " \
     ${prefix}/ccsp/CcspCrSsp \
     ${prefix}/ccsp/cr-deviceprofile.xml \
 "
