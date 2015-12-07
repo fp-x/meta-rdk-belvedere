@@ -8,10 +8,6 @@ DEPENDS = "ccsp-common-library"
 require ccsp_common.inc
 SRC_URI = "${RDKB_CCSP_ROOT_GIT}/CcspMisc${CCSP_EXT};protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH};name=CcspMisc"
 
-SRC_URI_append_puma6 = "\
-    file://03-support-ucontext-t-move.patch \
-    "
-
 SRCREV_CcspMisc = "${AUTOREV}"
 PV = "${RDK_RELEASE}+git${SRCPV}"
 

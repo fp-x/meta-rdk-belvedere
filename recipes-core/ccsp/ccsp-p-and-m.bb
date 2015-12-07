@@ -5,7 +5,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=d41d8cd98f00b204e9800998ecf8427e"
 
 DEPENDS = "ccsp-common-library ccsp-lm-lite"
-DEPENDS_append_puma6 = " utopia virtual/ccsp-hal curl "
+DEPENDS_append_puma6 = " utopia virtual/ccsp-hal curl tr69"
 
 require ccsp_common.inc
 

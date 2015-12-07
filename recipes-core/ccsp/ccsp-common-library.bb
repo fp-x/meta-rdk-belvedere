@@ -10,8 +10,6 @@ require ccsp_common.inc
 
 SRC_URI = " \
     ${RDKB_CCSP_ROOT_GIT}/CcspCommonLibrary${CCSP_EXT};protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH} \
-    file://01-support-newer-dbus-apis.patch \
-    file://02-support-dbus-ccsp-apis.patch \
     "
 
 SRCREV = "${AUTOREV}"
