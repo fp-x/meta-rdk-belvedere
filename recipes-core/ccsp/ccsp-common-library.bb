@@ -50,7 +50,7 @@ do_install_append () {
     install -m 644 ${S}/source/ccsp/components/common/MessageBusHelper/include/*.h ${D}/usr/include/ccsp
     install -m 644 ${S}/source/ccsp/components/common/PoamIrepFolder/*.h ${D}/usr/include/ccsp
 
-    # Config files and scripts
+   # Config files and scripts
     install -d ${D}/usr/ccsp
     install -d ${D}/usr/ccsp/cm
     install -d ${D}/usr/ccsp/mta
@@ -72,7 +72,7 @@ do_install_append_qemux86 () {
 }
 
 do_install_append_atom () {
-    # Config files and scripts
+   # Config files and scripts
     install -m 777 ${S}/scripts/cli_start_atom.sh ${D}/usr/ccsp/cli_start.sh
     install -m 777 ${S}/scripts/cosa_start_atom.sh ${D}/usr/ccsp/cosa_start.sh
     install -m 644 ${S}/config-atom/basic.conf ${D}/usr/ccsp/basic.conf
@@ -111,37 +111,22 @@ do_install_append_puma6 () {
     do_install_for_arm
     
     # also install for Arris-expected file locations...
-    install -d ${IMAGE_ROOTFS}/fss/gw/usr/ccsp
-    install -d ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/cm
-    install -d ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/mta
-    install -d ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/pam
-    install -d ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/tr069pa
-    install -d ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/wecb
-    install -m 777 ${S}/scripts/cosa_stop.sh -t ${IMAGE_ROOTFS}/fss/gw/usr/ccsp
+    install -d ${D}/fss/gw/usr/
+    cp -rf ${D}/usr/ccsp ${D}/fss/gw/usr/ccsp
+    rm -rf ${D}/usr/ccsp 
+ }
 
-    install -m 777 ${S}/scripts/cli_start_arm.sh ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/cli_start.sh
-    install -m 777 ${S}/scripts/cosa_start_arm.sh ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/cosa_start.sh
-    install -m 644 ${S}/config-arm/basic.conf ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/basic.conf
-    install -m 644 ${S}/config-arm/ccsp_msg.cfg ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/ccsp_msg.cfg
-    install -m 644 ${S}/config-arm/ccsp_msg.cfg ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/cm/ccsp_msg.cfg
-    install -m 644 ${S}/config-arm/ccsp_msg.cfg ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/mta/ccsp_msg.cfg
-    install -m 644 ${S}/config-arm/ccsp_msg.cfg ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/pam/ccsp_msg.cfg
-    install -m 644 ${S}/config-arm/ccsp_msg.cfg ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/tr069pa/ccsp_msg.cfg
-    install -m 644 ${S}/config-arm/ccsp_msg.cfg ${IMAGE_ROOTFS}/fss/gw/usr/ccsp/wecb/ccsp_msg.cfg
-}
+#PACKAGES =+ "ccsp-common-startup"
+PACKAGES += "${PN}-ccsp"
 
-PACKAGES =+ "ccsp-common-startup"
-
-FILES_ccsp-common-startup = " \
-    ${exec_prefix}/ccsp/basic.conf \
-    ${exec_prefix}/ccsp/cli_start.sh \
-    ${exec_prefix}/ccsp/cosa_*.sh \
-    ${exec_prefix}/ccsp/ccsp_msg.cfg \
-    ${exec_prefix}/ccsp/cm/ccsp_msg.cfg \
-    ${exec_prefix}/ccsp/mta/ccsp_msg.cfg \
-    ${exec_prefix}/ccsp/pam/ccsp_msg.cfg \
-    ${exec_prefix}/ccsp/tr069pa/ccsp_msg.cfg \
-    ${exec_prefix}/ccsp/wecb/ccsp_msg.cfg \
+FILES_${PN} = " \
+    /usr/ccsp \
+    /usr/ccsp/basic.conf \
+    /usr/ccsp/* \
+    /usr/ccsp/*/* \
+    /fss/gw/usr/ccsp/* \
+    /fss/gw/usr/ccsp/*/* \
+    /usr/lib/libccsp_common* \
 "
 FILES_${PN} += "/usr/ccsp/wecb"
 
