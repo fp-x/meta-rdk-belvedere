@@ -113,22 +113,19 @@ do_install_append_puma6 () {
     # also install for Arris-expected file locations...
     install -d ${D}/fss/gw/usr/
     cp -rf ${D}/usr/ccsp ${D}/fss/gw/usr/ccsp
-    rm -rf ${D}/usr/ccsp 
- }
+}
 
 #PACKAGES =+ "ccsp-common-startup"
 PACKAGES += "${PN}-ccsp"
 
 FILES_${PN} = " \
     /usr/ccsp \
-    /usr/ccsp/basic.conf \
     /usr/ccsp/* \
     /usr/ccsp/*/* \
     /fss/gw/usr/ccsp/* \
     /fss/gw/usr/ccsp/*/* \
     /usr/lib/libccsp_common* \
 "
-FILES_${PN} += "/usr/ccsp/wecb"
 
 FILES_${PN}-dbg = " \
     ${exec_prefix}/ccsp/.debug \
