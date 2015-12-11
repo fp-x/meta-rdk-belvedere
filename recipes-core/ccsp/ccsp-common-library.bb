@@ -115,7 +115,20 @@ do_install_append_puma6 () {
     cp -rf ${D}/usr/ccsp ${D}/fss/gw/usr/ccsp
 }
 
-#PACKAGES =+ "ccsp-common-startup"
+PACKAGES =+ "ccsp-common-startup"
+
+FILES_ccsp-common-startup = " \
+    ${exec_prefix}/ccsp/basic.conf \
+    ${exec_prefix}/ccsp/cli_start.sh \
+    ${exec_prefix}/ccsp/cosa_*.sh \
+    ${exec_prefix}/ccsp/ccsp_msg.cfg \
+    ${exec_prefix}/ccsp/cm/ccsp_msg.cfg \
+    ${exec_prefix}/ccsp/mta/ccsp_msg.cfg \
+    ${exec_prefix}/ccsp/pam/ccsp_msg.cfg \
+    ${exec_prefix}/ccsp/tr069pa/ccsp_msg.cfg \
+    ${exec_prefix}/ccsp/wecb/ccsp_msg.cfg \
+"
+
 PACKAGES += "${PN}-ccsp"
 
 FILES_${PN} = " \
