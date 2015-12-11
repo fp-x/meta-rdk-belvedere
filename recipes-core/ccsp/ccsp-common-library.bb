@@ -50,7 +50,7 @@ do_install_append () {
     install -m 644 ${S}/source/ccsp/components/common/MessageBusHelper/include/*.h ${D}/usr/include/ccsp
     install -m 644 ${S}/source/ccsp/components/common/PoamIrepFolder/*.h ${D}/usr/include/ccsp
 
-   # Config files and scripts
+    # Config files and scripts
     install -d ${D}/usr/ccsp
     install -d ${D}/usr/ccsp/cm
     install -d ${D}/usr/ccsp/mta
@@ -72,7 +72,7 @@ do_install_append_qemux86 () {
 }
 
 do_install_append_atom () {
-   # Config files and scripts
+    # Config files and scripts
     install -m 777 ${S}/scripts/cli_start_atom.sh ${D}/usr/ccsp/cli_start.sh
     install -m 777 ${S}/scripts/cosa_start_atom.sh ${D}/usr/ccsp/cosa_start.sh
     install -m 644 ${S}/config-atom/basic.conf ${D}/usr/ccsp/basic.conf
