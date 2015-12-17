@@ -114,6 +114,8 @@ do_install_append_armeb () {
 
 do_install_append_puma6 () {
     do_install_arm_files
+
+    sed -i 's|"/usr/ccsp"|"/fss/gw/usr/ccsp"|g' ${D}${sysconfdir}/utopia/service.d/service_cosa.sh
 }
 
 FILES_${PN} += "${sysconfdir}/utopia/"

@@ -27,7 +27,8 @@ do_install_append () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
+    /usr/bin/ \
 "
 
 FILES_${PN}-dbg = " \

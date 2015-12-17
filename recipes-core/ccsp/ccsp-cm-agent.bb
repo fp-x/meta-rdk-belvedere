@@ -65,11 +65,13 @@ do_install_append_puma6() {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
     /usr/ccsp/cm/CcspCMAgentSsp \
     /usr/ccsp/cm/CcspCMDM.cfg \
     /usr/ccsp/cm/CcspCM.cfg \
     /usr/ccsp/cm/TR181-CM.XML \
+    /usr/lib/ \
+    /usr/bin/ \
 "
 
 FILES_${PN}-dbg = " \

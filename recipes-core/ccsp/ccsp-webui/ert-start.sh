@@ -24,15 +24,15 @@ Subsys="eRT."
 
 echo "Elected subsystem is $Subsys"
 
-    echo "./CcspCrSsp -subsys $Subsys"
-    ./CcspCrSsp -subsys $Subsys
-    echo "./PsmSsp -subsys $Subsys"
-    ./PsmSsp -subsys $Subsys
+    echo "CcspCrSsp -subsys $Subsys"
+    CcspCrSsp -subsys $Subsys
+    echo "PsmSsp -subsys $Subsys"
+    PsmSsp -subsys $Subsys
 if [ -e ./pam ]; then
     sleep 1
 	cd pam
-		echo "./CcspPandMSsp -subsys $Subsys"
-		./CcspPandMSsp -subsys $Subsys
+		echo "CcspPandMSsp -subsys $Subsys"
+		CcspPandMSsp -subsys $Subsys
 
     # double background to detach the script from the tty
 	((sh ./email_notification_monitor.sh 12 &) &)
@@ -42,8 +42,8 @@ fi
 #sleep 3
 if [ -e ./rm ]; then
 cd rm
-    echo "./CcspRmSsp -subsys $Subsys"
-	./CcspRmSsp -subsys $Subsys
+    echo "CcspRmSsp -subsys $Subsys"
+	CcspRmSsp -subsys $Subsys
 cd ..
 fi
 
@@ -58,16 +58,16 @@ fi
 if [ -e ./wecb ]; then
     sleep 5
     cd wecb
-         echo "./CcspWecbController -subsys $Subsys"
-        ./CcspWecbController -subsys $Subsys 
+         echo "CcspWecbController -subsys $Subsys"
+        CcspWecbController -subsys $Subsys 
     cd ..
 fi
 
 if [ -e ./tr069pa ]; then
     sleep 30
     cd tr069pa
-        echo "./CcspTr069PaSsp -subsys $Subsys"
-        ./CcspTr069PaSsp -subsys $Subsys
+        echo "CcspTr069PaSsp -subsys $Subsys"
+        CcspTr069PaSsp -subsys $Subsys
     cd ..
 fi
 
@@ -79,32 +79,32 @@ fi
 if [ -e ./cm ]; then
     sleep 5
     cd cm
-        echo "./CcspCMAgentSsp -subsys $Subsys"
-        ./CcspCMAgentSsp -subsys $Subsys 
+        echo "CcspCMAgentSsp -subsys $Subsys"
+        CcspCMAgentSsp -subsys $Subsys 
     cd ..
 fi
 
 if [ -e ./mta ]; then
     sleep 30
     cd mta
-        echo "./CcspMtaAgentSsp -subsys $Subsys"
-        ./CcspMtaAgentSsp -subsys $Subsys 
+        echo "CcspMtaAgentSsp -subsys $Subsys"
+        CcspMtaAgentSsp -subsys $Subsys 
     cd ..
 fi
 
 if [ -e ./ssd ]; then
     cd ssd
     sleep 1
-        echo "./CcspSsdSsp -subsys $Subsys"
-        ./CcspSsdSsp -subsys $Subsys
+        echo "CcspSsdSsp -subsys $Subsys"
+        CcspSsdSsp -subsys $Subsys
     cd ..
 fi
 
 if [ -e ./fu ]; then
     cd fu
     sleep 1
-        echo "./CcspFuSsp -subsys $Subsys"
-        ./CcspFuSsp -subsys $Subsys
+        echo "CcspFuSsp -subsys $Subsys"
+        CcspFuSsp -subsys $Subsys
     cd ..
 fi
 
@@ -112,21 +112,22 @@ if [ -e ./tad ]; then
 	cd tad
 	#delay TaD in order to reduce CPU overload and make PAM ready early
 	sleep 3
-        echo "./CcspTandDSsp -subsys $Subsys"
-		./CcspTandDSsp -subsys $Subsys
+        echo "CcspTandDSsp -subsys $Subsys"
+		CcspTandDSsp -subsys $Subsys
 	cd ..
 fi
 
 sleep 1
 
 if [ -e ./ccspRecoveryManager ]; then
-        echo "./ccspRecoveryManager -subsys $Subsys &"
-        ./ccspRecoveryManager -subsys $Subsys &
+        echo "ccspRecoveryManager -subsys $Subsys &"
+        ccspRecoveryManager -subsys $Subsys &
 fi
 
 
 if [ -e ./lm ]; then
     cd lm
     sleep 5
-    ./CcspLMLite &
+    CcspLMLite &
 fi
+

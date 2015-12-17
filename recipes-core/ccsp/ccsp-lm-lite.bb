@@ -41,8 +41,10 @@ do_install_append () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
     ${prefix}/ccsp/lm/CcspLMLite \
+    /usr/bin/ \
+    /usr/lib/ \
 "
 
 FILES_${PN}-dbg = " \

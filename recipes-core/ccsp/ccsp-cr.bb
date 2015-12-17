@@ -51,9 +51,10 @@ do_install_append_armeb() {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
     ${prefix}/ccsp/CcspCrSsp \
     ${prefix}/ccsp/cr-deviceprofile.xml \
+    /usr/bin/ \
 "
 
 FILES_${PN}-dbg = " \

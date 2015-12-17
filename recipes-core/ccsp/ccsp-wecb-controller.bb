@@ -63,13 +63,15 @@ do_install_append_armeb () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
     /usr/ccsp/CcspWecbController \
     /usr/ccsp/* \
     /usr/ccsp/wecb/* \
     /usr/ccsp/wecb/CcspWecb.cfg \
     /usr/ccsp/wecb/CcspWecbController_dm.xml \
     /usr/ccsp/wecb/CcspWecbLib.cfg  \
+    /usr/bin/ \
+    /usr/lib/ \
 "
 
 FILES_${PN}-dbg = " \

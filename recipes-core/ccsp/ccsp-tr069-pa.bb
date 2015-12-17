@@ -101,11 +101,12 @@ do_install_append_armeb () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
     ${prefix}/ccsp/tr069pa/ccsp_tr069_pa_certificate_cfg.xml \
     ${prefix}/ccsp/tr069pa/ccsp_tr069_pa_cfg.xml \
     ${prefix}/ccsp/tr069pa/ccsp_tr069_pa_mapper.xml \
     ${prefix}/ccsp/tr069pa/sdm.xml \
+    /usr/bin/CcspTr069PaSsp \
 "
 
 FILES_${PN}-dbg = " \

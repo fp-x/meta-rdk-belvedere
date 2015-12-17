@@ -31,4 +31,4 @@ do_install_append_armeb () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " /usr/ccsp/"
+FILES_${PN} = " /usr/ccsp/"

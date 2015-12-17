@@ -110,23 +110,9 @@ do_install_append_armeb () {
 do_install_append_puma6 () {
     do_install_for_arm
     
-    # also install for Arris-expected file locations...
-    install -d ${D}/fss/gw/usr/ccsp
-    install -d ${D}/fss/gw/usr/ccsp/cm
-    install -d ${D}/fss/gw/usr/ccsp/mta
-    install -d ${D}/fss/gw/usr/ccsp/pam
-    install -d ${D}/fss/gw/usr/ccsp/tr069pa
-    install -d ${D}/fss/gw/usr/ccsp/wecb
-    install -D -m 755 ${S}/scripts/cosa_stop.sh ${D}/fss/gw/usr/ccsp/cosa_stop.sh
-    install -m 777 ${S}/scripts/cli_start_arm.sh ${D}/fss/gw/usr/ccsp/cli_start.sh
-    install -m 777 ${S}/scripts/cosa_start_arm.sh ${D}/fss/gw/usr/ccsp/cosa_start.sh
-    install -m 644 ${S}/config-arm/basic.conf ${D}/fss/gw/usr/ccsp/basic.conf
-    install -m 644 ${S}/config-arm/ccsp_msg.cfg ${D}/fss/gw/usr/ccsp/ccsp_msg.cfg
-    install -m 644 ${S}/config-arm/ccsp_msg.cfg ${D}/fss/gw/usr/ccsp/cm/ccsp_msg.cfg
-    install -m 644 ${S}/config-arm/ccsp_msg.cfg ${D}/fss/gw/usr/ccsp/mta/ccsp_msg.cfg
-    install -m 644 ${S}/config-arm/ccsp_msg.cfg ${D}/fss/gw/usr/ccsp/pam/ccsp_msg.cfg
-    install -m 644 ${S}/config-arm/ccsp_msg.cfg ${D}/fss/gw/usr/ccsp/tr069pa/ccsp_msg.cfg
-    install -m 644 ${S}/config-arm/ccsp_msg.cfg ${D}/fss/gw/usr/ccsp/wecb/ccsp_msg.cfg
+    echo "ifconfig lan0:0 192.168.101.1" >> ${D}/usr/ccsp/create_dbus_if.sh
+    chmod a+x ${D}/usr/ccsp/create_dbus_if.sh
+    touch ${D}/usr/ccsp/cp_subsys_ert
 }
 
 PACKAGES =+ "ccsp-common-startup"
@@ -146,12 +132,8 @@ FILES_ccsp-common-startup = " \
 PACKAGES += "${PN}-ccsp"
 
 FILES_${PN} += " \
-    /usr/ccsp \
-    /usr/ccsp/* \
-    /usr/ccsp/*/* \
-    /fss/gw/usr/ccsp/* \
-    /fss/gw/usr/ccsp/*/* \
-    /usr/lib/libccsp_common* \
+    /usr/ccsp/ \
+    /usr/lib/ \
 "
 
 FILES_${PN}-dbg = " \

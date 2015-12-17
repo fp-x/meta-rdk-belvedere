@@ -38,11 +38,13 @@ do_install_append () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
     ${prefix}/ccsp/snmp/snmpd.conf \
     ${prefix}/ccsp/snmp/run_snmpd.sh \
     ${prefix}/ccsp/snmp/run_subagent.sh \
     ${prefix}/ccsp/snmp/Ccsp*.xml \
+    /usr/bin/ \
+    /usr/lib/ \
 "
 
 FILES_${PN}-dbg = " \

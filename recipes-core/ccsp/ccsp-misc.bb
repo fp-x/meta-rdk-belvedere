@@ -29,8 +29,9 @@ do_install_append () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
     /usr/ccsp/psmcli \
+    /usr/bin/ \
 "
 
 FILES_${PN}-dbg = " \

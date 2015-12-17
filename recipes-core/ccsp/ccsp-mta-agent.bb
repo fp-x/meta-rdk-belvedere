@@ -72,10 +72,12 @@ do_install_append_mips () {
 
 PACKAGES += "${PN}-ccsp"
 
-FILES_${PN}-ccsp = " \
+FILES_${PN} = " \
     ${prefix}/ccsp/mta/CcspMtaAgent.xml \
     ${prefix}/ccsp/mta/CcspMta.cfg \
     ${prefix}/ccsp/mta/CcspMtaLib.cfg \
+    /usr/bin/ \
+    /usr/lib/ \
 "
 
 FILES_${PN}-dbg = " \
