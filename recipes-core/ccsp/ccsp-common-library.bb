@@ -9,7 +9,7 @@ DEPENDS = "dbus openssl"
 require ccsp_common.inc
 
 SRC_URI = " \
-    git://github.com/fp-x/CcspCommonLibrary${CCSP_EXT};protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH} \
+    ${RDKB_CCSP_ROOT_GIT}/CcspCommonLibrary${CCSP_EXT};protocol=${RDK_GIT_PROTOCOL};branch=${CCSP_GIT_BRANCH} \
     "
 
 SRCREV = "${AUTOREV}"
@@ -87,7 +87,6 @@ do_install_for_arm () {
     install -m 777 ${S}/scripts/cli_start_arm.sh ${D}/usr/ccsp/cli_start.sh
     install -m 777 ${S}/scripts/cosa_start_arm.sh ${D}/usr/ccsp/cosa_start.sh
     install -m 644 ${S}/config-arm/basic.conf ${D}/usr/ccsp/basic.conf
-    install -m 644 ${S}/config-arm/basic.conf ${D}/usr/ccsp/dbus-ccsp.conf
     install -m 644 ${S}/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/ccsp_msg.cfg
     install -m 644 ${S}/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/cm/ccsp_msg.cfg
     install -m 644 ${S}/config-arm/ccsp_msg.cfg ${D}/usr/ccsp/mta/ccsp_msg.cfg
@@ -114,10 +113,6 @@ do_install_append_puma6 () {
     echo "ifconfig lan0:0 192.168.101.1" >> ${D}/usr/ccsp/create_dbus_if.sh
     chmod a+x ${D}/usr/ccsp/create_dbus_if.sh
     touch ${D}/usr/ccsp/cp_subsys_ert
-
-    
-    install -d ${D}/fss/gw/usr/
-    cp -rf ${D}/usr/ccsp ${D}/fss/gw/usr/ccsp
 }
 
 PACKAGES =+ "ccsp-common-startup"
@@ -137,9 +132,8 @@ FILES_ccsp-common-startup = " \
 PACKAGES += "${PN}-ccsp"
 
 FILES_${PN} += " \
-    ${prefix}/ccsp/ \
-    /fss/gw/usr/ccsp/ \
-    ${libdir}/ \
+    /usr/ccsp/ \
+    /usr/lib/ \
 "
 
 FILES_${PN}-dbg = " \
